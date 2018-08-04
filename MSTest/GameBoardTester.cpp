@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "GameBoard.h"
+#include <GameBoard.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
