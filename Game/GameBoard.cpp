@@ -22,12 +22,21 @@ void GameBoard::moveRight()
 				while (k < board[i].size() - 1 && board[i][++k] == 0)
 					;
 				if (board[i][k] == 0)
+				{
+					board[i][j] = 0;
 					board[i][k] = value;
+				}
 				else if (board[i][k] == value)
+				{
+					board[i][j] = 0;
 					board[i][k] = 2 * value;
+				}
 				else
+				{
 					board[i][k - 1] = value;
-				board[i][j] = 0;
+					if (k != j + 1)
+						board[i][j] = 0;
+				}
 			}
 		}
 }
