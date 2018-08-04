@@ -5,7 +5,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace MSTest
-{		
+{
 	TEST_CLASS(GameBoardTester)
 	{
 	public:
@@ -83,5 +83,25 @@ namespace MSTest
 			},
 				board.getBoard());
 		}
+
+		TEST_METHOD(testMoveRightThreeTwos)
+		{
+			GameBoard board(
+			{
+				{ 2, 2, 2, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+			board.moveRight();
+			assertAreEqual(
+			{
+				{ 0, 0, 2, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+				board.getBoard());
+		}
 	};
-}
+};
