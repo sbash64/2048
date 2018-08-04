@@ -252,5 +252,23 @@ namespace MSTest
 				{ 0, 0, 0, 0 }
 			});
 		}
+
+		TEST_METHOD(testMoveRightTwiceAllZeros)
+		{
+			assertBoardTransition(
+			{
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+			"rr",
+			{
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+		}
 	};
 };
