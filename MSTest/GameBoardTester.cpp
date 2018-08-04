@@ -11,25 +11,36 @@ namespace MSTest
 	public:
 		TEST_METHOD(testMoveRightAllZeros)
 		{
-			GameBoard board(
-			{
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 }
-			});
-			board.moveRight();
-			assertAreEqual(
+			assertBoardTransition(
 			{
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			},
-				board.getBoard());
+			"r",
+			{
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
 		}
 
 	private:
+		void assertBoardTransition(
+			std::vector<std::vector<double>> initial,
+			std::string movement,
+			std::vector<std::vector<double>> final
+		)
+		{
+			GameBoard board(initial);
+			for (const auto &c : movement)
+				if (c == 'r' || c == 'R')
+					board.moveRight();
+			assertAreEqual(final, board.getBoard());
+		}
+
 		void assertAreEqual(
 			std::vector<std::vector<double>> expected,
 			std::vector<std::vector<double>> actual)
@@ -44,84 +55,101 @@ namespace MSTest
 		}
 
 	public:
-		TEST_METHOD(testMoveRightOneTwoA)
+		TEST_METHOD(testMoveRightOneTwo)
 		{
-			GameBoard board(
+			assertBoardTransition(
 			{
 				{ 2, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
-			});
-			board.moveRight();
-			assertAreEqual(
+			},
+			"r",
 			{
 				{ 0, 0, 0, 2 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
-			},
-				board.getBoard());
-		}
+			});
 
-		TEST_METHOD(testMoveRightOneTwoB)
-		{
-			GameBoard board(
-			{
-				{ 0, 0, 0, 2 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 }
-			});
-			board.moveRight();
-			assertAreEqual(
+			assertBoardTransition(
 			{
 				{ 0, 0, 0, 2 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			},
-				board.getBoard());
+			"r",
+			{
+				{ 0, 0, 0, 2 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
 		}
 
 		TEST_METHOD(testMoveRightTwoTwos)
 		{
-			GameBoard board(
+			assertBoardTransition(
 			{
 				{ 2, 2, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
-			});
-			board.moveRight();
-			assertAreEqual(
+			},
+			"r",
 			{
 				{ 0, 0, 0, 4 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
+			});
+			assertBoardTransition(
+			{
+				{ 2, 0, 2, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
 			},
-				board.getBoard());
+			"r",
+			{
+				{ 0, 0, 0, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+			assertBoardTransition(
+			{
+				{ 2, 0, 0, 2 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+			"r",
+			{
+				{ 0, 0, 0, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
 		}
 
 		TEST_METHOD(testMoveRightThreeTwos)
 		{
-			GameBoard board(
+			assertBoardTransition(
 			{
 				{ 2, 2, 2, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
-			});
-			board.moveRight();
-			assertAreEqual(
+			},
+			"r",
 			{
 				{ 0, 0, 2, 4 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
-			},
-				board.getBoard());
+			});
 		}
 	};
 };
