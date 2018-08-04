@@ -9,7 +9,6 @@ namespace MSTest
 	TEST_CLASS(GameBoardTester)
 	{
 	public:
-		
 		TEST_METHOD(testMoveRightAllZeros)
 		{
 			GameBoard board(
@@ -42,6 +41,27 @@ namespace MSTest
 						actual[i][j]
 					);
 
+		}
+
+	public:
+		TEST_METHOD(testMoveRightTwoTwos)
+		{
+			GameBoard board(
+			{
+				{ 2, 2, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+			board.moveRight();
+			assertAreEqual(
+			{
+				{ 0, 0, 0, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+				board.getBoard());
 		}
 	};
 }
