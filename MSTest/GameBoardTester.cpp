@@ -71,7 +71,6 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-
 			assertBoardTransition(
 			{
 				{ 0, 0, 0, 2 },
@@ -230,6 +229,24 @@ namespace MSTest
 			"r",
 			{
 				{ 0, 0, 2, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+		}
+
+		TEST_METHOD(testMoveRightFourTwos)
+		{
+			assertBoardTransition(
+			{
+				{ 2, 2, 2, 2 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+			"r",
+			{
+				{ 0, 0, 4, 4 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
