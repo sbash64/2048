@@ -11,7 +11,7 @@ class GameBoard
 {
 	std::vector<std::vector<double>> board;
 public:
-	GAME_API GameBoard(std::vector<std::vector<double>> board);
+	GAME_API GameBoard(const std::vector<std::vector<double>> &board);
 	GAME_API const std::vector<std::vector<double>> &getBoard();
 	GAME_API void moveRight();
 };

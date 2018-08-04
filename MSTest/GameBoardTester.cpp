@@ -29,9 +29,9 @@ namespace MSTest
 
 	private:
 		void assertBoardTransition(
-			std::vector<std::vector<double>> initial,
-			std::string movement,
-			std::vector<std::vector<double>> final
+			const std::vector<std::vector<double>> &initial,
+			const std::string &movement,
+			const std::vector<std::vector<double>> &final
 		)
 		{
 			GameBoard board(initial);
@@ -42,8 +42,8 @@ namespace MSTest
 		}
 
 		void assertAreEqual(
-			std::vector<std::vector<double>> expected,
-			std::vector<std::vector<double>> actual)
+			const std::vector<std::vector<double>> &expected,
+			const std::vector<std::vector<double>> &actual)
 		{
 			for (size_t i = 0; i < expected.size(); i++)
 				for (size_t j = 0; j < expected[i].size(); j++)

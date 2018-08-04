@@ -1,6 +1,6 @@
 #include "GameBoard.h"
 
-GameBoard::GameBoard(std::vector<std::vector<double>> board) :
+GameBoard::GameBoard(const std::vector<std::vector<double>> &board) :
 	board(board)
 {
 }
