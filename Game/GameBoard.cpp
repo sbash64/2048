@@ -13,6 +13,8 @@ const std::vector<std::vector<double>>& GameBoard::getBoard()
 void GameBoard::moveRight()
 {
 	for (int i = 0; i < board.size(); i++)
+	{
+		std::vector<bool> combinationSpaces(board[i].size() - 2, false);
 		for (int j = board[i].size() - 2; j > -1; j--)
 		{
 			double value = board[i][j];
@@ -26,10 +28,11 @@ void GameBoard::moveRight()
 					board[i][j] = 0;
 					board[i][k] = value;
 				}
-				else if (board[i][k] == value)
+				else if (board[i][k] == value && !combinationSpaces[k-2])
 				{
 					board[i][j] = 0;
 					board[i][k] = 2 * value;
+					combinationSpaces[k - 2] = true;
 				}
 				else
 				{
@@ -39,4 +42,5 @@ void GameBoard::moveRight()
 				}
 			}
 		}
+	}
 }
