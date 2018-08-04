@@ -44,11 +44,31 @@ namespace MSTest
 		}
 
 	public:
-		TEST_METHOD(testMoveRightOneTwo)
+		TEST_METHOD(testMoveRightOneTwoA)
 		{
 			GameBoard board(
 			{
 				{ 2, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+			board.moveRight();
+			assertAreEqual(
+			{
+				{ 0, 0, 0, 2 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+				board.getBoard());
+		}
+
+		TEST_METHOD(testMoveRightOneTwoB)
+		{
+			GameBoard board(
+			{
+				{ 0, 0, 0, 2 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
