@@ -447,6 +447,24 @@ namespace MSTest
 			});
 		}
 
+		TEST_METHOD(testMoveRightCombinesOnlyOnce)
+		{
+			assertBoardTransition(
+			{
+				{ 4, 2, 2, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+			"r",
+			{
+				{ 0, 0, 4, 4 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+		}
+
 		TEST_METHOD(testMoveRightTwiceAllZeros)
 		{
 			assertBoardTransition(
