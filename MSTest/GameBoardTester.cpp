@@ -524,5 +524,23 @@ namespace MSTest
 				{ 0, 0, 0, 0 }
 			});
 		}
+
+		TEST_METHOD(testMoveRightThreeCombos)
+		{
+			assertBoardTransition(
+			{
+				{ 8, 4, 2, 2 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			},
+			"rrr",
+			{
+				{ 0, 0, 0, 16 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 }
+			});
+		}
 	};
 };
