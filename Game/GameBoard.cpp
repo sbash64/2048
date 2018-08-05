@@ -18,27 +18,24 @@ void GameBoard::moveRight()
 		const auto oneBeforeEnd = board[row].size() - 2;
 		for (int col = oneBeforeEnd; col > -1; col--)
 		{
-			double value = board[row][col];
+			const double value = board[row][col];
 			if (value != 0)
 			{
 				const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col);
 				if (board[row][nextNonzeroOrLastColumn] == 0)
-				{
-					board[row][col] = 0;
 					board[row].back() = value;
-				}
-				else if (board[row][nextNonzeroOrLastColumn] == value && !hasBeenCombined[nextNonzeroOrLastColumn])
+				else if (
+					board[row][nextNonzeroOrLastColumn] == value &&
+					!hasBeenCombined[nextNonzeroOrLastColumn])
 				{
-					board[row][col] = 0;
 					board[row][nextNonzeroOrLastColumn] = 2 * value;
 					hasBeenCombined[nextNonzeroOrLastColumn] = true;
 				}
-				else
-				{
+				else if (nextNonzeroOrLastColumn != col + 1)
 					board[row][nextNonzeroOrLastColumn - 1] = value;
-					if (nextNonzeroOrLastColumn != col + 1)
-						board[row][col] = 0;
-				}
+				else
+					continue;
+				board[row][col] = 0;
 			}
 		}
 	}
