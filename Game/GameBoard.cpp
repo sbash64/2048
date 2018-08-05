@@ -21,22 +21,22 @@ void GameBoard::moveRight()
 			double value = board[row][col];
 			if (value != 0)
 			{
-				const auto nextNonzeroColumn = getNextNonZeroColumn(row, col);
-				if (board[row][nextNonzeroColumn] == 0)
+				const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col);
+				if (board[row][nextNonzeroOrLastColumn] == 0)
 				{
 					board[row][col] = 0;
-					board[row][nextNonzeroColumn] = value;
+					board[row].back() = value;
 				}
-				else if (board[row][nextNonzeroColumn] == value && !hasBeenCombined[nextNonzeroColumn])
+				else if (board[row][nextNonzeroOrLastColumn] == value && !hasBeenCombined[nextNonzeroOrLastColumn])
 				{
 					board[row][col] = 0;
-					board[row][nextNonzeroColumn] = 2 * value;
-					hasBeenCombined[nextNonzeroColumn] = true;
+					board[row][nextNonzeroOrLastColumn] = 2 * value;
+					hasBeenCombined[nextNonzeroOrLastColumn] = true;
 				}
 				else
 				{
-					board[row][nextNonzeroColumn - 1] = value;
-					if (nextNonzeroColumn != col + 1)
+					board[row][nextNonzeroOrLastColumn - 1] = value;
+					if (nextNonzeroOrLastColumn != col + 1)
 						board[row][col] = 0;
 				}
 			}
@@ -44,10 +44,9 @@ void GameBoard::moveRight()
 	}
 }
 
-int GameBoard::getNextNonZeroColumn(int row, int col)
+int GameBoard::getNextNonzeroOrLastColumn(int row, int col)
 {
-	int i = col;
-	while (i < board[row].size() - 1 && board[row][++i] == 0)
+	while (col < board[row].size() - 1 && board[row][++col] == 0)
 		;
-	return i;
+	return col;
 }

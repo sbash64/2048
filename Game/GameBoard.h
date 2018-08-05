@@ -16,5 +16,5 @@ public:
 	GAME_API void moveRight();
 
 private:
-	int getNextNonZeroColumn(int row, int col);
+	int getNextNonzeroOrLastColumn(int row, int col);
 };
