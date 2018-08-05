@@ -14,4 +14,7 @@ public:
 	GAME_API GameBoard(const std::vector<std::vector<double>> &board);
 	GAME_API const std::vector<std::vector<double>> &getBoard();
 	GAME_API void moveRight();
+
+private:
+	int getNextNonZeroColumn(int row, int col);
 };

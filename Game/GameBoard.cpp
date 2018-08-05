@@ -15,14 +15,13 @@ void GameBoard::moveRight()
 	for (int row = 0; row < board.size(); row++)
 	{
 		std::vector<bool> hasBeenCombined(board[row].size(), false);
-		for (int col = board[row].size() - 2; col > -1; col--)
+		const auto oneBeforeEnd = board[row].size() - 2;
+		for (int col = oneBeforeEnd; col > -1; col--)
 		{
 			double value = board[row][col];
 			if (value != 0)
 			{
-				int nextNonzeroColumn = col;
-				while (nextNonzeroColumn < board[row].size() - 1 && board[row][++nextNonzeroColumn] == 0)
-					;
+				const auto nextNonzeroColumn = getNextNonZeroColumn(row, col);
 				if (board[row][nextNonzeroColumn] == 0)
 				{
 					board[row][col] = 0;
@@ -43,4 +42,12 @@ void GameBoard::moveRight()
 			}
 		}
 	}
+}
+
+int GameBoard::getNextNonZeroColumn(int row, int col)
+{
+	int i = col;
+	while (i < board[row].size() - 1 && board[row][++i] == 0)
+		;
+	return i;
 }
