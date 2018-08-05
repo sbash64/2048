@@ -12,33 +12,33 @@ const std::vector<std::vector<double>>& GameBoard::getBoard()
 
 void GameBoard::moveRight()
 {
-	for (int i = 0; i < board.size(); i++)
+	for (int row = 0; row < board.size(); row++)
 	{
-		std::vector<bool> combinationSpaces(board[i].size() - 2, false);
-		for (int j = board[i].size() - 2; j > -1; j--)
+		std::vector<bool> combinationSpaces(board[row].size() - 2, false);
+		for (int col = board[row].size() - 2; col > -1; col--)
 		{
-			double value = board[i][j];
+			double value = board[row][col];
 			if (value != 0)
 			{
-				int k = j;
-				while (k < board[i].size() - 1 && board[i][++k] == 0)
+				int nextNonzeroColumn = col;
+				while (nextNonzeroColumn < board[row].size() - 1 && board[row][++nextNonzeroColumn] == 0)
 					;
-				if (board[i][k] == 0)
+				if (board[row][nextNonzeroColumn] == 0)
 				{
-					board[i][j] = 0;
-					board[i][k] = value;
+					board[row][col] = 0;
+					board[row][nextNonzeroColumn] = value;
 				}
-				else if (board[i][k] == value && !combinationSpaces[k-2])
+				else if (board[row][nextNonzeroColumn] == value && !combinationSpaces[nextNonzeroColumn-2])
 				{
-					board[i][j] = 0;
-					board[i][k] = 2 * value;
-					combinationSpaces[k - 2] = true;
+					board[row][col] = 0;
+					board[row][nextNonzeroColumn] = 2 * value;
+					combinationSpaces[nextNonzeroColumn - 2] = true;
 				}
 				else
 				{
-					board[i][k - 1] = value;
-					if (k != j + 1)
-						board[i][j] = 0;
+					board[row][nextNonzeroColumn - 1] = value;
+					if (nextNonzeroColumn != col + 1)
+						board[row][col] = 0;
 				}
 			}
 		}
