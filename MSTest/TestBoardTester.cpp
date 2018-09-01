@@ -27,5 +27,23 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}));
 		}
+
+		TEST_METHOD(testRotateClockwiseOneTwo)
+		{
+			assertAreEqual(
+				{
+					{ 0, 0, 0, 2 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				},
+				rotateClockwise(
+					{
+						{ 2, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}));
+		}
 	};
 }
