@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include <GameBoard.h>
 #include "assert_utility.h"
+#include "test_board_utility.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -12,7 +13,7 @@ namespace MSTest
 	public:
 		TEST_METHOD(testMoveRightAllZeros)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
@@ -37,9 +38,67 @@ namespace MSTest
 		{
 			GameBoard board(initial);
 			for (const auto &c : movement)
-				if (c == 'r' || c == 'R')
+				switch (c)
+				{
+				case 'r':
+				case 'R':
 					board.moveRight();
+					break;
+				case 'd':
+				case 'D':
+					board.moveDown();
+					break;
+				case 'l':
+				case 'L':
+					break;
+				case 'u':
+				case 'U':
+					break;
+				}
 			assertAreEqual(final, board.getBoard());
+		}
+
+		std::string clockwiseMovementTransform(std::string movement)
+		{
+			for (auto &c : movement)
+				switch (c)
+				{
+				case 'r':
+				case 'R':
+					c = 'd';
+					break;
+				case 'd':
+				case 'D':
+					c = 'l';
+					break;
+				case 'l':
+				case 'L':
+					c = 'u';
+					break;
+				case 'u':
+				case 'U':
+					c = 'r';
+					break;
+				}
+			return movement;
+		}
+
+		void assertAllRotatedTransformTransitions(
+			const std::vector<std::vector<double>> &initial,
+			const std::string &movement,
+			const std::vector<std::vector<double>> &final
+		)
+		{
+			assertBoardTransition(initial, movement, final);
+			auto rotatedInitial(initial);
+			auto rotatedMovement(movement);
+			auto rotatedFinal(final);
+			for (int i = 0; i < 3; i++) {
+				rotatedInitial = rotateClockwise(std::move(rotatedInitial));
+				rotatedMovement = clockwiseMovementTransform(std::move(rotatedMovement));
+				rotatedFinal = rotateClockwise(std::move(rotatedFinal));
+				assertBoardTransition(rotatedInitial, rotatedMovement, rotatedFinal);
+			}
 		}
 
 	public:
