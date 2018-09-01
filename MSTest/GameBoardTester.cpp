@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <GameBoard.h>
+#include "assert_utility.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -39,19 +40,6 @@ namespace MSTest
 				if (c == 'r' || c == 'R')
 					board.moveRight();
 			assertAreEqual(final, board.getBoard());
-		}
-
-		void assertAreEqual(
-			const std::vector<std::vector<double>> &expected,
-			const std::vector<std::vector<double>> &actual)
-		{
-			for (size_t i = 0; i < expected.size(); i++)
-				for (size_t j = 0; j < expected[i].size(); j++)
-					Assert::AreEqual(
-						expected[i][j],
-						actual[i][j]
-					);
-
 		}
 
 	public:
