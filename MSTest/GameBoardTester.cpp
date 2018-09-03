@@ -63,6 +63,7 @@ namespace MSTest
 					break;
 				case 'l':
 				case 'L':
+					board.moveLeft();
 					break;
 				case 'u':
 				case 'U':
@@ -106,7 +107,7 @@ namespace MSTest
 			auto rotatedInitial(initial);
 			auto rotatedMovement(movement);
 			auto rotatedFinal(final);
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 2; i++) {
 				rotatedInitial = rotateClockwise(std::move(rotatedInitial));
 				rotatedMovement = clockwiseMovementTransform(std::move(rotatedMovement));
 				rotatedFinal = rotateClockwise(std::move(rotatedFinal));
