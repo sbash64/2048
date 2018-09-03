@@ -14,6 +14,14 @@ namespace MSTest
 		TEST_METHOD(testInvalidBoardThrows)
 		{
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, {} }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0 }, {} }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, { 0 } }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0 }, { 0 } }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0, 0 }, {} }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, { 0, 0 } }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0, 0 }, { 0 } }); });
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0 }, { 0, 0 } }); });
+			GameBoard({ { 0, 0 }, { 0, 0 } });
 		}
 
 		TEST_METHOD(testMoveRightAllZeros)
