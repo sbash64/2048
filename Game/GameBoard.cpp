@@ -24,7 +24,7 @@ void GameBoard::moveRight()
 		for (size_t adjacentCol = N - 1; adjacentCol > 0; --adjacentCol)
 		{
 			const auto col = adjacentCol - 1;
-			const double value = board[row][col];
+			const auto value = board[row][col];
 			const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col);
 			if (board[row][nextNonzeroOrLastColumn] == 0)
 				board[row].back() = value;
@@ -52,7 +52,7 @@ void GameBoard::moveLeft()
 		for (size_t adjacentCol = 0; adjacentCol < N - 1; ++adjacentCol)
 		{
 			const auto col = adjacentCol + 1;
-			const double value = board[row][col];
+			const auto value = board[row][col];
 			const auto previousNonzeroOrFirstColumn = getPreviousNonzeroOrFirstColumn(row, col);
 			if (board[row][previousNonzeroOrFirstColumn] == 0)
 				board[row].front() = value;
@@ -80,7 +80,7 @@ void GameBoard::moveDown()
 		for (size_t adjacentRow = N - 1; adjacentRow > 0; --adjacentRow)
 		{
 			const auto row = adjacentRow - 1;
-			const double value = board[row][col];
+			const auto value = board[row][col];
 			const auto nextNonzeroOrLastRow = getNextNonzeroOrLastRow(row, col);
 			if (board[nextNonzeroOrLastRow][col] == 0)
 				board.back()[col] = value;
@@ -108,7 +108,7 @@ void GameBoard::moveUp()
 		for (size_t adjacentRow = 0; adjacentRow < N - 1; ++adjacentRow)
 		{
 			const auto row = adjacentRow + 1;
-			const double value = board[row][col];
+			const auto value = board[row][col];
 			const auto previousNonzeroOrFirstRow = getPreviousNonzeroOrFirstRow(row, col);
 			if (board[previousNonzeroOrFirstRow][col] == 0)
 				board.front()[col] = value;
@@ -128,28 +128,28 @@ void GameBoard::moveUp()
 	}
 }
 
-int GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
+size_t GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
 {
 	while (col < N - 1 && board[row][++col] == 0)
 		;
 	return col;
 }
 
-int GameBoard::getPreviousNonzeroOrFirstColumn(size_t row, size_t col)
+size_t GameBoard::getPreviousNonzeroOrFirstColumn(size_t row, size_t col)
 {
 	while (col > 0 && board[row][--col] == 0)
 		;
 	return col;
 }
 
-int GameBoard::getNextNonzeroOrLastRow(size_t row, size_t col)
+size_t GameBoard::getNextNonzeroOrLastRow(size_t row, size_t col)
 {
 	while (row < N - 1 && board[++row][col] == 0)
 		;
 	return row;
 }
 
-int GameBoard::getPreviousNonzeroOrFirstRow(size_t row, size_t col)
+size_t GameBoard::getPreviousNonzeroOrFirstRow(size_t row, size_t col)
 {
 	while (row > 0 && board[--row][col] == 0)
 		;
