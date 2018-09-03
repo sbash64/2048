@@ -104,7 +104,7 @@ namespace MSTest
 	public:
 		TEST_METHOD(testMoveRightOneTwo)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
