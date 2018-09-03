@@ -118,7 +118,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 0, 0 },
 				{ 0, 0, 0, 0 },
@@ -132,7 +132,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 2, 0 },
 				{ 0, 0, 0, 0 },
@@ -146,7 +146,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 0, 2 },
 				{ 0, 0, 0, 0 },
