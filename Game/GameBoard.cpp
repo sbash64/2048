@@ -1,15 +1,16 @@
 #include "GameBoard.h"
 
-GameBoard::GameBoard(const std::vector<std::vector<double>> &board) :
-	board(board)
+GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
+	board(std::move(_board)),
+	N(board.size())
 {
-	const auto rows = this->board.size();
-	for (const auto &row : this->board)
+	const auto rows = board.size();
+	for (const auto &row : board)
 		if (row.size() != rows)
 			throw std::runtime_error("Invalid board dimensions.");
 }
 
-const std::vector<std::vector<double>>& GameBoard::getBoard()
+const std::vector<std::vector<double>> &GameBoard::getBoard()
 {
 	return board;
 }
