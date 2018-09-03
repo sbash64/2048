@@ -177,7 +177,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightTwoTwos)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 2, 0, 0 },
 				{ 0, 0, 0, 0 },
@@ -191,7 +191,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 2, 0 },
 				{ 0, 0, 0, 0 },
@@ -205,7 +205,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 0, 2 },
 				{ 0, 0, 0, 0 },
@@ -219,7 +219,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 2, 0 },
 				{ 0, 0, 0, 0 },
@@ -233,7 +233,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 0, 2 },
 				{ 0, 0, 0, 0 },
@@ -247,7 +247,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -265,7 +265,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightThreeTwos)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 2, 2, 0 },
 				{ 0, 0, 0, 0 },
@@ -279,7 +279,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 2, 0, 2 },
 				{ 0, 0, 0, 0 },
@@ -293,7 +293,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -307,7 +307,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -325,7 +325,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightFourTwos)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 2, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -343,7 +343,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightTwoUnequals)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 4, 0, 0 },
 				{ 0, 0, 0, 0 },
@@ -357,7 +357,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 4, 0 },
 				{ 0, 0, 0, 0 },
@@ -371,7 +371,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 0, 4 },
 				{ 0, 0, 0, 0 },
@@ -385,7 +385,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 4, 0 },
 				{ 0, 0, 0, 0 },
@@ -399,7 +399,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 0, 4 },
 				{ 0, 0, 0, 0 },
@@ -413,7 +413,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 2, 4 },
 				{ 0, 0, 0, 0 },
@@ -431,7 +431,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightThreeUnequals)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 4, 8, 0 },
 				{ 0, 0, 0, 0 },
@@ -445,7 +445,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 4, 0, 8 },
 				{ 0, 0, 0, 0 },
@@ -459,7 +459,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 0, 4, 8 },
 				{ 0, 0, 0, 0 },
@@ -473,7 +473,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 2, 4, 8 },
 				{ 0, 0, 0, 0 },
@@ -491,7 +491,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightFourUnequals)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 2, 4, 8, 16 },
 				{ 0, 0, 0, 0 },
@@ -509,7 +509,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightCombinesOnlyOnce)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 4, 2, 2, 0 },
 				{ 0, 0, 0, 0 },
@@ -523,7 +523,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 4, 2, 0, 2 },
 				{ 0, 0, 0, 0 },
@@ -537,7 +537,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 4, 0, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -551,7 +551,7 @@ namespace MSTest
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 }
 			});
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 4, 2, 2 },
 				{ 0, 0, 0, 0 },
@@ -569,7 +569,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightTwiceAllZeros)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 0, 0, 0, 0 },
 				{ 0, 0, 0, 0 },
@@ -587,7 +587,7 @@ namespace MSTest
 
 		TEST_METHOD(testMoveRightThreeCombos)
 		{
-			assertBoardTransition(
+			assertAllRotatedTransformTransitions(
 			{
 				{ 8, 4, 2, 2 },
 				{ 0, 0, 0, 0 },
