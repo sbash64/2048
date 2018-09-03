@@ -18,6 +18,7 @@ public:
 	GAME_API void moveRight();
 	GAME_API void moveLeft();
 	GAME_API void moveDown();
+	GAME_API void moveUp();
 
 private:
 	int getNextNonzeroOrLastColumn(size_t row, size_t col);

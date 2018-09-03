@@ -98,6 +98,11 @@ void GameBoard::moveDown()
 	}
 }
 
+void GameBoard::moveUp()
+{
+
+}
+
 int GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
 {
 	while (col < N - 1 && board[row][++col] == 0)
