@@ -100,7 +100,30 @@ void GameBoard::moveDown()
 
 void GameBoard::moveUp()
 {
-
+	for (size_t col = 0; col < N; ++col)
+	{
+		std::vector<bool> hasBeenCombined(N, false);
+		for (size_t adjacentRow = 0; adjacentRow < N - 1; ++adjacentRow)
+		{
+			const auto row = adjacentRow + 1;
+			const double value = board[row][col];
+			const auto previousNonzeroOrFirstRow = getPreviousNonzeroOrFirstRow(row, col);
+			if (board[previousNonzeroOrFirstRow][col] == 0)
+				board.front()[col] = value;
+			else if (
+				board[previousNonzeroOrFirstRow][col] == value &&
+				!hasBeenCombined[previousNonzeroOrFirstRow])
+			{
+				board[previousNonzeroOrFirstRow][col] += value;
+				hasBeenCombined[previousNonzeroOrFirstRow] = true;
+			}
+			else if (previousNonzeroOrFirstRow != adjacentRow)
+				board[previousNonzeroOrFirstRow + 1][col] = value;
+			else
+				continue;
+			board[row][col] = 0;
+		}
+	}
 }
 
 int GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
@@ -120,6 +143,13 @@ int GameBoard::getPreviousNonzeroOrFirstColumn(size_t row, size_t col)
 int GameBoard::getNextNonzeroOrLastRow(size_t row, size_t col)
 {
 	while (row < N - 1 && board[++row][col] == 0)
+		;
+	return row;
+}
+
+int GameBoard::getPreviousNonzeroOrFirstRow(size_t row, size_t col)
+{
+	while (row > 0 && board[--row][col] == 0)
 		;
 	return row;
 }
