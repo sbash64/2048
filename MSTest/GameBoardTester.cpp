@@ -21,7 +21,29 @@ namespace MSTest
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, { 0, 0 } }); });
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0, 0 }, { 0 } }); });
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0 }, { 0, 0 } }); });
-			GameBoard({ { 0, 0 }, { 0, 0 } });
+			GameBoard(
+				{
+					{ 0 }
+				}
+			);
+			GameBoard(
+				{ 
+					{ 0, 0 }, 
+					{ 0, 0 } 
+				});
+			GameBoard(
+				{ 
+					{ 0, 0, 0 }, 
+					{ 0, 0, 0 },
+					{ 0, 0, 0 }
+				});
+			GameBoard(
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				});
 		}
 
 		TEST_METHOD(testAllZeros)
@@ -589,19 +611,37 @@ namespace MSTest
 		TEST_METHOD(testThreeCombos)
 		{
 			assertAllRotatedTransformTransitions(
-			{
-				{ 8, 4, 2, 2 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 }
-			},
-			"rrr",
-			{
-				{ 0, 0, 0, 16 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 },
-				{ 0, 0, 0, 0 }
-			});
+				{
+					{ 8, 4, 2, 2 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				},
+				"rrr",
+				{
+					{ 0, 0, 0, 16 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				});
+		}
+
+		TEST_METHOD(testUnfortunateBoard)
+		{
+			assertAllRotatedTransformTransitions(
+				{
+					{ 2, 4, 2, 4 },
+					{ 4, 2, 4, 2 },
+					{ 2, 4, 2, 4 },
+					{ 4, 2, 4, 2 }
+				},
+				"rdlu",
+				{
+					{ 2, 4, 2, 4 },
+					{ 4, 2, 4, 2 },
+					{ 2, 4, 2, 4 },
+					{ 4, 2, 4, 2 }
+				});
 		}
 	};
 };
