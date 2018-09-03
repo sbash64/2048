@@ -4,9 +4,8 @@ GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
 	board(std::move(_board)),
 	N(board.size())
 {
-	const auto rows = board.size();
 	for (const auto &row : board)
-		if (row.size() != rows)
+		if (row.size() != N)
 			throw std::runtime_error("Invalid board dimensions.");
 }
 
@@ -17,13 +16,13 @@ const std::vector<std::vector<double>> &GameBoard::getBoard()
 
 void GameBoard::moveRight()
 {
-	for (int row = 0; row < board.size(); row++)
+	for (size_t row = 0; row < N; row++)
 	{
-		std::vector<bool> hasBeenCombined(board[row].size(), false);
-		const auto columnBeforeEnd = board[row].size() - 2;
-		for (int col = columnBeforeEnd; col > -1; col--)
+		std::vector<bool> hasBeenCombined(N, false);
+		const size_t columnBeforeEnd = N - 2;
+		for (size_t col = columnBeforeEnd + 1; col > 0; col--)
 		{
-			const double value = board[row][col];
+			const double value = board[row][col-1];
 			const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col);
 			if (board[row][nextNonzeroOrLastColumn] == 0)
 				board[row].back() = value;
@@ -34,24 +33,24 @@ void GameBoard::moveRight()
 				board[row][nextNonzeroOrLastColumn] += value;
 				hasBeenCombined[nextNonzeroOrLastColumn] = true;
 			}
-			else if (nextNonzeroOrLastColumn != col + 1)
+			else if (nextNonzeroOrLastColumn != col)
 				board[row][nextNonzeroOrLastColumn - 1] = value;
 			else
 				continue;
-			board[row][col] = 0;
+			board[row][col-1] = 0;
 		}
 	}
 }
 
 void GameBoard::moveDown()
 {
-	for (int col = 0; col < board.front().size(); col++)
+	for (size_t col = 0; col < N; col++)
 	{
-		std::vector<bool> hasBeenCombined(board.size(), false);
-		const auto rowBeforeEnd = board.size() - 2;
-		for (int row = rowBeforeEnd; row > -1; row--)
+		std::vector<bool> hasBeenCombined(N, false);
+		const size_t rowBeforeEnd = N - 2;
+		for (size_t row = rowBeforeEnd + 1; row > 0; row--)
 		{
-			const double value = board[row][col];
+			const double value = board[row-1][col];
 			const auto nextNonzeroOrLastRow = getNextNonzeroOrLastRow(row, col);
 			if (board[nextNonzeroOrLastRow][col] == 0)
 				board.back()[col] = value;
@@ -62,25 +61,25 @@ void GameBoard::moveDown()
 				board[nextNonzeroOrLastRow][col] += value;
 				hasBeenCombined[nextNonzeroOrLastRow] = true;
 			}
-			else if (nextNonzeroOrLastRow != row + 1)
+			else if (nextNonzeroOrLastRow != row)
 				board[nextNonzeroOrLastRow - 1][col] = value;
 			else
 				continue;
-			board[row][col] = 0;
+			board[row-1][col] = 0;
 		}
 	}
 }
 
-int GameBoard::getNextNonzeroOrLastColumn(int row, int col)
+int GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
 {
-	while (col < board[row].size() - 1 && board[row][++col] == 0)
+	while (col < N && board[row][++col - 1] == 0)
 		;
-	return col;
+	return col - 1;
 }
 
-int GameBoard::getNextNonzeroOrLastRow(int row, int col)
+int GameBoard::getNextNonzeroOrLastRow(size_t row, size_t col)
 {
-	while (row < board.size() - 1 && board[++row][col] == 0)
+	while (row < N && board[++row - 1][col] == 0)
 		;
-	return row;
+	return row - 1;
 }

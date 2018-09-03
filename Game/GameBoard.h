@@ -11,7 +11,7 @@ class GameBoard
 {
 	// Order important for construction.
 	std::vector<std::vector<double>> board;
-	const int N;
+	const size_t N;
 public:
 	GAME_API GameBoard(std::vector<std::vector<double>> board);
 	GAME_API const std::vector<std::vector<double>> &getBoard();
@@ -19,6 +19,6 @@ public:
 	GAME_API void moveDown();
 
 private:
-	int getNextNonzeroOrLastColumn(int row, int col);
-	int getNextNonzeroOrLastRow(int row, int col);
+	int getNextNonzeroOrLastColumn(size_t row, size_t col);
+	int getNextNonzeroOrLastRow(size_t row, size_t col);
 };
