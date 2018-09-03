@@ -3,6 +3,10 @@
 GameBoard::GameBoard(const std::vector<std::vector<double>> &board) :
 	board(board)
 {
+	const auto rows = this->board.size();
+	for (const auto &row : this->board)
+		if (row.size() != rows)
+			throw std::runtime_error("Invalid board dimensions.");
 }
 
 const std::vector<std::vector<double>>& GameBoard::getBoard()
