@@ -16,14 +16,13 @@ const std::vector<std::vector<double>> &GameBoard::getBoard()
 
 void GameBoard::moveRight()
 {
-	for (size_t row = 0; row < N; row++)
+	for (size_t row = 0; row < N; ++row)
 	{
 		std::vector<bool> hasBeenCombined(N, false);
-		const size_t columnBeforeEnd = N - 2;
-		for (size_t col = columnBeforeEnd + 1; col > 0; col--)
+		for (size_t col = N - 1; col > 0; --col)
 		{
 			const double value = board[row][col-1];
-			const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col);
+			const auto nextNonzeroOrLastColumn = getNextNonzeroOrLastColumn(row, col-1);
 			if (board[row][nextNonzeroOrLastColumn] == 0)
 				board[row].back() = value;
 			else if (
@@ -44,14 +43,13 @@ void GameBoard::moveRight()
 
 void GameBoard::moveDown()
 {
-	for (size_t col = 0; col < N; col++)
+	for (size_t col = 0; col < N; ++col)
 	{
 		std::vector<bool> hasBeenCombined(N, false);
-		const size_t rowBeforeEnd = N - 2;
-		for (size_t row = rowBeforeEnd + 1; row > 0; row--)
+		for (size_t row = N - 1; row > 0; --row)
 		{
 			const double value = board[row-1][col];
-			const auto nextNonzeroOrLastRow = getNextNonzeroOrLastRow(row, col);
+			const auto nextNonzeroOrLastRow = getNextNonzeroOrLastRow(row-1, col);
 			if (board[nextNonzeroOrLastRow][col] == 0)
 				board.back()[col] = value;
 			else if (
@@ -72,14 +70,14 @@ void GameBoard::moveDown()
 
 int GameBoard::getNextNonzeroOrLastColumn(size_t row, size_t col)
 {
-	while (col < N && board[row][++col - 1] == 0)
+	while (col < N - 1 && board[row][++col] == 0)
 		;
-	return col - 1;
+	return col;
 }
 
 int GameBoard::getNextNonzeroOrLastRow(size_t row, size_t col)
 {
-	while (row < N && board[++row - 1][col] == 0)
+	while (row < N - 1 && board[++row][col] == 0)
 		;
-	return row - 1;
+	return row;
 }
