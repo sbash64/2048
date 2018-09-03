@@ -66,19 +66,16 @@ namespace MSTest
 
 	private:
 		void assertAllRotatedTransformTransitions(
-			const std::vector<std::vector<double>> &initial,
-			const std::string &movement,
-			const std::vector<std::vector<double>> &final
+			std::vector<std::vector<double>> initial,
+			std::string movement,
+			std::vector<std::vector<double>> final
 		)
 		{
-			auto rotatedInitial(initial);
-			auto rotatedMovement(movement);
-			auto rotatedFinal(final);
 			for (int i = 0; i < 4; i++) {
-				assertBoardTransition(rotatedInitial, rotatedMovement, rotatedFinal);
-				rotatedInitial = rotateClockwise(std::move(rotatedInitial));
-				rotatedMovement = clockwiseMovementTransform(std::move(rotatedMovement));
-				rotatedFinal = rotateClockwise(std::move(rotatedFinal));
+				assertBoardTransition(initial, movement, final);
+				initial = rotateClockwise(std::move(initial));
+				movement = clockwiseMovementTransform(std::move(movement));
+				final = rotateClockwise(std::move(final));
 			}
 		}
 
@@ -641,6 +638,24 @@ namespace MSTest
 					{ 4, 2, 4, 2 },
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 }
+				});
+		}
+
+		TEST_METHOD(testVeryFortunateBoard)
+		{
+			assertAllRotatedTransformTransitions(
+				{
+					{ 2, 2, 2, 2 },
+					{ 2, 2, 2, 2 },
+					{ 2, 2, 2, 2 },
+					{ 2, 2, 2, 2 }
+				},
+				"rdlu",
+				{
+					{ 32, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
 				});
 		}
 	};
