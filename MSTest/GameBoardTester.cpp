@@ -11,6 +11,11 @@ namespace MSTest
 	TEST_CLASS(GameBoardTester)
 	{
 	public:
+		TEST_METHOD(testInvalidBoardThrows)
+		{
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {} }); });
+		}
+
 		TEST_METHOD(testMoveRightAllZeros)
 		{
 			assertAllRotatedTransformTransitions(
