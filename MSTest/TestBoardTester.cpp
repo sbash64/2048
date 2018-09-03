@@ -3,8 +3,6 @@
 #include "assert_utility.h"
 #include "test_board_utility.h"
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
 namespace MSTest
 {
 	TEST_CLASS(TestBoardTester)

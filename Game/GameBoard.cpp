@@ -4,6 +4,8 @@ GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
 	board(std::move(_board)),
 	N(board.size())
 {
+	if (N == 0)
+		throw std::runtime_error("Empty board.");
 	for (const auto &row : board)
 		if (row.size() != N)
 			throw std::runtime_error("Invalid board dimensions.");

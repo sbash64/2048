@@ -4,8 +4,6 @@
 #include "assert_utility.h"
 #include "test_board_utility.h"
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
 namespace MSTest
 {
 	TEST_CLASS(GameBoardTester)
@@ -13,6 +11,8 @@ namespace MSTest
 	public:
 		TEST_METHOD(testInvalidBoardThrows)
 		{
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::ExpectException<std::runtime_error>([]() { GameBoard({}); });
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, {} }); });
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ { 0 }, {} }); });
 			Assert::ExpectException<std::runtime_error>([]() { GameBoard({ {}, { 0 } }); });
@@ -24,7 +24,7 @@ namespace MSTest
 			GameBoard({ { 0, 0 }, { 0, 0 } });
 		}
 
-		TEST_METHOD(testMoveRightAllZeros)
+		TEST_METHOD(testAllZeros)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -43,6 +43,23 @@ namespace MSTest
 		}
 
 	private:
+		void assertAllRotatedTransformTransitions(
+			const std::vector<std::vector<double>> &initial,
+			const std::string &movement,
+			const std::vector<std::vector<double>> &final
+		)
+		{
+			auto rotatedInitial(initial);
+			auto rotatedMovement(movement);
+			auto rotatedFinal(final);
+			for (int i = 0; i < 4; i++) {
+				assertBoardTransition(rotatedInitial, rotatedMovement, rotatedFinal);
+				rotatedInitial = rotateClockwise(std::move(rotatedInitial));
+				rotatedMovement = clockwiseMovementTransform(std::move(rotatedMovement));
+				rotatedFinal = rotateClockwise(std::move(rotatedFinal));
+			}
+		}
+
 		void assertBoardTransition(
 			const std::vector<std::vector<double>> &initial,
 			const std::string &movement,
@@ -98,26 +115,8 @@ namespace MSTest
 			return movement;
 		}
 
-		void assertAllRotatedTransformTransitions(
-			const std::vector<std::vector<double>> &initial,
-			const std::string &movement,
-			const std::vector<std::vector<double>> &final
-		)
-		{
-			assertBoardTransition(initial, movement, final);
-			auto rotatedInitial(initial);
-			auto rotatedMovement(movement);
-			auto rotatedFinal(final);
-			for (int i = 0; i < 3; i++) {
-				rotatedInitial = rotateClockwise(std::move(rotatedInitial));
-				rotatedMovement = clockwiseMovementTransform(std::move(rotatedMovement));
-				rotatedFinal = rotateClockwise(std::move(rotatedFinal));
-				assertBoardTransition(rotatedInitial, rotatedMovement, rotatedFinal);
-			}
-		}
-
 	public:
-		TEST_METHOD(testMoveRightOneTwo)
+		TEST_METHOD(testOneTwo)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -177,7 +176,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightTwoTwos)
+		TEST_METHOD(testTwoTwos)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -265,7 +264,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightThreeTwos)
+		TEST_METHOD(testThreeTwos)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -325,7 +324,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightFourTwos)
+		TEST_METHOD(testFourTwos)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -343,7 +342,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightTwoUnequals)
+		TEST_METHOD(testTwoUnequals)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -431,7 +430,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightThreeUnequals)
+		TEST_METHOD(testThreeUnequals)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -491,7 +490,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightFourUnequals)
+		TEST_METHOD(testFourUnequals)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -509,7 +508,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightCombinesOnlyOnce)
+		TEST_METHOD(testCombinesOnlyOnce)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -569,7 +568,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightTwiceAllZeros)
+		TEST_METHOD(testTwiceAllZeros)
 		{
 			assertAllRotatedTransformTransitions(
 			{
@@ -587,7 +586,7 @@ namespace MSTest
 			});
 		}
 
-		TEST_METHOD(testMoveRightThreeCombos)
+		TEST_METHOD(testThreeCombos)
 		{
 			assertAllRotatedTransformTransitions(
 			{
