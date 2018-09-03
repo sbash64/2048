@@ -18,4 +18,5 @@ public:
 
 private:
 	int getNextNonzeroOrLastColumn(int row, int col);
+	int getNextNonzeroOrLastRow(int row, int col);
 };

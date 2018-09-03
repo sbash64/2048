@@ -40,7 +40,30 @@ void GameBoard::moveRight()
 
 void GameBoard::moveDown()
 {
-	moveRight();
+	for (int col = 0; col < board.front().size(); col++)
+	{
+		std::vector<bool> hasBeenCombined(board.size(), false);
+		const auto rowBeforeEnd = board.size() - 2;
+		for (int row = rowBeforeEnd; row > -1; row--)
+		{
+			const double value = board[row][col];
+			const auto nextNonzeroOrLastRow = getNextNonzeroOrLastRow(row, col);
+			if (board[nextNonzeroOrLastRow][col] == 0)
+				board.back()[col] = value;
+			else if (
+				board[nextNonzeroOrLastRow][col] == value &&
+				!hasBeenCombined[nextNonzeroOrLastRow])
+			{
+				board[nextNonzeroOrLastRow][col] += value;
+				hasBeenCombined[nextNonzeroOrLastRow] = true;
+			}
+			else if (nextNonzeroOrLastRow != row + 1)
+				board[nextNonzeroOrLastRow - 1][col] = value;
+			else
+				continue;
+			board[row][col] = 0;
+		}
+	}
 }
 
 int GameBoard::getNextNonzeroOrLastColumn(int row, int col)
@@ -48,4 +71,11 @@ int GameBoard::getNextNonzeroOrLastColumn(int row, int col)
 	while (col < board[row].size() - 1 && board[row][++col] == 0)
 		;
 	return col;
+}
+
+int GameBoard::getNextNonzeroOrLastRow(int row, int col)
+{
+	while (row < board.size() - 1 && board[++row][col] == 0)
+		;
+	return row;
 }
