@@ -42,6 +42,11 @@ void GameBoard::moveRight()
 	}
 }
 
+void GameBoard::moveLeft()
+{
+
+}
+
 void GameBoard::moveDown()
 {
 	for (size_t col = 0; col < N; ++col)

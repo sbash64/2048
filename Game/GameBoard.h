@@ -16,6 +16,7 @@ public:
 	GAME_API GameBoard(std::vector<std::vector<double>> board);
 	GAME_API const std::vector<std::vector<double>> &getBoard();
 	GAME_API void moveRight();
+	GAME_API void moveLeft();
 	GAME_API void moveDown();
 
 private:
