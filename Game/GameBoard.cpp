@@ -36,79 +36,52 @@ void GameBoard::moveUp()
 	moveAlong(&GameBoard::upwards);
 }
 
-void GameBoard::moveAlong(double &(GameBoard::*direction)(size_t range, size_t element))
+void GameBoard::moveAlong(double &(GameBoard::*direction)(size_t slice, size_t element))
 {
-	for (size_t range = 0; range < N; ++range) {
+	for (size_t slice = 0; slice < N; ++slice) {
 		std::vector<bool> hasBeenCombined(N, false);
 		for (size_t adjacentElement = N - 1; adjacentElement > 0; --adjacentElement)
 		{
 			const auto element = adjacentElement - 1;
-			const auto value = (this->*direction)(range, element);
+			const auto value = (this->*direction)(slice, element);
 			auto nextNonzeroOrLastElement = element;
-			while (nextNonzeroOrLastElement < N - 1 && (this->*direction)(range, ++nextNonzeroOrLastElement) == 0)
+			while (nextNonzeroOrLastElement < N - 1 && (this->*direction)(slice, ++nextNonzeroOrLastElement) == 0)
 				;
-			if ((this->*direction)(range, nextNonzeroOrLastElement) == 0)
-				(this->*direction)(range, N - 1) = value;
+			if ((this->*direction)(slice, nextNonzeroOrLastElement) == 0)
+				(this->*direction)(slice, N - 1) = value;
 			else if (
-				(this->*direction)(range, nextNonzeroOrLastElement) == value &&
+				(this->*direction)(slice, nextNonzeroOrLastElement) == value &&
 				!hasBeenCombined[nextNonzeroOrLastElement])
 			{
-				(this->*direction)(range, nextNonzeroOrLastElement) += value;
+				(this->*direction)(slice, nextNonzeroOrLastElement) += value;
 				hasBeenCombined[nextNonzeroOrLastElement] = true;
 			}
 			else if (nextNonzeroOrLastElement != adjacentElement)
-				(this->*direction)(range, nextNonzeroOrLastElement - 1) = value;
+				(this->*direction)(slice, nextNonzeroOrLastElement - 1) = value;
 			else
 				continue;
-			(this->*direction)(range, element) = 0;
+			(this->*direction)(slice, element) = 0;
 		}
 	}
 }
 
-double & GameBoard::toTheRight(size_t range, size_t element)
+double & GameBoard::toTheRight(size_t slice, size_t element)
 {
-	return board[range][element];
+	return board[slice][element];
 }
 
-double & GameBoard::toTheLeft(size_t range, size_t element)
+double & GameBoard::toTheLeft(size_t slice, size_t element)
 {
-	return board[range][N - 1 - element];
+	return board[slice][N - 1 - element];
 }
 
-double & GameBoard::upwards(size_t range, size_t element)
+double & GameBoard::upwards(size_t slice, size_t element)
 {
-	return board[N - 1 - element][range];
+	return board[N - 1 - element][slice];
 }
 
-double & GameBoard::downwards(size_t range, size_t element)
+double & GameBoard::downwards(size_t slice, size_t element)
 {
-	return board[element][range];
+	return board[element][slice];
 }
 
-size_t GameBoard::nextNonzeroOrLastColumn(size_t row, size_t col)
-{
-	while (col < N - 1 && board[row][++col] == 0)
-		;
-	return col;
-}
-
-size_t GameBoard::previousNonzeroOrFirstColumn(size_t row, size_t col)
-{
-	while (col > 0 && board[row][--col] == 0)
-		;
-	return col;
-}
-
-size_t GameBoard::nextNonzeroOrLastRow(size_t row, size_t col)
-{
-	while (row < N - 1 && board[++row][col] == 0)
-		;
-	return row;
-}
-
-size_t GameBoard::previousNonzeroOrFirstRow(size_t row, size_t col)
-{
-	while (row > 0 && board[--row][col] == 0)
-		;
-	return row;
-}

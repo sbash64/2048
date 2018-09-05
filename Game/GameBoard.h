@@ -21,13 +21,9 @@ public:
 	GAME_API void moveUp();
 
 private:
-	void moveAlong(double &(GameBoard::*)(size_t range, size_t element));
-	double &toTheRight(size_t range, size_t element);
-	double &toTheLeft(size_t range, size_t element);
-	double &upwards(size_t range, size_t element);
-	double &downwards(size_t range, size_t element);
-	size_t nextNonzeroOrLastColumn(size_t row, size_t col);
-	size_t previousNonzeroOrFirstColumn(size_t row, size_t col);
-	size_t nextNonzeroOrLastRow(size_t row, size_t col);
-	size_t previousNonzeroOrFirstRow(size_t row, size_t col);
+	void moveAlong(double &(GameBoard::*)(size_t slice, size_t element));
+	double &toTheRight(size_t slice, size_t element);
+	double &toTheLeft(size_t slice, size_t element);
+	double &upwards(size_t slice, size_t element);
+	double &downwards(size_t slice, size_t element);
 };
