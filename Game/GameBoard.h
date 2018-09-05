@@ -21,8 +21,8 @@ public:
 	GAME_API void moveUp();
 
 private:
-	size_t getNextNonzeroOrLastColumn(size_t row, size_t col);
-	size_t getPreviousNonzeroOrFirstColumn(size_t row, size_t col);
-	size_t getNextNonzeroOrLastRow(size_t row, size_t col);
-	size_t getPreviousNonzeroOrFirstRow(size_t row, size_t col);
+	size_t nextNonzeroOrLastColumn(size_t row, size_t col);
+	size_t previousNonzeroOrFirstColumn(size_t row, size_t col);
+	size_t nextNonzeroOrLastRow(size_t row, size_t col);
+	size_t previousNonzeroOrFirstRow(size_t row, size_t col);
 };
