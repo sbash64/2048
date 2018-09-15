@@ -36,16 +36,22 @@ void GameBoard::moveUp()
 	moveAlong(&GameBoard::upwards);
 }
 
-void GameBoard::moveAlong(double &(GameBoard::*direction)(size_t slice, size_t element))
+void GameBoard::moveAlong(
+	double &(GameBoard::*direction)(size_t slice, size_t element))
 {
 	for (size_t slice = 0; slice < N; ++slice) {
 		std::vector<bool> hasBeenCombined(N, false);
-		for (size_t adjacentElement = N - 1; adjacentElement > 0; --adjacentElement)
+		for (
+			size_t adjacentElement = N - 1; 
+			adjacentElement > 0; 
+			--adjacentElement)
 		{
 			const auto element = adjacentElement - 1;
 			const auto value = (this->*direction)(slice, element);
 			auto nextNonzeroOrLastElement = element;
-			while (nextNonzeroOrLastElement < N - 1 && (this->*direction)(slice, ++nextNonzeroOrLastElement) == 0)
+			while (
+				nextNonzeroOrLastElement < N - 1 && 
+				(this->*direction)(slice, ++nextNonzeroOrLastElement) == 0)
 				;
 			if ((this->*direction)(slice, nextNonzeroOrLastElement) == 0)
 				(this->*direction)(slice, N - 1) = value;
