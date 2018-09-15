@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include <GameBoardFormatter.h>
 
 namespace MSTest
 {
@@ -23,8 +24,7 @@ namespace MSTest
 							{ 0, 0, 0, 0 }
 						}
 					)
-				));
-			);
+				).c_str());
 		}
 	};
 }
