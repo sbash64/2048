@@ -34,5 +34,6 @@ bool ConsoleIODevice::upArrowKeyPressed()
 
 void ConsoleIODevice::getKeyPress()
 {
+	_getch();
 	key = _getch();
 }
