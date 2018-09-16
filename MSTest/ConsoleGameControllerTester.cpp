@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <ConsoleGameController.h>
+#include <GameBoardFormatter.h>
 #include <CppUnitTest.h>
 #include <string>
 
@@ -34,6 +35,7 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				),
+				std::make_shared<GameBoardFormatter>(),
 				device);
 			device->setRightArrowKeyTrue();
 			controller.next();

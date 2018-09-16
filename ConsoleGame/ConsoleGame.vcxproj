@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameController.h" />
+    <ClInclude Include="Formatter.h" />
     <ClInclude Include="IODevice.h" />
   </ItemGroup>
   <ItemGroup>

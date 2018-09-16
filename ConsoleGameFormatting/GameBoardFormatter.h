@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GameBoard.h>
-#include <string>
+#include <vector>
+#include <Formatter.h>
 
 #ifdef CONSOLEGAMEFORMATTING_EXPORTS
 #define CONSOLEGAMEFORMATTING_API __declspec(dllexport)
@@ -9,10 +9,10 @@
 #define CONSOLEGAMEFORMATTING_API __declspec(dllimport)
 #endif
 
-class GameBoardFormatter
+class GameBoardFormatter : public Formatter
 {
 public:
-	CONSOLEGAMEFORMATTING_API std::string asString(const GameBoard &board);
+	CONSOLEGAMEFORMATTING_API std::string asString(const GameBoard &board) override;
 private:
 	std::vector<int> maxDigitsInEachColumn(const GameBoard &board);
 };

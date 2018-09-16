@@ -21,6 +21,9 @@
     <ClInclude Include="IODevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Formatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameController.cpp">
