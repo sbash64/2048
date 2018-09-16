@@ -5,5 +5,5 @@
 class GameBoardAnalyzer
 {
 public:
-	GAME_API std::vector<double> openCells(const GameBoard &board);
+	GAME_API std::vector<size_t> openCells(const GameBoard &board);
 };

@@ -3,8 +3,8 @@
 #include "assert_utility.h"
 
 void assertAreEqual(
-	const std::vector<double> &expected,
-	const std::vector<double> &actual)
+	const std::vector<size_t> &expected,
+	const std::vector<size_t> &actual)
 {
 	for (size_t i = 0; i < expected.size(); ++i)
 		Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
