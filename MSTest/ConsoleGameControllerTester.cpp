@@ -7,6 +7,7 @@ class MockIODevice : public IODevice
 {
 	std::string _lastOutput;
 	bool _rightArrowKey = false;
+	bool _downArrowKey = false;
 public:
 	void setRightArrowKeyTrue()
 	{
@@ -18,7 +19,11 @@ public:
 	}
 	void setDownArrowKeyTrue()
 	{
-
+		_downArrowKey = true;
+	}
+	virtual bool downArrowKeyPressed() override
+	{
+		return _downArrowKey;
 	}
 	void setLeftArrowKeyTrue()
 	{
