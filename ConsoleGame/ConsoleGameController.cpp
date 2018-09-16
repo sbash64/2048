@@ -16,7 +16,9 @@ void ConsoleGameController::next()
 		game.moveRight();
 	else if (device->downArrowKeyPressed())
 		game.moveDown();
-	else
+	else if (device->leftArrowKeyPressed())
 		game.moveLeft();
+	else
+		game.moveUp();
 	device->print(formatter->asString(game));
 }

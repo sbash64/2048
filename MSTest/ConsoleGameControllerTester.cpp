@@ -8,6 +8,7 @@ class MockIODevice : public IODevice
 	std::string _lastOutput;
 	bool _rightArrowKey = false;
 	bool _downArrowKey = false;
+	bool _leftArrowKey = false;
 public:
 	void setRightArrowKeyTrue()
 	{
@@ -26,6 +27,14 @@ public:
 		return _downArrowKey;
 	}
 	void setLeftArrowKeyTrue()
+	{
+		_leftArrowKey = true;
+	}
+	virtual bool leftArrowKeyPressed() override
+	{
+		return _leftArrowKey;
+	}
+	void setUpArrowKeyTrue()
 	{
 
 	}
@@ -130,7 +139,7 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device);
-			device->setLeftArrowKeyTrue();
+			device->setUpArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
 				"0 2 0 0\n" \
