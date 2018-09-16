@@ -666,5 +666,25 @@ namespace MSTest
 					{ 0, 0, 0, 0 }
 				});
 		}
+		TEST_METHOD(testSetCell)
+		{
+			GameBoard board(
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				}
+			);
+			board.setCell(0, 0, 1);
+			assertAreEqual(
+				{
+					{ 1, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				}, 
+				board.getBoard());
+		}
 	};
 };
