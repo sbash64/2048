@@ -8,7 +8,9 @@ ConsoleGameController::ConsoleGameController(
 	formatter(std::move(formatter)),
 	device(std::move(device))
 {
-	this->device->print(this->formatter->asString(this->game));
+	this->device->print(
+		std::string("Press an arrow key to play.\n\n") + 
+		this->formatter->asString(this->game) + "\n\n");
 }
 
 void ConsoleGameController::next()
@@ -24,6 +26,6 @@ void ConsoleGameController::next()
 	else if (device->upArrowKeyPressed())
 		game.moveUp();
 	else
-		header = "Unrecognized key pressed. Press an arrow key to play.\n\n";
-	device->print(header + formatter->asString(game));
+		header = "Unrecognized key pressed.\nPress an arrow key to play.\n\n";
+	device->print(header + formatter->asString(game) + "\n\n");
 }
