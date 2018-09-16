@@ -115,5 +115,29 @@ namespace MSTest
 				"0 0 0 0",
 				device->lastOutput().c_str());
 		}
+
+		TEST_METHOD(testNextWithUpArrowKey)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 2, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device);
+			device->setLeftArrowKeyTrue();
+			controller.next();
+			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+				"0 2 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 0",
+				device->lastOutput().c_str());
+		}
 	};
 }
