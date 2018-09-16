@@ -89,6 +89,32 @@ namespace MSTest
 	TEST_CLASS(ConsoleGameControllerTester)
 	{
 	public:
+
+
+		TEST_METHOD(testConstructorPrintsInitialBoard)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::AreEqual("", device->lastOutput().c_str());
+			ConsoleGameController(
+				GameBoard(
+					{
+						{ 2, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device);
+			Assert::AreEqual(
+				"2 0 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 0",
+				device->lastOutput().c_str());
+		}
+
 		TEST_METHOD(testNextCallsGetKeyPress)
 		{
 			const auto device = std::make_shared<MockIODevice>();
