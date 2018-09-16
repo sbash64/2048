@@ -12,5 +12,6 @@
 class ConsoleGameController
 {
 public:
-	CONSOLEGAME_API ConsoleGameController(std::shared_ptr<IODevice> device);
+	CONSOLEGAME_API explicit ConsoleGameController(
+		std::shared_ptr<IODevice> device);
 };

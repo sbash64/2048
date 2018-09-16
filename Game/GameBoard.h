@@ -13,7 +13,7 @@ class GameBoard
 	std::vector<std::vector<double>> board;
 	const std::size_t N;
 public:
-	GAME_API GameBoard(std::vector<std::vector<double>> board);
+	GAME_API explicit GameBoard(std::vector<std::vector<double>> board);
 	GAME_API const std::vector<std::vector<double>> &getBoard() const noexcept;
 	GAME_API void moveRight();
 	GAME_API void moveLeft();
