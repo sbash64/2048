@@ -1,4 +1,5 @@
 #include "GameBoard.h"
+#include <vector>
 
 template<std::size_t N>
 GameBoard<N>::GameBoard(std::array<std::array<double, N>, N> board) :
@@ -97,4 +98,10 @@ double &GameBoard<N>::downwards(size_t slice, size_t element)
 {
 	return board[element][slice];
 }
+
+template GameBoard<4>;
+template GameBoard<3>;
+template GameBoard<2>;
+template GameBoard<1>;
+template GameBoard<0>;
 

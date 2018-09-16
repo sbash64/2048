@@ -12,5 +12,6 @@
 class GameBoardFormatter
 {
 public:
-	CONSOLEGAME_API std::string asString(const GameBoard &board);
+	template<std::size_t N>
+	CONSOLEGAME_API std::string asString(const GameBoard<N> &board);
 };

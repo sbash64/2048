@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
+#include <array>
 
+template<std::size_t N>
 void assertAreEqual(
-	const std::vector<std::vector<double>> &expected,
-	const std::vector<std::vector<double>> &actual);
+	const std::array<std::array<double, N>, N> &expected,
+	const std::array<std::array<double, N>, N> &actual);

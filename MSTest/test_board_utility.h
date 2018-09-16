@@ -1,5 +1,6 @@
 #pragma once
-#include <vector>
+#include <array>
 
-std::vector<std::vector<double>> rotateClockwise(
-	std::vector<std::vector<double>> board);
+template<std::size_t N>
+std::array<std::array<double, N>, N> rotateClockwise(
+	std::array<std::array<double, N>, N> board);

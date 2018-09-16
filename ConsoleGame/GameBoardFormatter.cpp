@@ -1,7 +1,8 @@
 #include "GameBoardFormatter.h"
 #include <sstream>
 
-std::string GameBoardFormatter::asString(const GameBoard & board)
+template<std::size_t N>
+std::string GameBoardFormatter::asString(const GameBoard<N> &board)
 {
 	std::stringstream stream;
 	const auto _board = board.getBoard();
@@ -19,3 +20,5 @@ std::string GameBoardFormatter::asString(const GameBoard & board)
 		}
 	return stream.str();
 }
+
+template CONSOLEGAME_API std::string GameBoardFormatter::asString(const GameBoard<4> &board);

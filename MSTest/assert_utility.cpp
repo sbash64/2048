@@ -2,9 +2,10 @@
 #include "CppUnitTest.h"
 #include "assert_utility.h"
 
+template<std::size_t N>
 void assertAreEqual(
-	const std::vector<std::vector<double>>& expected, 
-	const std::vector<std::vector<double>>& actual)
+	const std::array<std::array<double, N>, N>& expected,
+	const std::array<std::array<double, N>, N>& actual)
 {
 	for (size_t i = 0; i < expected.size(); i++)
 		for (size_t j = 0; j < expected[i].size(); j++)
@@ -14,3 +15,7 @@ void assertAreEqual(
 			);
 
 }
+
+template void assertAreEqual(
+	const std::array<std::array<double, 4>, 4>& expected,
+	const std::array<std::array<double, 4>, 4>& actual);

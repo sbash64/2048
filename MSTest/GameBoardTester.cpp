@@ -14,10 +14,7 @@ namespace MSTest
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<std::runtime_error>(
 				[]() { GameBoard<0>({}); });
-			GameBoard<1>(
-				{
-					{ 0 }
-				});
+			GameBoard<1>({ 0 });
 			GameBoard<2>(
 				{ {
 					{ 0, 0 },
@@ -40,27 +37,28 @@ namespace MSTest
 
 		TEST_METHOD(testAllZeros)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{ {
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				} });
 		}
 
 	private:
+		template<std::size_t N>
 		void assertAllRotatedTransformTransitions(
-			std::vector<std::vector<double>> initial,
+			std::array<std::array<double, N>, N> initial,
 			std::string movement,
-			std::vector<std::vector<double>> final
+			std::array<std::array<double, N>, N> final
 		)
 		{
 			for (int i = 0; i < 4; i++) {
@@ -71,13 +69,14 @@ namespace MSTest
 			}
 		}
 
+		template<std::size_t N>
 		void assertBoardTransition(
-			const std::vector<std::vector<double>> &initial,
+			const std::array<std::array<double, N>, N> &initial,
 			const std::string &movement,
-			const std::vector<std::vector<double>> &final
+			const std::array<std::array<double, N>, N> &final
 		)
 		{
-			GameBoard board(initial);
+			GameBoard<N> board(initial);
 			for (const auto &c : movement)
 				switch (c)
 				{
@@ -129,526 +128,526 @@ namespace MSTest
 	public:
 		TEST_METHOD(testOneTwo)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				} });
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				} });
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 0, 2, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testTwoTwos)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 2, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 2, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				} });
 		}
 
 		TEST_METHOD(testThreeTwos)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				} });
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				} });
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				} });
 		}
 
 		TEST_METHOD(testFourTwos)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 2, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{{
 					{ 0, 0, 4, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testTwoUnequals)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 4, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 4, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 4, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 0, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{ {
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				} });
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testThreeUnequals)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 4, 8, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{{
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 4, 0, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 2, 0, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testFourUnequals)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 4, 8, 16 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{{
 					{ 2, 4, 8, 16 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testCombinesOnlyOnce)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 4, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"r",
-				{
+				{{
 					{ 0, 0, 4, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 4, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 4, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 4, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 4, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
-				{
+				}});
+			assertAllRotatedTransformTransitions<4>(
+				{ {
 					{ 0, 4, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				} },
 				"r",
-				{
+				{{
 					{ 0, 0, 4, 4 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testTwiceAllZeros)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"rr",
-				{
+				{{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testThreeCombos)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 8, 4, 2, 2 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				},
+				}},
 				"rrr",
-				{
+				{{
 					{ 0, 0, 0, 16 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testUnfortunateBoard)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 },
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 }
-				},
+				}},
 				"rdlu",
-				{
+				{{
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 },
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 }
-				});
+				}});
 		}
 
 		TEST_METHOD(testVeryFortunateBoard)
 		{
-			assertAllRotatedTransformTransitions(
-				{
+			assertAllRotatedTransformTransitions<4>(
+				{{
 					{ 2, 2, 2, 2 },
 					{ 2, 2, 2, 2 },
 					{ 2, 2, 2, 2 },
 					{ 2, 2, 2, 2 }
-				},
+				}},
 				"rdlu",
-				{
+				{{
 					{ 32, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}});
 		}
 	};
 };
