@@ -13,14 +13,16 @@ ConsoleGameController::ConsoleGameController(
 void ConsoleGameController::next()
 {
 	device->getKeyPress();
-	device->upArrowKeyPressed();
+	std::string header;
 	if (device->rightArrowKeyPressed())
 		game.moveRight();
 	else if (device->downArrowKeyPressed())
 		game.moveDown();
 	else if (device->leftArrowKeyPressed())
 		game.moveLeft();
-	else
+	else if (device->upArrowKeyPressed())
 		game.moveUp();
-	device->print(formatter->asString(game));
+	else
+		header = "Unrecognized key pressed. Press an arrow key to play.\n\n";
+	device->print(header + formatter->asString(game));
 }
