@@ -21,4 +21,5 @@ void ConsoleGameController::next()
 	else
 		game.moveUp();
 	device->print(formatter->asString(game));
+	device->getKeyPress();
 }
