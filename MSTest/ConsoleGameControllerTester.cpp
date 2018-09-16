@@ -10,6 +10,7 @@ class MockIODevice : public IODevice
 	bool _rightArrowKey = false;
 	bool _downArrowKey = false;
 	bool _leftArrowKey = false;
+	bool _upArrowKey = false;
 	bool _getKeyPressCalled = false;
 public:
 	void setRightArrowKeyTrue()
@@ -18,6 +19,7 @@ public:
 	}
 	virtual bool rightArrowKeyPressed() override
 	{
+		_keyControllerLog += "rightArrowKeyPressed ";
 		return _rightArrowKey;
 	}
 	void setDownArrowKeyTrue()
@@ -26,6 +28,7 @@ public:
 	}
 	virtual bool downArrowKeyPressed() override
 	{
+		_keyControllerLog += "downArrowKeyPressed ";
 		return _downArrowKey;
 	}
 	void setLeftArrowKeyTrue()
@@ -34,14 +37,21 @@ public:
 	}
 	virtual bool leftArrowKeyPressed() override
 	{
+		_keyControllerLog += "leftArrowKeyPressed ";
 		return _leftArrowKey;
 	}
 	void setUpArrowKeyTrue()
 	{
-
+		_upArrowKey = true;
+	}
+	virtual bool upArrowKeyPressed() override
+	{
+		_keyControllerLog += "upArrowKeyPressed ";
+		return _upArrowKey;
 	}
 	virtual void getKeyPress() override
 	{
+		_keyControllerLog += "getKeyPress ";
 		_getKeyPressCalled = true;
 	}
 	bool getKeyPressCalled() const

@@ -10,5 +10,6 @@ public:
 	virtual bool rightArrowKeyPressed() = 0;
 	virtual bool downArrowKeyPressed() = 0;
 	virtual bool leftArrowKeyPressed() = 0;
+	virtual bool upArrowKeyPressed() = 0;
 	virtual void getKeyPress() = 0;
 };
