@@ -6,6 +6,7 @@
 class MockIODevice : public IODevice
 {
 	std::string _lastOutput;
+	std::string _keyControllerLog;
 	bool _rightArrowKey = false;
 	bool _downArrowKey = false;
 	bool _leftArrowKey = false;
@@ -55,7 +56,23 @@ public:
 	{
 		_lastOutput = output;
 	}
+	std::string keyControllerLog() const
+	{
+		return _keyControllerLog;
+	}
 };
+
+static bool beginsWith(std::string const &beginning, std::string const &s) {
+	if (s.length() >= beginning.length())
+		return (0 == s.compare(0, beginning.length(), beginning));
+	else
+		return false;
+}
+
+static bool contains(std::string const &s1, std::string const &s2)
+{
+	return s2.find(s1) != std::string::npos;
+}
 
 namespace MSTest
 {
