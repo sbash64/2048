@@ -36,6 +36,11 @@ void GameBoard::moveUp()
 	moveAlong(&GameBoard::upwards);
 }
 
+void GameBoard::setCell(size_t row, size_t col, double value)
+{
+	board[row][col] = value;
+}
+
 void GameBoard::moveAlong(
 	double &(GameBoard::*direction)(size_t slice, size_t element))
 {

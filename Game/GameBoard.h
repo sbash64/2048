@@ -19,6 +19,7 @@ public:
 	GAME_API void moveLeft();
 	GAME_API void moveDown();
 	GAME_API void moveUp();
+	GAME_API void setCell(size_t row, size_t col, double value);
 
 private:
 	void moveAlong(double &(GameBoard::*)(size_t slice, size_t element));
