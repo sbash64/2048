@@ -1,10 +1,20 @@
 #include "stdafx.h"
 #include <ConsoleGameController.h>
-#include "CppUnitTest.h"
+#include <CppUnitTest.h>
+#include <string>
 
 class MockIODevice : public IODevice
 {
+	std::string _lastOutput;
+public:
+	void setRightArrowKeyTrue()
+	{
 
+	}
+	std::string lastOutput() const
+	{
+		return _lastOutput;
+	}
 };
 
 namespace MSTest
@@ -25,14 +35,14 @@ namespace MSTest
 					}
 				),
 				device);
-			device.setRightArrowKeyTrue();
+			device->setRightArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
 				"0 0 0 2\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0",
-				device.lastOutput());
+				device->lastOutput().c_str());
 		}
 	};
 }

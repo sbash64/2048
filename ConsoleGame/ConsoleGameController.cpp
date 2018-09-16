@@ -5,3 +5,8 @@ ConsoleGameController::ConsoleGameController(
 	std::shared_ptr<IODevice> device)
 {
 }
+
+void ConsoleGameController::next()
+{
+	return void();
+}
