@@ -55,6 +55,21 @@ namespace MSTest
 						}
 					)
 				).c_str());
+			Assert::AreEqual(
+				"  1     2 3000   4\n" \
+				" 50     6    7 800\n" \
+				"900    10  110  12\n" \
+				" 13 14000  150 160",
+				GameBoardFormatter{}.asString(
+					GameBoard(
+						{
+							{ 1, 2, 3000, 4 },
+							{ 50, 6, 7, 800 },
+							{ 900, 10, 110, 12 },
+							{ 13, 14000, 150, 160 }
+						}
+					)
+				).c_str());
 		}
 	};
 }
