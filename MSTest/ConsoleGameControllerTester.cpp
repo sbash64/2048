@@ -38,6 +38,10 @@ public:
 	{
 
 	}
+	bool getKeyPressCalled() const
+	{
+		return false;
+	}
 	std::string lastOutput() const
 	{
 		return _lastOutput;
@@ -53,6 +57,26 @@ namespace MSTest
 	TEST_CLASS(ConsoleGameControllerTester)
 	{
 	public:
+		TEST_METHOD(testNextCallsGetKeyPress)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device);
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::IsFalse(device->getKeyPressCalled());
+			controller.next();
+			Assert::IsTrue(device->getKeyPressCalled());
+		}
+
 		TEST_METHOD(testNextWithRightArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
