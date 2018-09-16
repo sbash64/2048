@@ -12,6 +12,10 @@ public:
 	{
 
 	}
+	void setDownArrowKeyTrue()
+	{
+
+	}
 	std::string lastOutput() const
 	{
 		return _lastOutput;
@@ -27,7 +31,7 @@ namespace MSTest
 	TEST_CLASS(ConsoleGameControllerTester)
 	{
 	public:
-		TEST_METHOD(testPrintToIODevice)
+		TEST_METHOD(testNextWithRightArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
@@ -48,6 +52,30 @@ namespace MSTest
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0",
+				device->lastOutput().c_str());
+		}
+
+		TEST_METHOD(testNextWithDownArrowKey)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 2, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device);
+			device->setDownArrowKeyTrue();
+			controller.next();
+			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+				"0 0 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 0\n" \
+				"2 0 0 0",
 				device->lastOutput().c_str());
 		}
 	};
