@@ -13,45 +13,29 @@ namespace MSTest
 		{
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({}); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ {}, {} }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ { 0 }, {} }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ {}, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ { 0 }, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ { 0, 0 }, {} }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ {}, { 0, 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ { 0, 0 }, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
-				[]() { GameBoard({ { 0 }, { 0, 0 } }); });
-			GameBoard(
+				[]() { GameBoard<0>({}); });
+			GameBoard<1>(
 				{
 					{ 0 }
 				});
-			GameBoard(
-				{ 
-					{ 0, 0 }, 
-					{ 0, 0 } 
-				});
-			GameBoard(
-				{ 
-					{ 0, 0, 0 }, 
+			GameBoard<2>(
+				{ {
+					{ 0, 0 },
+					{ 0, 0 }
+				} });
+			GameBoard<3>(
+				{ {
+					{ 0, 0, 0 },
 					{ 0, 0, 0 },
 					{ 0, 0, 0 }
-				});
-			GameBoard(
-				{
+				} });
+			GameBoard<4>(
+				{ {
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				} });
 		}
 
 		TEST_METHOD(testAllZeros)

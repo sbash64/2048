@@ -1,42 +1,45 @@
 #include "GameBoard.h"
 
-GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
-	board(std::move(_board)),
-	N(board.size())
+template<std::size_t N>
+GameBoard<N>::GameBoard(std::array<std::array<double, N>, N> board) :
+	board(std::move(board))
 {
 	if (N == 0)
 		throw std::runtime_error("Empty board.");
-	for (const auto &row : board)
-		if (row.size() != N)
-			throw std::runtime_error("Invalid board dimensions.");
 }
 
-const std::vector<std::vector<double>> &GameBoard::getBoard() const noexcept
+template<std::size_t N>
+const std::array<std::array<double, N>, N> &GameBoard<N>::getBoard() const noexcept
 {
 	return board;
 }
 
-void GameBoard::moveRight()
+template<std::size_t N>
+void GameBoard<N>::moveRight()
 {
 	moveAlong(&GameBoard::toTheRight);
 }
 
-void GameBoard::moveLeft()
+template<std::size_t N>
+void GameBoard<N>::moveLeft()
 {
 	moveAlong(&GameBoard::toTheLeft);
 }
 
-void GameBoard::moveDown()
+template<std::size_t N>
+void GameBoard<N>::moveDown()
 {
 	moveAlong(&GameBoard::downwards);
 }
 
-void GameBoard::moveUp()
+template<std::size_t N>
+void GameBoard<N>::moveUp()
 {
 	moveAlong(&GameBoard::upwards);
 }
 
-void GameBoard::moveAlong(
+template<std::size_t N>
+void GameBoard<N>::moveAlong(
 	double &(GameBoard::*direction)(size_t slice, size_t element))
 {
 	for (size_t slice = 0; slice < N; ++slice) {
@@ -71,22 +74,26 @@ void GameBoard::moveAlong(
 	}
 }
 
-double & GameBoard::toTheRight(size_t slice, size_t element)
+template<std::size_t N>
+double &GameBoard<N>::toTheRight(size_t slice, size_t element)
 {
 	return board[slice][element];
 }
 
-double & GameBoard::toTheLeft(size_t slice, size_t element)
+template<std::size_t N>
+double &GameBoard<N>::toTheLeft(size_t slice, size_t element)
 {
 	return board[slice][N - 1 - element];
 }
 
-double & GameBoard::upwards(size_t slice, size_t element)
+template<std::size_t N>
+double &GameBoard<N>::upwards(size_t slice, size_t element)
 {
 	return board[N - 1 - element][slice];
 }
 
-double & GameBoard::downwards(size_t slice, size_t element)
+template<std::size_t N>
+double &GameBoard<N>::downwards(size_t slice, size_t element)
 {
 	return board[element][slice];
 }
