@@ -82,6 +82,30 @@ namespace MSTest
 			Assert::IsTrue(device->getKeyPressCalled());
 		}
 
+		TEST_METHOD(testNextCallsGetKeyPressBeforeQueryingKeys)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device);
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::AreEqual("", device->keyControllerLog().c_str());
+			controller.next();
+			Assert::IsTrue(beginsWith("getKeyPress", device->keyControllerLog()));
+			Assert::IsTrue(contains("leftArrowKeyPressed", device->keyControllerLog()));
+			Assert::IsTrue(contains("rightArrowKeyPressed", device->keyControllerLog()));
+			Assert::IsTrue(contains("upArrowKeyPressed", device->keyControllerLog()));
+			Assert::IsTrue(contains("downArrowKeyPressed", device->keyControllerLog()));
+		}
+
 		TEST_METHOD(testNextWithRightArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
