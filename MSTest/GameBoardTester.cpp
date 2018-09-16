@@ -685,6 +685,15 @@ namespace MSTest
 					{ 0, 0, 0, 0 }
 				}, 
 				board.getBoard());
+			board.setCell(3, 2, 1);
+			assertAreEqual(
+				{
+					{ 1, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 1, 0 }
+				},
+				board.getBoard());
 		}
 	};
 };
