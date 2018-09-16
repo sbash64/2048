@@ -15,7 +15,16 @@ namespace MSTest
 		TEST_METHOD(testPrintToIODevice)
 		{
 			auto device = std::make_shared<MockIODevice>();
-			ConsoleGameController controller(device);
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
+				),
+				device);
 		}
 	};
 }

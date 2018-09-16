@@ -20,6 +20,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Console2048", "Console2048\Console2048.vcxproj", "{43DFC30C-B468-4737-8C96-415E374C8BE2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleGame", "ConsoleGame\ConsoleGame.vcxproj", "{6D780292-D299-492E-A82D-8C2C3D9B838C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3BC3F629-3C1A-4853-984E-B6B87759440A} = {3BC3F629-3C1A-4853-984E-B6B87759440A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
