@@ -16,6 +16,10 @@ public:
 	{
 		return _lastOutput;
 	}
+	virtual void print(std::string output) override
+	{
+		_lastOutput = output;
+	}
 };
 
 namespace MSTest
