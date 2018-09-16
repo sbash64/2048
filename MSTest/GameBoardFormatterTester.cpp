@@ -26,9 +26,9 @@ namespace MSTest
 					)
 				).c_str());
 			Assert::AreEqual(
-				"1 2 3 4\n" \
-				"5 6 7 8\n" \
-				"9 10 11 12\n" \
+				" 1  2  3  4\n" \
+				" 5  6  7  8\n" \
+				" 9 10 11 12\n" \
 				"13 14 15 16",
 				GameBoardFormatter{}.asString(
 					GameBoard(
