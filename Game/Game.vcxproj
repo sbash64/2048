@@ -119,9 +119,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameBoard.h" />
+    <ClInclude Include="GameBoardAnalyzer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameBoard.cpp" />
+    <ClCompile Include="GameBoardAnalyzer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "assert_utility.h"
+#include <GameBoardAnalyzer.h>
 
 namespace MSTest
 {
