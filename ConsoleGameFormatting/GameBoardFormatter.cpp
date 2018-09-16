@@ -4,6 +4,8 @@
 
 static int digits(int number)
 {
+	if (number == 0)
+		return 1;
 	int _digits = 0;
 	while (number) {
 		number /= 10;
