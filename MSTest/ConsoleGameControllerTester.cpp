@@ -1,5 +1,11 @@
 #include "stdafx.h"
+#include <ConsoleGameController.h>
 #include "CppUnitTest.h"
+
+class MockIODevice : public IODevice
+{
+
+};
 
 namespace MSTest
 {
