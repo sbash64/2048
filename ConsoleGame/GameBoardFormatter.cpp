@@ -1,7 +1,7 @@
 #include "GameBoardFormatter.h"
 #include <sstream>
 
-std::string GameBoardFormatter::as_string(const GameBoard & board)
+std::string GameBoardFormatter::asString(const GameBoard & board)
 {
 	std::stringstream stream;
 	const auto _board = board.getBoard();
