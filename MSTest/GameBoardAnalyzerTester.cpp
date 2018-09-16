@@ -22,6 +22,18 @@ namespace MSTest
 						}
 					)
 				));
+			assertAreEqual(
+				{ 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14 },
+				GameBoardAnalyzer{}.openCells(
+					GameBoard(
+						{
+							{ 1, 0, 0, 0 },
+							{ 0, 1, 0, 0 },
+							{ 0, 0, 1, 0 },
+							{ 0, 0, 0, 1 }
+						}
+					)
+				));
 		}
 	};
 }
