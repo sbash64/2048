@@ -13,4 +13,6 @@ class GameBoardFormatter
 {
 public:
 	CONSOLEGAME_API std::string asString(const GameBoard &board);
+private:
+	std::vector<int> maxDigitsInEachColumn(const GameBoard &board);
 };
