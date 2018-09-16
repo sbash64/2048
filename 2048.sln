@@ -11,10 +11,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MSTest", "MSTest\MSTest.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{3BC3F629-3C1A-4853-984E-B6B87759440A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleGame", "ConsoleGame\ConsoleGame.vcxproj", "{EB9C9727-85B2-4B41-B651-3903DC1B0526}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3BC3F629-3C1A-4853-984E-B6B87759440A} = {3BC3F629-3C1A-4853-984E-B6B87759440A}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleGameFormatting", "ConsoleGameFormatting\ConsoleGameFormatting.vcxproj", "{EB9C9727-85B2-4B41-B651-3903DC1B0526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
