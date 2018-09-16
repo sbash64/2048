@@ -14,7 +14,7 @@ class GameBoard
 	const size_t N;
 public:
 	GAME_API GameBoard(std::vector<std::vector<double>> board);
-	GAME_API const std::vector<std::vector<double>> &getBoard() noexcept;
+	GAME_API const std::vector<std::vector<double>> &getBoard() const noexcept;
 	GAME_API void moveRight();
 	GAME_API void moveLeft();
 	GAME_API void moveDown();
