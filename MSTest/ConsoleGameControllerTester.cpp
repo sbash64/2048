@@ -108,10 +108,13 @@ namespace MSTest
 				std::make_shared<GameBoardFormatter>(),
 				device);
 			Assert::AreEqual(
+				"Press an arrow key to play.\n" \
+				"\n"
 				"2 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 0 0 0",
+				"0 0 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 
@@ -179,7 +182,8 @@ namespace MSTest
 				"0 0 0 2\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 0 0 0",
+				"0 0 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 
@@ -203,7 +207,8 @@ namespace MSTest
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"2 0 0 0",
+				"2 0 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 
@@ -227,7 +232,8 @@ namespace MSTest
 				"2 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 0 0 0",
+				"0 0 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 
@@ -251,7 +257,8 @@ namespace MSTest
 				"0 2 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 0 0 0",
+				"0 0 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 
@@ -271,12 +278,14 @@ namespace MSTest
 				device);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				"Unrecognized key pressed. Press an arrow key to play.\n" \
+				"Unrecognized key pressed.\n" \
+				"Press an arrow key to play.\n" \
 				"\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 2 0 0",
+				"0 2 0 0\n" \
+				"\n",
 				device->lastOutput().c_str());
 		}
 	};
