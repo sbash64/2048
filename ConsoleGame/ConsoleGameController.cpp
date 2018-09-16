@@ -8,6 +8,7 @@ ConsoleGameController::ConsoleGameController(
 	formatter(std::move(formatter)),
 	device(std::move(device))
 {
+	this->device->print(this->formatter->asString(this->game));
 }
 
 void ConsoleGameController::next()
