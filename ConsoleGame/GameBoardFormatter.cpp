@@ -16,7 +16,6 @@ std::string GameBoardFormatter::asString(const GameBoard & board)
 					stream << "\n";
 			else
 				stream << " ";
-			
 		}
 	return stream.str();
 }
