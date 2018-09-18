@@ -98,8 +98,6 @@ namespace MSTest
 	TEST_CLASS(ConsoleGameControllerTester)
 	{
 	public:
-
-
 		TEST_METHOD(testConstructorPrintsInitialBoard)
 		{
 			const auto device = std::make_shared<MockIODevice>();
@@ -338,6 +336,7 @@ namespace MSTest
 		TEST_METHOD(testNextCallsRandomNumberGenerator)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
@@ -349,7 +348,12 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
+			device->setRightArrowKeyTrue();
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::IsFalse(generator.randomIntCalled());
+			controller.next();
+			Assert::IsTrue(generator.randomIntCalled());
 		}
 	};
 }
