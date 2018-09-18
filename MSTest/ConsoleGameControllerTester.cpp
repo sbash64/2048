@@ -379,5 +379,33 @@ namespace MSTest
 			Assert::AreEqual(0, generator->low());
 			Assert::AreEqual(14, generator->hi());
 		}
+
+		TEST_METHOD(testNextInsertsTwoAccordingToRNG)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 2, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device,
+				generator);
+			device->setRightArrowKeyTrue();
+			generator->setRandomInt(5);
+			controller.next();
+			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+				"0 0 0 0\n" \
+				"0 2 0 0\n" \
+				"0 0 0 0\n" \
+				"0 0 0 2\n" \
+				"\n",
+				device->lastOutput().c_str());
+		}
 	};
 }
