@@ -364,6 +364,8 @@ namespace MSTest
 			Assert::IsFalse(generator->randomIntCalled());
 			controller.next();
 			Assert::IsTrue(generator->randomIntCalled());
+			Assert::AreEqual(0, generator->low());
+			Assert::AreEqual(14, generator->hi());
 		}
 	};
 }
