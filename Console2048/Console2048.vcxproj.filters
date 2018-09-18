@@ -21,9 +21,15 @@
     <ClCompile Include="ConsoleIODevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MersenneTwisterGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleIODevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MersenneTwisterGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

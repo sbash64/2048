@@ -5,7 +5,17 @@
 
 class MockRandomNumberGenerator : public RandomNumberGenerator
 {
-
+	bool _randomIntCalled = false;
+public:
+	bool randomIntCalled() const
+	{
+		return _randomIntCalled;
+	}
+	virtual int randomIntBetween(int low, int hi) override
+	{
+		_randomIntCalled = true;
+		return 0;
+	}
 };
 
 class MockIODevice : public IODevice
@@ -351,9 +361,9 @@ namespace MSTest
 				generator);
 			device->setRightArrowKeyTrue();
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-			Assert::IsFalse(generator.randomIntCalled());
+			Assert::IsFalse(generator->randomIntCalled());
 			controller.next();
-			Assert::IsTrue(generator.randomIntCalled());
+			Assert::IsTrue(generator->randomIntCalled());
 		}
 	};
 }

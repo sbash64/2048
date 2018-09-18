@@ -161,9 +161,11 @@
   <ItemGroup>
     <ClCompile Include="ConsoleIODevice.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MersenneTwisterGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleIODevice.h" />
+    <ClInclude Include="MersenneTwisterGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

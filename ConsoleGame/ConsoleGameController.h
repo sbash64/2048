@@ -17,6 +17,7 @@ class ConsoleGameController
 	GameBoard game;
 	std::shared_ptr<Formatter> formatter;
 	std::shared_ptr<IODevice> device;
+	std::shared_ptr<RandomNumberGenerator> generator;
 public:
 	CONSOLEGAME_API ConsoleGameController(
 		GameBoard game,

@@ -7,7 +7,8 @@ ConsoleGameController::ConsoleGameController(
 	std::shared_ptr<RandomNumberGenerator> generator) :
 	game(std::move(game)),
 	formatter(std::move(formatter)),
-	device(std::move(device))
+	device(std::move(device)),
+	generator(std::move(generator))
 {
 	this->device->print(
 		std::string("Press an arrow key to play.\n\n") + 
@@ -16,6 +17,7 @@ ConsoleGameController::ConsoleGameController(
 
 void ConsoleGameController::next()
 {
+	generator->randomIntBetween(0, 0);
 	device->getKeyPress();
 	std::string header;
 	if (device->rightArrowKeyPressed())
