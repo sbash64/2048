@@ -1,4 +1,5 @@
 #include "ConsoleGameController.h"
+#include <GameBoardAnalyzer.h>
 
 ConsoleGameController::ConsoleGameController(
 	GameBoard game,
@@ -17,7 +18,8 @@ ConsoleGameController::ConsoleGameController(
 
 void ConsoleGameController::next()
 {
-	generator->randomIntBetween(0, 0);
+	const auto openCells = GameBoardAnalyzer{}.openCells(game);
+	generator->randomIntBetween(0, openCells.size() - 1);
 	device->getKeyPress();
 	std::string header;
 	if (device->rightArrowKeyPressed())

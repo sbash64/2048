@@ -5,6 +5,8 @@
 
 class MockRandomNumberGenerator : public RandomNumberGenerator
 {
+	int _low;
+	int _hi;
 	bool _randomIntCalled = false;
 public:
 	bool randomIntCalled() const
@@ -14,7 +16,17 @@ public:
 	virtual int randomIntBetween(int low, int hi) override
 	{
 		_randomIntCalled = true;
+		_low = low;
+		_hi = hi;
 		return 0;
+	}
+	int low() const
+	{
+		return _low;
+	}
+	int hi() const
+	{
+		return _hi;
 	}
 };
 
