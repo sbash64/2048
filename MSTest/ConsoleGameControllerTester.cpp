@@ -7,18 +7,23 @@ class MockRandomNumberGenerator : public RandomNumberGenerator
 {
 	int _low;
 	int _hi;
+	int _x;
 	bool _randomIntCalled = false;
 public:
 	bool randomIntCalled() const
 	{
 		return _randomIntCalled;
 	}
+	void setRandomInt(int x)
+	{
+		_x = x;
+	}
 	virtual int randomIntBetween(int low, int hi) override
 	{
 		_randomIntCalled = true;
 		_low = low;
 		_hi = hi;
-		return 0;
+		return _x;
 	}
 	int low() const
 	{
@@ -197,6 +202,7 @@ namespace MSTest
 		TEST_METHOD(testNextWithRightArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
@@ -208,11 +214,12 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
 			device->setRightArrowKeyTrue();
+			generator->setRandomInt(0);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				"0 0 0 2\n" \
+				"2 0 0 2\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -223,6 +230,7 @@ namespace MSTest
 		TEST_METHOD(testNextWithDownArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
@@ -234,11 +242,12 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
 			device->setDownArrowKeyTrue();
+			generator->setRandomInt(0);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				"0 0 0 0\n" \
+				"2 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"2 0 0 0\n" \
@@ -249,23 +258,25 @@ namespace MSTest
 		TEST_METHOD(testNextWithLeftArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
-						{ 0, 0, 0, 2 },
 						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 2 },
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 }
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
 			device->setLeftArrowKeyTrue();
+			generator->setRandomInt(0);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
 				"2 0 0 0\n" \
-				"0 0 0 0\n" \
+				"2 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"\n",
@@ -275,6 +286,7 @@ namespace MSTest
 		TEST_METHOD(testNextWithUpArrowKey)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
@@ -286,11 +298,12 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
 			device->setUpArrowKeyTrue();
+			generator->setRandomInt(0);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				"0 2 0 0\n" \
+				"2 2 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -329,6 +342,7 @@ namespace MSTest
 		TEST_METHOD(testTwoMoves)
 		{
 			const auto device = std::make_shared<MockIODevice>();
+			const auto generator = std::make_shared<MockRandomNumberGenerator>();
 			ConsoleGameController controller(
 				GameBoard(
 					{
@@ -340,17 +354,19 @@ namespace MSTest
 				),
 				std::make_shared<GameBoardFormatter>(),
 				device,
-				std::make_shared<MockRandomNumberGenerator>());
+				generator);
 			device->setUpArrowKeyTrue();
+			generator->setRandomInt(0);
 			controller.next();
 			device->setUpArrowKeyFalse();
 			device->setLeftArrowKeyTrue();
+			generator->setRandomInt(14);
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				"2 0 0 0\n" \
+				"4 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
-				"0 0 0 0\n" \
+				"0 0 0 2\n" \
 				"\n",
 				device->lastOutput().c_str());
 		}

@@ -18,8 +18,6 @@ ConsoleGameController::ConsoleGameController(
 
 void ConsoleGameController::next()
 {
-	const auto openCells = GameBoardAnalyzer{}.openCells(game);
-	generator->randomIntBetween(0, openCells.size() - 1);
 	device->getKeyPress();
 	std::string header;
 	if (device->rightArrowKeyPressed())
@@ -31,6 +29,13 @@ void ConsoleGameController::next()
 	else if (device->upArrowKeyPressed())
 		game.moveUp();
 	else
+	{
 		header = "Unrecognized key pressed.\nPress an arrow key to play.\n\n";
+		device->print(header + formatter->asString(game) + "\n\n");
+		return;
+	}
+	const auto openCells = GameBoardAnalyzer{}.openCells(game);
+	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
+	game.setCell(openCells[x] % 4, openCells[x] / 4, 2);
 	device->print(header + formatter->asString(game) + "\n\n");
 }
