@@ -320,5 +320,22 @@ namespace MSTest
 				"\n",
 				device->lastOutput().c_str());
 		}
+
+		TEST_METHOD(testNextCallsRandomNumberGenerator)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 2, 0, 0 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
+		}
 	};
 }
