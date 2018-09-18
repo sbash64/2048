@@ -3,6 +3,11 @@
 #include <GameBoardFormatter.h>
 #include <CppUnitTest.h>
 
+class MockRandomNumberGenerator : public RandomNumberGenerator
+{
+
+};
+
 class MockIODevice : public IODevice
 {
 	std::string _lastOutput;
@@ -110,7 +115,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			Assert::AreEqual(
 				"Press an arrow key to play.\n" \
 				"\n"
@@ -135,7 +141,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsFalse(device->getKeyPressCalled());
 			controller.next();
@@ -155,7 +162,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::AreEqual("", device->keyControllerLog().c_str());
 			controller.next();
@@ -179,7 +187,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			device->setRightArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
@@ -204,7 +213,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			device->setDownArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
@@ -229,7 +239,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			device->setLeftArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
@@ -254,7 +265,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			device->setUpArrowKeyTrue();
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
@@ -279,7 +291,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			controller.next();
 			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
 				"Unrecognized key pressed.\n" \
@@ -306,7 +319,8 @@ namespace MSTest
 					}
 				),
 				std::make_shared<GameBoardFormatter>(),
-				device);
+				device,
+				std::make_shared<MockRandomNumberGenerator>());
 			device->setUpArrowKeyTrue();
 			controller.next();
 			device->setUpArrowKeyFalse();

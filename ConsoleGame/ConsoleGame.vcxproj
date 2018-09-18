@@ -22,6 +22,7 @@
     <ClInclude Include="ConsoleGameController.h" />
     <ClInclude Include="Formatter.h" />
     <ClInclude Include="IODevice.h" />
+    <ClInclude Include="RandomNumberGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameController.cpp" />

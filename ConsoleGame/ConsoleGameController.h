@@ -2,6 +2,7 @@
 
 #include "IODevice.h"
 #include "Formatter.h"
+#include "RandomNumberGenerator.h"
 #include <GameBoard.h>
 #include <memory>
 
@@ -20,6 +21,7 @@ public:
 	CONSOLEGAME_API ConsoleGameController(
 		GameBoard game,
 		std::shared_ptr<Formatter> formatter,
-		std::shared_ptr<IODevice> device);
+		std::shared_ptr<IODevice> device,
+		std::shared_ptr<RandomNumberGenerator> generator);
 	CONSOLEGAME_API void next();
 };
