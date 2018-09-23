@@ -156,6 +156,7 @@
     <ClInclude Include="test_board_utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="assert_utility.cpp" />
     <ClCompile Include="ConsoleGameControllerTester.cpp" />
     <ClCompile Include="GameBoardAnalyzerTester.cpp" />
     <ClCompile Include="GameBoardFormatterTester.cpp" />

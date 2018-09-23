@@ -114,7 +114,7 @@ namespace MSTest
 					board.moveUp();
 					break;
 				}
-			assertAreEqual(final, board.getBoard());
+			assertAreEqual(final, board);
 		}
 
 		std::string clockwiseMovementTransform(std::string movement)
@@ -684,7 +684,7 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
 				}, 
-				board.getBoard());
+				board);
 			board.setCell(3, 2, 1);
 			assertAreEqual(
 				{
@@ -693,7 +693,7 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 1, 0 }
 				},
-				board.getBoard());
+				board);
 		}
 	};
 };

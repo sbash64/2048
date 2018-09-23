@@ -11,9 +11,14 @@ GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
 			throw std::runtime_error("Invalid board dimensions.");
 }
 
-const std::vector<std::vector<double>> &GameBoard::getBoard() const noexcept
+const std::vector<double>& GameBoard::operator[](std::size_t row) const
 {
-	return board;
+	return board[row];
+}
+
+std::size_t GameBoard::size() const
+{
+	return N;
 }
 
 void GameBoard::moveRight()

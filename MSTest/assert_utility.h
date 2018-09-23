@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
-#include "CppUnitTest.h"
+#include <GameBoard.h>
+#include <CppUnitTest.h>
 #include <vector>
 
 template<typename T>
@@ -17,14 +18,16 @@ void assertAreEqual(
 
 template<typename T>
 void assertAreEqual(
-	const std::vector<std::vector<T>>& expected,
-	const std::vector<std::vector<T>>& actual)
+	const std::vector<std::vector<T>> &expected,
+	const std::vector<std::vector<T>> &actual)
 {
-	for (std::size_t i = 0; i < expected.size(); i++)
-		for (std::size_t j = 0; j < expected[i].size(); j++)
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-				expected[i][j],
-				actual[i][j]
-			);
-
+	for (std::size_t i = 0; i < expected.size(); ++i)
+		assertAreEqual(
+			expected[i],
+			actual[i]
+		);
 }
+
+void assertAreEqual(
+	const std::vector<std::vector<double>>& expected,
+	const GameBoard& actual);
