@@ -123,13 +123,14 @@ static bool contains(std::string const &s1, std::string const &s2)
 
 namespace MSTest
 {
+	using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
 	TEST_CLASS(ConsoleGameControllerTester)
 	{
 	public:
 		TEST_METHOD(testConstructorPrintsInitialBoard)
 		{
 			const auto device = std::make_shared<MockIODevice>();
-			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(device->lastOutput().empty());
 			ConsoleGameController(
 				GameBoard(
@@ -169,7 +170,6 @@ namespace MSTest
 				std::make_shared<GameBoardFormatter>(),
 				device,
 				std::make_shared<MockRandomNumberGenerator>(0));
-			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsFalse(device->getKeyPressCalled());
 			controller.next();
 			Assert::IsTrue(device->getKeyPressCalled());
@@ -190,7 +190,6 @@ namespace MSTest
 				std::make_shared<GameBoardFormatter>(),
 				device,
 				std::make_shared<MockRandomNumberGenerator>(0));
-			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(device->keyControllerLog().empty());
 			controller.next();
 			Assert::IsTrue(beginsWith("getKeyPress", device->keyControllerLog()));
@@ -217,7 +216,7 @@ namespace MSTest
 				std::make_shared<MockRandomNumberGenerator>(0));
 			device->setRightArrowKeyTrue();
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"2 0 0 2\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -243,7 +242,7 @@ namespace MSTest
 				std::make_shared<MockRandomNumberGenerator>(0));
 			device->setDownArrowKeyTrue();
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"2 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -269,7 +268,7 @@ namespace MSTest
 				std::make_shared<MockRandomNumberGenerator>(0));
 			device->setLeftArrowKeyTrue();
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"2 0 0 0\n" \
 				"2 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -295,7 +294,7 @@ namespace MSTest
 				std::make_shared<MockRandomNumberGenerator>(0));
 			device->setUpArrowKeyTrue();
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"2 2 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -320,7 +319,7 @@ namespace MSTest
 				device,
 				std::make_shared<MockRandomNumberGenerator>(0));
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"Unrecognized key pressed.\n" \
 				"Press an arrow key to play.\n" \
 				"\n" \
@@ -354,7 +353,7 @@ namespace MSTest
 			device->setLeftArrowKeyTrue();
 			generator->setRandomInt(14);
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"4 0 0 0\n" \
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \
@@ -380,7 +379,6 @@ namespace MSTest
 				device,
 				generator);
 			device->setRightArrowKeyTrue();
-			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsFalse(generator->randomIntCalled());
 			controller.next();
 			Assert::IsTrue(generator->randomIntCalled());
@@ -405,7 +403,7 @@ namespace MSTest
 				std::make_shared<MockRandomNumberGenerator>(5));
 			device->setRightArrowKeyTrue();
 			controller.next();
-			Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
+			Assert::AreEqual(
 				"0 0 0 0\n" \
 				"0 2 0 0\n" \
 				"0 0 0 0\n" \
