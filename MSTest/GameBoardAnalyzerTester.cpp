@@ -47,5 +47,21 @@ namespace MSTest
 					)
 				));
 		}
+		TEST_METHOD(testCanMove)
+		{
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+			Assert::IsTrue(
+				GameBoardAnalyzer{}.openCells(
+					GameBoard(
+						{
+							{ 0, 0, 0, 0 },
+							{ 0, 0, 0, 0 },
+							{ 0, 0, 0, 0 },
+							{ 0, 0, 0, 0 }
+						}
+					)
+				).canMove()
+			);
+		}
 	};
 }
