@@ -10,3 +10,8 @@ std::vector<size_t> GameBoardAnalyzer::openCells(const GameBoard &board)
 				cells.push_back(row + col * _board.size());
 	return cells;
 }
+
+bool GameBoardAnalyzer::canMove(const GameBoard &board)
+{
+	return true;
+}

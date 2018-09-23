@@ -51,7 +51,7 @@ namespace MSTest
 		{
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(
-				GameBoardAnalyzer{}.openCells(
+				GameBoardAnalyzer{}.canMove(
 					GameBoard(
 						{
 							{ 0, 0, 0, 0 },
@@ -60,7 +60,7 @@ namespace MSTest
 							{ 0, 0, 0, 0 }
 						}
 					)
-				).canMove()
+				)
 			);
 		}
 	};
