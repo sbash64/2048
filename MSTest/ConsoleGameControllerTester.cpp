@@ -129,7 +129,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-			Assert::AreEqual("", device->lastOutput().c_str());
+			Assert::IsTrue(device->lastOutput().empty());
 			ConsoleGameController(
 				GameBoard(
 					{
@@ -190,7 +190,7 @@ namespace MSTest
 				device,
 				std::make_shared<MockRandomNumberGenerator>());
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-			Assert::AreEqual("", device->keyControllerLog().c_str());
+			Assert::IsTrue(device->keyControllerLog().empty());
 			controller.next();
 			Assert::IsTrue(beginsWith("getKeyPress", device->keyControllerLog()));
 			Assert::IsTrue(contains("leftArrowKeyPressed", device->keyControllerLog()));
