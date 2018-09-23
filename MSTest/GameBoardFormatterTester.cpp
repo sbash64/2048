@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "CppUnitTest.h"
 #include <GameBoardFormatter.h>
+#include <CppUnitTest.h>
 
 namespace MSTest
 {
