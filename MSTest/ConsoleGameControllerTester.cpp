@@ -412,7 +412,7 @@ namespace MSTest
 				device->lastOutput().c_str());
 		}
 
-		TEST_METHOD(nextPrintsSnarkyMessageOnImpossibleBoard)
+		TEST_METHOD(constructorPrintsSnarkyMessageOnImpossibleBoard)
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
@@ -431,6 +431,34 @@ namespace MSTest
 				"Wow. That's unfortunate. You didn't even get to play!\n" \
 				"\n"
 				"2 4 2 4\n" \
+				"4 2 4 2\n" \
+				"2 4 2 4\n" \
+				"4 2 4 2\n" \
+				"\n",
+				device->lastOutput().c_str());
+		}
+
+		TEST_METHOD(nextPrintsFailureMessageWhenNoMovesLeft)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 16, 8, 4, 0 },
+						{ 4, 2, 4, 2 },
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 2 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device,
+				std::make_shared<MockRandomNumberGenerator>(0));
+			device->setRightArrowKeyTrue();
+			controller.next();
+			Assert::AreEqual(
+				"No more moves can be done. Game over.\n" \
+				"\n"
+				"2 16 8 4\n" \
 				"4 2 4 2\n" \
 				"2 4 2 4\n" \
 				"4 2 4 2\n" \
