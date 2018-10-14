@@ -5,11 +5,9 @@
 
 namespace MSTest
 {
-	TEST_CLASS(TestBoardTester)
-	{
+	TEST_CLASS(TestBoardTester) {
 	public:
-		TEST_METHOD(testRotateClockwiseAllZeros)
-		{
+		TEST_METHOD(rotateClockwiseAllZeros) {
 			assertAreEqual(
 				{
 					{ 0, 0, 0, 0 },
@@ -26,8 +24,7 @@ namespace MSTest
 					}));
 		}
 
-		TEST_METHOD(testRotateClockwiseOneTwo)
-		{
+		TEST_METHOD(rotateClockwiseSingleTwo) {
 			assertAreEqual(
 				{
 					{ 0, 0, 0, 2 },
@@ -44,8 +41,7 @@ namespace MSTest
 					}));
 		}
 
-		TEST_METHOD(testRotateClockwiseUniqueElements)
-		{
+		TEST_METHOD(rotateClockwiseUniqueElements) {
 			assertAreEqual(
 				{
 					{ 13, 9, 5, 1 },
