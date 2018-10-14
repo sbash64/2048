@@ -411,5 +411,31 @@ namespace MSTest
 				"\n",
 				device->lastOutput().c_str());
 		}
+
+		TEST_METHOD(nextPrintsSnarkyMessageOnImpossibleBoard)
+		{
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller(
+				GameBoard(
+					{
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 2 },
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 2 }
+					}
+				),
+				std::make_shared<GameBoardFormatter>(),
+				device,
+				std::make_shared<MockRandomNumberGenerator>(0));
+			Assert::AreEqual(
+				"Wow. That's unfortunate. You didn't even get to play!\n" \
+				"\n"
+				"2 4 2 4\n" \
+				"4 2 4 2\n" \
+				"2 4 2 4\n" \
+				"4 2 4 2\n" \
+				"\n",
+				device->lastOutput().c_str());
+		}
 	};
 }
