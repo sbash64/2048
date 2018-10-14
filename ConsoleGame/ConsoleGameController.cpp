@@ -11,9 +11,14 @@ ConsoleGameController::ConsoleGameController(
 	device(std::move(device)),
 	generator(std::move(generator))
 {
-	this->device->print(
-		"Press an arrow key to play.\n\n" + 
-		this->formatter->asString(this->game) + "\n\n");
+	if (GameBoardAnalyzer{}.canMove(this->game))
+		this->device->print(
+			"Press an arrow key to play.\n\n" +
+			this->formatter->asString(this->game) + "\n\n");
+	else
+		this->device->print(
+			"Wow. That's unfortunate. You didn't even get to play!\n\n" +
+			this->formatter->asString(this->game) + "\n\n");
 }
 
 void ConsoleGameController::next()
