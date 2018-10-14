@@ -12,19 +12,20 @@ ConsoleGameController::ConsoleGameController(
 	generator(std::move(generator))
 {
 	if (GameBoardAnalyzer{}.canMove(this->game))
-		this->device->print(
-			"Press an arrow key to play.\n\n" +
-			this->formatter->asString(this->game) + "\n\n");
+		printGameBoardWithHeader("Press an arrow key to play.\n\n");
 	else
-		this->device->print(
-			"Wow. That's unfortunate. You didn't even get to play!\n\n" +
-			this->formatter->asString(this->game) + "\n\n");
+		printGameBoardWithHeader(
+			"Wow. That's unfortunate. You didn't even get to play!\n\n");
+}
+
+void ConsoleGameController::printGameBoardWithHeader(std::string header)
+{
+	device->print(header + formatter->asString(game) + "\n\n");
 }
 
 void ConsoleGameController::next()
 {
 	device->getKeyPress();
-	std::string header;
 	if (device->rightArrowKeyPressed())
 		game.moveRight();
 	else if (device->downArrowKeyPressed())
@@ -35,14 +36,13 @@ void ConsoleGameController::next()
 		game.moveUp();
 	else
 	{
-		header = 
+		printGameBoardWithHeader(
 			"Unrecognized key pressed.\n"
-			"Press an arrow key to play.\n\n";
-		device->print(header + formatter->asString(game) + "\n\n");
+			"Press an arrow key to play.\n\n");
 		return;
 	}
 	const auto openCells = GameBoardAnalyzer{}.openCells(game);
 	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
 	game.setCell(openCells[x] % game.size(), openCells[x] / game.size(), 2);
-	device->print(header + formatter->asString(game) + "\n\n");
+	printGameBoardWithHeader("");
 }

@@ -25,4 +25,6 @@ public:
 		std::shared_ptr<IODevice> device,
 		std::shared_ptr<RandomNumberGenerator> generator);
 	CONSOLEGAME_API void next();
+private:
+	void printGameBoardWithHeader(std::string header);
 };
