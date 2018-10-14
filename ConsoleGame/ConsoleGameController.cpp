@@ -44,5 +44,8 @@ void ConsoleGameController::next()
 	const auto openCells = GameBoardAnalyzer{}.openCells(game);
 	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
 	game.setCell(openCells[x] % game.size(), openCells[x] / game.size(), 2);
-	printGameBoardWithHeader("");
+	if (GameBoardAnalyzer{}.canMove(game))
+		printGameBoardWithHeader("");
+	else
+		printGameBoardWithHeader("No more moves can be done. Game over.\n\n");
 }

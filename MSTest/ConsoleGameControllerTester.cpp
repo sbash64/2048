@@ -459,9 +459,9 @@ namespace MSTest
 				"No more moves can be done. Game over.\n" \
 				"\n"
 				"2 16 8 4\n" \
-				"4 2 4 2\n" \
-				"2 4 2 4\n" \
-				"4 2 4 2\n" \
+				"4  2 4 2\n" \
+				"2  4 2 4\n" \
+				"4  2 4 2\n" \
 				"\n",
 				device->lastOutput().c_str());
 		}
