@@ -6,11 +6,9 @@
 
 namespace MSTest
 {
-	TEST_CLASS(GameBoardTester)
-	{
+	TEST_CLASS(GameBoardTester) {
 	public:
-		TEST_METHOD(testInvalidBoardThrows)
-		{
+		TEST_METHOD(constructorThrowsWhenInvalidBoardPassed) {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<std::runtime_error>(
 				[]() { GameBoard({}); });
@@ -54,8 +52,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testAllZeros)
-		{
+		TEST_METHOD(allZeros) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 0, 0, 0, 0 },
@@ -70,19 +67,32 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
 				});
+			assertAllRotatedTransformTransitions(
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				},
+				"rr",
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				});
 		}
 
 	private:
 		void assertAllRotatedTransformTransitions(
 			std::vector<std::vector<double>> initial,
 			std::string movement,
-			std::vector<std::vector<double>> final
-		)
+			std::vector<std::vector<double>> final)
 		{
 			for (int i = 0; i < 4; i++) {
 				assertBoardTransition(initial, movement, final);
 				initial = rotateClockwise(std::move(initial));
-				movement = clockwiseMovementTransform(std::move(movement));
+				movement = transformClockwise(std::move(movement));
 				final = rotateClockwise(std::move(final));
 			}
 		}
@@ -90,8 +100,7 @@ namespace MSTest
 		void assertBoardTransition(
 			const std::vector<std::vector<double>> &initial,
 			const std::string &movement,
-			const std::vector<std::vector<double>> &final
-		)
+			const std::vector<std::vector<double>> &final)
 		{
 			GameBoard board(initial);
 			for (const auto &c : movement)
@@ -117,11 +126,9 @@ namespace MSTest
 			assertAreEqual(final, board);
 		}
 
-		std::string clockwiseMovementTransform(std::string movement)
-		{
+		std::string transformClockwise(std::string movement) {
 			for (auto &c : movement)
-				switch (c)
-				{
+				switch (c) {
 				case 'r':
 				case 'R':
 					c = 'd';
@@ -143,8 +150,7 @@ namespace MSTest
 		}
 
 	public:
-		TEST_METHOD(testOneTwo)
-		{
+		TEST_METHOD(singleTwo) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 0, 0, 0 },
@@ -203,8 +209,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testTwoTwos)
-		{
+		TEST_METHOD(DoubleTwos) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 2, 0, 0 },
@@ -291,8 +296,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testThreeTwos)
-		{
+		TEST_METHOD(tripleTwos) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 2, 2, 0 },
@@ -351,8 +355,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testFourTwos)
-		{
+		TEST_METHOD(quadrupleTwos) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 2, 2, 2 },
@@ -369,8 +372,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testTwoUnequals)
-		{
+		TEST_METHOD(TwoUnequals) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 4, 0, 0 },
@@ -457,8 +459,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testThreeUnequals)
-		{
+		TEST_METHOD(threeUnequals) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 4, 8, 0 },
@@ -517,8 +518,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testFourUnequals)
-		{
+		TEST_METHOD(fourUnequals) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 4, 8, 16 },
@@ -535,8 +535,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testCombinesOnlyOnce)
-		{
+		TEST_METHOD(combinesOnlyOnce) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 4, 2, 2, 0 },
@@ -595,26 +594,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testTwiceAllZeros)
-		{
-			assertAllRotatedTransformTransitions(
-				{
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 }
-				},
-				"rr",
-				{
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 }
-				});
-		}
-
-		TEST_METHOD(testThreeCombos)
-		{
+		TEST_METHOD(threeCombos) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 8, 4, 2, 2 },
@@ -631,8 +611,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testUnfortunateBoard)
-		{
+		TEST_METHOD(unfortunateBoard) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 4, 2, 4 },
@@ -649,8 +628,7 @@ namespace MSTest
 				});
 		}
 
-		TEST_METHOD(testVeryFortunateBoard)
-		{
+		TEST_METHOD(veryFortunateBoard) {
 			assertAllRotatedTransformTransitions(
 				{
 					{ 2, 2, 2, 2 },
@@ -666,8 +644,8 @@ namespace MSTest
 					{ 0, 0, 0, 0 }
 				});
 		}
-		TEST_METHOD(testSetCell)
-		{
+
+		TEST_METHOD(setCell) {
 			GameBoard board(
 				{
 					{ 0, 0, 0, 0 },
@@ -685,6 +663,7 @@ namespace MSTest
 					{ 0, 0, 0, 0 }
 				}, 
 				board);
+
 			board.setCell(3, 2, 1);
 			assertAreEqual(
 				{
