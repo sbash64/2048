@@ -74,6 +74,18 @@ namespace MSTest
 					)
 				)
 			);
+			Assert::IsTrue(
+				GameBoardAnalyzer{}.canMove(
+					GameBoard(
+						{
+							{ 2, 0, 0, 0 },
+							{ 0, 0, 0, 0 },
+							{ 0, 0, 0, 0 },
+							{ 0, 0, 0, 0 }
+						}
+					)
+				)
+			);
 		}
 	};
 }
