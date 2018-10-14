@@ -2,14 +2,13 @@
 #include <sstream>
 #include <algorithm>
 
-static int digits(int number)
-{
+static int digits(int number) {
 	if (number == 0)
 		return 1;
 	int _digits = 0;
 	while (number) {
 		number /= 10;
-		_digits++;
+		++_digits;
 	}
 	return _digits;
 }
@@ -19,8 +18,7 @@ std::string GameBoardFormatter::asString(const GameBoard &board)
 	std::stringstream stream;
 	const auto maxDigits = maxDigitsInEachColumn(board);
 	for (std::size_t row = 0; row < board.size(); ++row)
-		for (std::size_t col = 0; col < board.size(); ++col)
-		{
+		for (std::size_t col = 0; col < board.size(); ++col) {
 			for (
 				int i = 0; 
 				i < maxDigits[col] - digits(board[row][col]);
@@ -40,11 +38,10 @@ std::string GameBoardFormatter::asString(const GameBoard &board)
 }
 
 std::vector<int> GameBoardFormatter::maxDigitsInEachColumn(
-	const GameBoard &board)
+	const GameBoard &board) 
 {
 	std::vector<int> maxDigits;
-	for (std::size_t col = 0; col < board.size(); ++col)
-	{
+	for (std::size_t col = 0; col < board.size(); ++col) {
 		double max = 0;
 		for (std::size_t row = 0; row < board.size(); ++row)
 			max = std::max(max, board[row][col]);

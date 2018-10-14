@@ -7,33 +7,27 @@ static const auto keyDown = 80;
 static const auto keyLeft = 75;
 static const auto keyRight = 77;
 
-void ConsoleIODevice::print(std::string out)
-{
+void ConsoleIODevice::print(std::string out) {
 	std::cout << out;
 }
 
-bool ConsoleIODevice::rightArrowKeyPressed()
-{
+bool ConsoleIODevice::rightArrowKeyPressed() {
 	return key == keyRight;
 }
 
-bool ConsoleIODevice::downArrowKeyPressed()
-{
+bool ConsoleIODevice::downArrowKeyPressed() {
 	return key == keyDown;
 }
 
-bool ConsoleIODevice::leftArrowKeyPressed()
-{
+bool ConsoleIODevice::leftArrowKeyPressed() {
 	return key == keyLeft;
 }
 
-bool ConsoleIODevice::upArrowKeyPressed()
-{
+bool ConsoleIODevice::upArrowKeyPressed() {
 	return key == keyUp;
 }
 
-void ConsoleIODevice::getKeyPress()
-{
+void ConsoleIODevice::getKeyPress() {
 	_getch();
 	key = _getch();
 }
