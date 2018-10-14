@@ -12,7 +12,7 @@ ConsoleGameController::ConsoleGameController(
 	generator(std::move(generator))
 {
 	this->device->print(
-		std::string("Press an arrow key to play.\n\n") + 
+		"Press an arrow key to play.\n\n" + 
 		this->formatter->asString(this->game) + "\n\n");
 }
 
@@ -30,12 +30,14 @@ void ConsoleGameController::next()
 		game.moveUp();
 	else
 	{
-		header = "Unrecognized key pressed.\nPress an arrow key to play.\n\n";
+		header = 
+			"Unrecognized key pressed.\n"
+			"Press an arrow key to play.\n\n";
 		device->print(header + formatter->asString(game) + "\n\n");
 		return;
 	}
 	const auto openCells = GameBoardAnalyzer{}.openCells(game);
 	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
-	game.setCell(openCells[x] % 4, openCells[x] / 4, 2);
+	game.setCell(openCells[x] % game.size(), openCells[x] / game.size(), 2);
 	device->print(header + formatter->asString(game) + "\n\n");
 }
