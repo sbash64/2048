@@ -12,5 +12,9 @@ std::vector<size_t> GameBoardAnalyzer::openCells(const GameBoard &board)
 
 bool GameBoardAnalyzer::canMove(const GameBoard &board)
 {
-	return board[0][0] == 0.0;
+	for (size_t col = 0; col < board.size(); ++col)
+		for (size_t row = 0; row < board.size(); ++row)
+			if (board[row][col] == 0)
+				return true;
+	return false;
 }
