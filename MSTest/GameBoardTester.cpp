@@ -10,23 +10,23 @@ namespace MSTest
 	public:
 		TEST_METHOD(constructorThrowsWhenInvalidBoardPassed) {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({}); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ {}, {} }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ { 0 }, {} }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ {}, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ { 0 }, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ { 0, 0 }, {} }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ {}, { 0, 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ { 0, 0 }, { 0 } }); });
-			Assert::ExpectException<std::runtime_error>(
+			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[]() { GameBoard({ { 0 }, { 0, 0 } }); });
 			GameBoard(
 				{
