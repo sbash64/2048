@@ -47,9 +47,11 @@ void GameBoard::setCell(std::size_t row, std::size_t col, double value)
 }
 
 void GameBoard::slide(
-	double &(GameBoard::*direction)(std::size_t index, std::size_t cell))
+	double &(GameBoard::*traversal)(std::size_t index, std::size_t cell))
 {
 	for (std::size_t index = 0; index < N; ++index) {
+		const std::function<double(std::size_t)> innerTraversal =
+			[=](std::size_t cell) { return (this->*traversal)(index, cell); };
 		std::vector<bool> hasBeenCombined(N, false);
 		for (
 			std::size_t adjacentCell = N - 1;
@@ -57,37 +59,37 @@ void GameBoard::slide(
 			--adjacentCell
 		) {
 			const auto cell = adjacentCell - 1;
-			const auto value = (this->*direction)(index, cell);
-			auto nextCombinableOrLastCell = findNextNonzeroOrLastCell(
-				[&](std::size_t cell) { return (this->*direction)(index, cell); }, 
+			const auto value = innerTraversal(cell);
+			auto furthestDestination = findNextNonzeroOrLastCell(
+				innerTraversal,
 				cell);
-			const auto nextCombinableOrLastCellValue = 
-				(this->*direction)(index, nextCombinableOrLastCell);
-			if (nextCombinableOrLastCellValue == 0)
-				(this->*direction)(index, N - 1) = value;
+			const auto furthestDestinationValue = 
+				innerTraversal(furthestDestination);
+			if (furthestDestinationValue == 0)
+				(this->*traversal)(index, N - 1) = value;
 			else if (
-				nextCombinableOrLastCellValue == value &&
-				!hasBeenCombined[nextCombinableOrLastCell]
+				furthestDestinationValue == value &&
+				!hasBeenCombined[furthestDestination]
 			) {
-				(this->*direction)(index, nextCombinableOrLastCell) += value;
-				hasBeenCombined[nextCombinableOrLastCell] = true;
+				(this->*traversal)(index, furthestDestination) += value;
+				hasBeenCombined[furthestDestination] = true;
 			}
-			else if (nextCombinableOrLastCell != adjacentCell)
-				(this->*direction)(index, nextCombinableOrLastCell - 1) = value;
+			else if (furthestDestination != adjacentCell)
+				(this->*traversal)(index, furthestDestination - 1) = value;
 			else
 				continue;
-			(this->*direction)(index, cell) = 0;
+			(this->*traversal)(index, cell) = 0;
 		}
 	}
 }
 
 double GameBoard::findNextNonzeroOrLastCell(
-	std::function<double(std::size_t cell)> direction, double start)
+	std::function<double(std::size_t cell)> traversal, double start)
 {
 	auto _nextNonzeroOrLastCell = start;
 	while (
 		_nextNonzeroOrLastCell < N - 1 &&
-		direction(++_nextNonzeroOrLastCell) == 0
+		traversal(++_nextNonzeroOrLastCell) == 0
 	)
 		;
 	return _nextNonzeroOrLastCell;
