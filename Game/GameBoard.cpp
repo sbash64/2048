@@ -54,24 +54,26 @@ void GameBoard::slide(
 		for (
 			std::size_t adjacentCell = N - 1;
 			adjacentCell > 0; 
-			--adjacentCell)
-		{
+			--adjacentCell
+		) {
 			const auto cell = adjacentCell - 1;
 			const auto value = (this->*direction)(index, cell);
-			auto nextNonzeroOrLastCell = findNextNonzeroOrLastCell(
-				[&](std::size_t c) { return (this->*direction)(index, c); }, 
+			auto nextCombinableOrLastCell = findNextNonzeroOrLastCell(
+				[&](std::size_t cell) { return (this->*direction)(index, cell); }, 
 				cell);
-			if ((this->*direction)(index, nextNonzeroOrLastCell) == 0)
+			const auto nextCombinableOrLastCellValue = 
+				(this->*direction)(index, nextCombinableOrLastCell);
+			if (nextCombinableOrLastCellValue == 0)
 				(this->*direction)(index, N - 1) = value;
 			else if (
-				(this->*direction)(index, nextNonzeroOrLastCell) == value &&
-				!hasBeenCombined[nextNonzeroOrLastCell])
-			{
-				(this->*direction)(index, nextNonzeroOrLastCell) += value;
-				hasBeenCombined[nextNonzeroOrLastCell] = true;
+				nextCombinableOrLastCellValue == value &&
+				!hasBeenCombined[nextCombinableOrLastCell]
+			) {
+				(this->*direction)(index, nextCombinableOrLastCell) += value;
+				hasBeenCombined[nextCombinableOrLastCell] = true;
 			}
-			else if (nextNonzeroOrLastCell != adjacentCell)
-				(this->*direction)(index, nextNonzeroOrLastCell - 1) = value;
+			else if (nextCombinableOrLastCell != adjacentCell)
+				(this->*direction)(index, nextCombinableOrLastCell - 1) = value;
 			else
 				continue;
 			(this->*direction)(index, cell) = 0;
