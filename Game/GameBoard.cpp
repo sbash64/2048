@@ -50,8 +50,10 @@ void GameBoard::slide(
 	double &(GameBoard::*traversal)(std::size_t index, std::size_t cell))
 {
 	for (std::size_t index = 0; index < N; ++index) {
-		const std::function<double(std::size_t)> innerTraversal =
-			[=](std::size_t cell) { return (this->*traversal)(index, cell); };
+		const auto innerTraversal =
+			[=](std::size_t cell) -> decltype(auto) { 
+				return (this->*traversal)(index, cell); 
+			};
 		std::vector<bool> hasBeenCombined(N, false);
 		for (
 			std::size_t adjacentCell = N - 1;
@@ -60,31 +62,32 @@ void GameBoard::slide(
 		) {
 			const auto cell = adjacentCell - 1;
 			const auto value = innerTraversal(cell);
-			auto furthestDestination = findNextNonzeroOrLastCell(
+			const auto furthestDestination = findNextNonzeroOrLastCell(
 				innerTraversal,
 				cell);
 			const auto furthestDestinationValue = 
 				innerTraversal(furthestDestination);
 			if (furthestDestinationValue == 0)
-				(this->*traversal)(index, N - 1) = value;
+				innerTraversal(N - 1) = value;
 			else if (
 				furthestDestinationValue == value &&
 				!hasBeenCombined[furthestDestination]
 			) {
-				(this->*traversal)(index, furthestDestination) += value;
+				innerTraversal(furthestDestination) += value;
 				hasBeenCombined[furthestDestination] = true;
 			}
 			else if (furthestDestination != adjacentCell)
-				(this->*traversal)(index, furthestDestination - 1) = value;
+				innerTraversal(furthestDestination - 1) = value;
 			else
 				continue;
-			(this->*traversal)(index, cell) = 0;
+			innerTraversal(cell) = 0;
 		}
 	}
 }
 
-double GameBoard::findNextNonzeroOrLastCell(
-	std::function<double(std::size_t cell)> traversal, double start)
+std::size_t GameBoard::findNextNonzeroOrLastCell(
+	std::function<double(std::size_t cell)> traversal, 
+	std::size_t start)
 {
 	auto _nextNonzeroOrLastCell = start;
 	while (

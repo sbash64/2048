@@ -27,9 +27,9 @@ public:
 private:
 	void slide(
 		double &(GameBoard::*)(std::size_t slice, std::size_t element));
-	double findNextNonzeroOrLastCell(
+	std::size_t findNextNonzeroOrLastCell(
 		std::function<double(std::size_t cell)> direction,
-		double start);
+		std::size_t start);
 	double &toTheRight(std::size_t slice, std::size_t element);
 	double &toTheLeft(std::size_t slice, std::size_t element);
 	double &upwards(std::size_t slice, std::size_t element);
