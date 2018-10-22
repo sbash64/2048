@@ -21,7 +21,9 @@ namespace MSTest
 		}
 
 	private:
-		void assertThrowsInvalidBoard(std::vector<std::vector<double>> board) {
+		void assertThrowsInvalidBoard(
+			std::vector<std::vector<double>> board) 
+		{
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<GameBoard::InvalidBoard>(
 				[&]() {
@@ -29,10 +31,10 @@ namespace MSTest
 				}
 			);
 		}
-	public:
 
+	public:
 		TEST_METHOD(allZeros) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -45,8 +47,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -59,29 +62,45 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				},
+				"rl",
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				}
+			);
 		}
 
 	private:
-		void assertAllRotatedTransformTransitions(
+		void assertBoardMovementAndAllRotatedTransforms(
 			std::vector<std::vector<double>> initial,
 			std::string movement,
 			std::vector<std::vector<double>> final)
 		{
-			for (int i = 0; i < 4; i++) {
-				assertBoardTransition(initial, movement, final);
+			for (int i = 0; i < 4; ++i) {
+				assertBoardMove(initial, movement, final);
 				initial = rotateClockwise(std::move(initial));
 				movement = transformClockwise(std::move(movement));
 				final = rotateClockwise(std::move(final));
 			}
 		}
 
-		void assertBoardTransition(
+		void assertBoardMove(
 			const std::vector<std::vector<double>> &initial,
 			const std::string &movement,
 			const std::vector<std::vector<double>> &final)
 		{
-			GameBoard board(initial);
+			GameBoard board{ initial };
 			for (const auto &c : movement)
 				switch (c)
 				{
@@ -130,7 +149,7 @@ namespace MSTest
 
 	public:
 		TEST_METHOD(singleTwo) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -143,8 +162,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -157,8 +177,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 2, 0 },
 					{ 0, 0, 0, 0 },
@@ -171,8 +192,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
@@ -185,11 +207,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(DoubleTwos) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 2, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -202,8 +225,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 2, 0 },
 					{ 0, 0, 0, 0 },
@@ -216,8 +240,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 0, 2 },
 					{ 0, 0, 0, 0 },
@@ -230,8 +255,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
@@ -244,8 +270,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
@@ -258,8 +285,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -272,11 +300,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(tripleTwos) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
@@ -289,8 +318,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
@@ -303,8 +333,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -317,8 +348,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -331,11 +363,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(quadrupleTwos) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 2, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -348,11 +381,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(TwoUnequals) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 4, 0, 0 },
 					{ 0, 0, 0, 0 },
@@ -365,8 +399,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 4, 0 },
 					{ 0, 0, 0, 0 },
@@ -379,8 +414,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 0, 4 },
 					{ 0, 0, 0, 0 },
@@ -393,8 +429,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 4, 0 },
 					{ 0, 0, 0, 0 },
@@ -407,8 +444,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 0, 4 },
 					{ 0, 0, 0, 0 },
@@ -421,8 +459,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 0, 2, 4 },
 					{ 0, 0, 0, 0 },
@@ -435,11 +474,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(threeUnequals) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 4, 8, 0 },
 					{ 0, 0, 0, 0 },
@@ -452,8 +492,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 4, 0, 8 },
 					{ 0, 0, 0, 0 },
@@ -466,8 +507,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 0, 4, 8 },
 					{ 0, 0, 0, 0 },
@@ -480,8 +522,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 2, 4, 8 },
 					{ 0, 0, 0, 0 },
@@ -494,11 +537,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(fourUnequals) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 4, 8, 16 },
 					{ 0, 0, 0, 0 },
@@ -511,11 +555,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(combinesOnlyOnce) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 4, 2, 2, 0 },
 					{ 0, 0, 0, 0 },
@@ -528,8 +573,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 4, 2, 0, 2 },
 					{ 0, 0, 0, 0 },
@@ -542,8 +588,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 4, 0, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -556,8 +603,9 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
-			assertAllRotatedTransformTransitions(
+				}
+			);
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 0, 4, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -570,11 +618,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(threeCombos) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 8, 4, 2, 2 },
 					{ 0, 0, 0, 0 },
@@ -587,11 +636,12 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(unfortunateBoard) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 },
@@ -604,11 +654,12 @@ namespace MSTest
 					{ 4, 2, 4, 2 },
 					{ 2, 4, 2, 4 },
 					{ 4, 2, 4, 2 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(veryFortunateBoard) {
-			assertAllRotatedTransformTransitions(
+			assertBoardMovementAndAllRotatedTransforms(
 				{
 					{ 2, 2, 2, 2 },
 					{ 2, 2, 2, 2 },
@@ -621,18 +672,19 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
-				});
+				}
+			);
 		}
 
 		TEST_METHOD(setCell) {
-			GameBoard board(
+			GameBoard board{
 				{
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
 				}
-			);
+			};
 			board.setCell(0, 0, 1);
 			assertAreEqual(
 				{
@@ -641,7 +693,8 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 0, 0 }
 				}, 
-				board);
+				board
+			);
 
 			board.setCell(3, 2, 1);
 			assertAreEqual(
@@ -651,7 +704,8 @@ namespace MSTest
 					{ 0, 0, 0, 0 },
 					{ 0, 0, 1, 0 }
 				},
-				board);
+				board
+			);
 		}
 	};
 };
