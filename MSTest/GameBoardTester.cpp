@@ -9,48 +9,27 @@ namespace MSTest
 	TEST_CLASS(GameBoardTester) {
 	public:
 		TEST_METHOD(constructorThrowsWhenInvalidBoardPassed) {
+			assertThrowsInvalidBoard({});
+			assertThrowsInvalidBoard({ {}, {} });
+			assertThrowsInvalidBoard({ { 0 }, {} });
+			assertThrowsInvalidBoard({ {}, { 0 } });
+			assertThrowsInvalidBoard({ { 0 }, { 0 } });
+			assertThrowsInvalidBoard({ { 0, 0 }, {} });
+			assertThrowsInvalidBoard({ {}, { 0, 0 } });
+			assertThrowsInvalidBoard({ { 0, 0 }, { 0 } });
+			assertThrowsInvalidBoard({ { 0 }, { 0, 0 } });
+		}
+
+	private:
+		void assertThrowsInvalidBoard(std::vector<std::vector<double>> board) {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({}); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ {}, {} }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ { 0 }, {} }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ {}, { 0 } }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ { 0 }, { 0 } }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ { 0, 0 }, {} }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ {}, { 0, 0 } }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ { 0, 0 }, { 0 } }); });
-			Assert::ExpectException<GameBoard::InvalidBoard>(
-				[]() { GameBoard({ { 0 }, { 0, 0 } }); });
-			GameBoard(
-				{
-					{ 0 }
-				});
-			GameBoard(
-				{ 
-					{ 0, 0 }, 
-					{ 0, 0 } 
-				});
-			GameBoard(
-				{ 
-					{ 0, 0, 0 }, 
-					{ 0, 0, 0 },
-					{ 0, 0, 0 }
-				});
-			GameBoard(
-				{
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 },
-					{ 0, 0, 0, 0 }
-				});
+				[&]() {
+					GameBoard b{ std::move(board) };
+				}
+			);
 		}
+	public:
 
 		TEST_METHOD(allZeros) {
 			assertAllRotatedTransformTransitions(
