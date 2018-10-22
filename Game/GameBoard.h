@@ -13,6 +13,7 @@ class GameBoard
 	std::vector<std::vector<double>> board;
 	const std::size_t N;
 public:
+	class InvalidBoard {};
 	GAME_API explicit GameBoard(std::vector<std::vector<double>> board);
 	GAME_API const std::vector<double> &operator[](std::size_t row) const;
 	GAME_API std::size_t size() const;

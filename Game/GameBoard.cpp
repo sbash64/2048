@@ -5,10 +5,10 @@ GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
 	N(board.size())
 {
 	if (N == 0)
-		throw std::runtime_error("Empty board.");
+		throw InvalidBoard{};
 	for (const auto &row : board)
 		if (row.size() != N)
-			throw std::runtime_error("Invalid board dimensions.");
+			throw InvalidBoard{};
 }
 
 const std::vector<double>& GameBoard::operator[](std::size_t row) const
