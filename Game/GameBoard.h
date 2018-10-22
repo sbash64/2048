@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 
 #ifdef GAME_EXPORTS
 	#define GAME_API __declspec(dllexport)
@@ -17,14 +18,18 @@ public:
 	GAME_API explicit GameBoard(std::vector<std::vector<double>> board);
 	GAME_API const std::vector<double> &operator[](std::size_t row) const;
 	GAME_API std::size_t size() const;
-	GAME_API void moveRight();
-	GAME_API void moveLeft();
-	GAME_API void moveDown();
-	GAME_API void moveUp();
+	GAME_API void slideRight();
+	GAME_API void slideLeft();
+	GAME_API void slideDown();
+	GAME_API void slideUp();
 	GAME_API void setCell(std::size_t row, std::size_t col, double value);
 
 private:
-	void moveAlong(double &(GameBoard::*)(std::size_t slice, std::size_t element));
+	void slide(
+		double &(GameBoard::*)(std::size_t slice, std::size_t element));
+	double findNextNonzeroOrLastCell(
+		std::function<double(std::size_t cell)> direction,
+		double start);
 	double &toTheRight(std::size_t slice, std::size_t element);
 	double &toTheLeft(std::size_t slice, std::size_t element);
 	double &upwards(std::size_t slice, std::size_t element);

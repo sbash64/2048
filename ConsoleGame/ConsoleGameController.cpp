@@ -28,13 +28,13 @@ void ConsoleGameController::next()
 {
 	device->getKeyPress();
 	if (device->rightArrowKeyPressed())
-		game.moveRight();
+		game.slideRight();
 	else if (device->downArrowKeyPressed())
-		game.moveDown();
+		game.slideDown();
 	else if (device->leftArrowKeyPressed())
-		game.moveLeft();
+		game.slideLeft();
 	else if (device->upArrowKeyPressed())
-		game.moveUp();
+		game.slideUp();
 	else
 	{
 		printGameBoardWithHeader(

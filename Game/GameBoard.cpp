@@ -1,12 +1,12 @@
 #include "GameBoard.h"
 
-GameBoard::GameBoard(std::vector<std::vector<double>> _board) :
-	board(std::move(_board)),
-	N(board.size())
+GameBoard::GameBoard(std::vector<std::vector<double>> board) :
+	board(std::move(board)),
+	N(this->board.size())
 {
 	if (N == 0)
 		throw InvalidBoard{};
-	for (const auto &row : board)
+	for (const auto &row : this->board)
 		if (row.size() != N)
 			throw InvalidBoard{};
 }
@@ -21,83 +21,93 @@ std::size_t GameBoard::size() const
 	return N;
 }
 
-void GameBoard::moveRight()
+void GameBoard::slideRight()
 {
-	moveAlong(&GameBoard::toTheRight);
+	slide(&GameBoard::toTheRight);
 }
 
-void GameBoard::moveLeft()
+void GameBoard::slideLeft()
 {
-	moveAlong(&GameBoard::toTheLeft);
+	slide(&GameBoard::toTheLeft);
 }
 
-void GameBoard::moveDown()
+void GameBoard::slideDown()
 {
-	moveAlong(&GameBoard::downwards);
+	slide(&GameBoard::downwards);
 }
 
-void GameBoard::moveUp()
+void GameBoard::slideUp()
 {
-	moveAlong(&GameBoard::upwards);
+	slide(&GameBoard::upwards);
 }
 
-void GameBoard::setCell(size_t row, size_t col, double value)
+void GameBoard::setCell(std::size_t row, std::size_t col, double value)
 {
 	board[row][col] = value;
 }
 
-void GameBoard::moveAlong(
-	double &(GameBoard::*direction)(size_t slice, size_t element))
+void GameBoard::slide(
+	double &(GameBoard::*direction)(std::size_t index, std::size_t cell))
 {
-	for (size_t slice = 0; slice < N; ++slice) {
+	for (std::size_t index = 0; index < N; ++index) {
 		std::vector<bool> hasBeenCombined(N, false);
 		for (
-			size_t adjacentElement = N - 1; 
-			adjacentElement > 0; 
-			--adjacentElement)
+			std::size_t adjacentCell = N - 1;
+			adjacentCell > 0; 
+			--adjacentCell)
 		{
-			const auto element = adjacentElement - 1;
-			const auto value = (this->*direction)(slice, element);
-			auto nextNonzeroOrLastElement = element;
-			while (
-				nextNonzeroOrLastElement < N - 1 && 
-				(this->*direction)(slice, ++nextNonzeroOrLastElement) == 0)
-				;
-			if ((this->*direction)(slice, nextNonzeroOrLastElement) == 0)
-				(this->*direction)(slice, N - 1) = value;
+			const auto cell = adjacentCell - 1;
+			const auto value = (this->*direction)(index, cell);
+			auto nextNonzeroOrLastCell = findNextNonzeroOrLastCell(
+				[&](std::size_t c) { return (this->*direction)(index, c); }, 
+				cell);
+			if ((this->*direction)(index, nextNonzeroOrLastCell) == 0)
+				(this->*direction)(index, N - 1) = value;
 			else if (
-				(this->*direction)(slice, nextNonzeroOrLastElement) == value &&
-				!hasBeenCombined[nextNonzeroOrLastElement])
+				(this->*direction)(index, nextNonzeroOrLastCell) == value &&
+				!hasBeenCombined[nextNonzeroOrLastCell])
 			{
-				(this->*direction)(slice, nextNonzeroOrLastElement) += value;
-				hasBeenCombined[nextNonzeroOrLastElement] = true;
+				(this->*direction)(index, nextNonzeroOrLastCell) += value;
+				hasBeenCombined[nextNonzeroOrLastCell] = true;
 			}
-			else if (nextNonzeroOrLastElement != adjacentElement)
-				(this->*direction)(slice, nextNonzeroOrLastElement - 1) = value;
+			else if (nextNonzeroOrLastCell != adjacentCell)
+				(this->*direction)(index, nextNonzeroOrLastCell - 1) = value;
 			else
 				continue;
-			(this->*direction)(slice, element) = 0;
+			(this->*direction)(index, cell) = 0;
 		}
 	}
 }
 
-double & GameBoard::toTheRight(size_t slice, size_t element)
+double GameBoard::findNextNonzeroOrLastCell(
+	std::function<double(std::size_t cell)> direction, double start)
 {
-	return board[slice][element];
+	auto _nextNonzeroOrLastCell = start;
+	while (
+		_nextNonzeroOrLastCell < N - 1 &&
+		direction(++_nextNonzeroOrLastCell) == 0
+	)
+		;
+	return _nextNonzeroOrLastCell;
 }
 
-double & GameBoard::toTheLeft(size_t slice, size_t element)
+double & GameBoard::toTheRight(std::size_t index, std::size_t cell)
 {
-	return board[slice][N - 1 - element];
+	return board[index][cell];
 }
 
-double & GameBoard::upwards(size_t slice, size_t element)
+double & GameBoard::toTheLeft(std::size_t index, std::size_t cell)
 {
-	return board[N - 1 - element][slice];
+	return board[index][N - 1 - cell];
 }
 
-double & GameBoard::downwards(size_t slice, size_t element)
+double & GameBoard::upwards(std::size_t index, std::size_t cell)
 {
-	return board[element][slice];
+	return board[N - 1 - cell][index];
+}
+
+double & GameBoard::downwards(std::size_t index, std::size_t cell)
+{
+	return board[cell][index];
 }
 
