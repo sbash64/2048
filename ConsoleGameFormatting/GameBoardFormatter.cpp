@@ -24,6 +24,10 @@ std::string GameBoardFormatter::asString(const GameBoard &board) {
 				++i
 			)
 				stream << " ";
+			if (board[row][col])
+				stream << "\x1b[" << (std::log2(board[row][col]) + 40) << "m";
+			else
+				stream << "\x1b[0m";
 			stream << board[row][col];
 			if (col == board.size() - 1)
 				if (row == board.size() - 1)

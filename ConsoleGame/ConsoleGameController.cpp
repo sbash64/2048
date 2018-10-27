@@ -19,13 +19,11 @@ ConsoleGameController::ConsoleGameController(
 			"Wow. That's unfortunate. You didn't even get to play!\n\n");
 }
 
-void ConsoleGameController::printGameBoardWithHeader(std::string header)
-{
+void ConsoleGameController::printGameBoardWithHeader(std::string header) {
 	device->print(header + formatter->asString(game) + "\n\n");
 }
 
-void ConsoleGameController::next()
-{
+void ConsoleGameController::next() {
 	device->getKeyPress();
 	if (device->rightArrowKeyPressed())
 		game.slideRight();
@@ -35,8 +33,7 @@ void ConsoleGameController::next()
 		game.slideLeft();
 	else if (device->upArrowKeyPressed())
 		game.slideUp();
-	else
-	{
+	else {
 		printGameBoardWithHeader(
 			"Unrecognized key pressed.\n"
 			"Press an arrow key to play.\n\n");
