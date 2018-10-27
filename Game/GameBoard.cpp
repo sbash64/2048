@@ -41,9 +41,9 @@ void GameBoard::slideUp()
 	slide(&GameBoard::upwards);
 }
 
-void GameBoard::setCell(std::size_t row, std::size_t col, double value)
+void GameBoard::setCell(CellPosition cell, double value)
 {
-	board[row][col] = value;
+	board[cell.row][cell.col] = value;
 }
 
 void GameBoard::slide(

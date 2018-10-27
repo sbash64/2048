@@ -44,7 +44,7 @@ void ConsoleGameController::next()
 	}
 	const auto openCells = GameBoardAnalyzer{}.openCells(game);
 	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
-	game.setCell(openCells[x] % game.size(), openCells[x] / game.size(), 2);
+	game.setCell({ openCells[x] % game.size(), openCells[x] / game.size() }, 2);
 	if (GameBoardAnalyzer{}.canMove(game))
 		printGameBoardWithHeader("");
 	else

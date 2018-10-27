@@ -683,7 +683,7 @@ namespace MSTest {
 					{ 0, 0, 0, 0 }
 				}
 			};
-			board.setCell(0, 0, 1);
+			board.setCell({ 0, 0 }, 1);
 			assertAreEqual(
 				{
 					{ 1, 0, 0, 0 },
@@ -694,7 +694,7 @@ namespace MSTest {
 				board
 			);
 
-			board.setCell(3, 2, 1);
+			board.setCell({ 3, 2 }, 1);
 			assertAreEqual(
 				{
 					{ 1, 0, 0, 0 },

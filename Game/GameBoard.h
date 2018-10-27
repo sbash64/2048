@@ -22,7 +22,11 @@ public:
 	GAME_API void slideLeft();
 	GAME_API void slideDown();
 	GAME_API void slideUp();
-	GAME_API void setCell(std::size_t row, std::size_t col, double value);
+	struct CellPosition {
+		std::size_t row;
+		std::size_t col;
+	};
+	GAME_API void setCell(CellPosition cell, double value);
 
 private:
 	void slide(
