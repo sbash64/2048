@@ -3,10 +3,9 @@
 #include <RandomNumberGenerator.h>
 #include <random>
 
-class MersenneTwisterGenerator : public RandomNumberGenerator
-{
+class MersenneTwisterGenerator : public RandomNumberGenerator {
 	std::mt19937 rng;
 public:
 	MersenneTwisterGenerator();
-	virtual int randomIntBetween(int low, int hi) override;
+	int randomIntBetween(int low, int hi) override;
 };

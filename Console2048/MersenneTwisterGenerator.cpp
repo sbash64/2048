@@ -6,5 +6,5 @@ MersenneTwisterGenerator::MersenneTwisterGenerator() :
 }
 
 int MersenneTwisterGenerator::randomIntBetween(int low, int hi) {
-	return std::uniform_int_distribution<int>(low, hi)(rng);
+	return std::uniform_int_distribution<int>{ low, hi }(rng);
 }
