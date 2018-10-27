@@ -45,66 +45,64 @@ namespace MSTest {
 			);
 		}
 
+	private:
+		bool boardCanMove(std::vector<std::vector<double>> board) {
+			return GameBoardAnalyzer{}.canMove(
+				GameBoard{ std::move(board) }
+			);
+		}
+
+	public:
 		TEST_METHOD(canMove) {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(
-				GameBoardAnalyzer{}.canMove(
-					GameBoard(
-						{
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 }
-						}
-					)
+				boardCanMove(
+					{
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
 				)
 			);
 			Assert::IsFalse(
-				GameBoardAnalyzer{}.canMove(
-					GameBoard(
-						{
-							{ 2, 4, 2, 4 },
-							{ 4, 2, 4, 2 },
-							{ 2, 4, 2, 4 },
-							{ 4, 2, 4, 2 }
-						}
-					)
+				boardCanMove(
+					{
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 2 },
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 2 }
+					}
 				)
 			);
 			Assert::IsTrue(
-				GameBoardAnalyzer{}.canMove(
-					GameBoard(
-						{
-							{ 2, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 }
-						}
-					)
+				boardCanMove(
+					{
+						{ 2, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 },
+						{ 0, 0, 0, 0 }
+					}
 				)
 			);
 			Assert::IsTrue(
-				GameBoardAnalyzer{}.canMove(
-					GameBoard(
-						{
-							{ 2, 2, 2, 2 },
-							{ 2, 2, 2, 2 },
-							{ 2, 2, 2, 2 },
-							{ 2, 2, 2, 2 }
-						}
-					)
+				boardCanMove(
+					{
+						{ 2, 2, 2, 2 },
+						{ 2, 2, 2, 2 },
+						{ 2, 2, 2, 2 },
+						{ 2, 2, 2, 2 }
+					}
 				)
 			);
 			Assert::IsTrue(
-				GameBoardAnalyzer{}.canMove(
-					GameBoard(
-						{
-							{ 2, 4, 2, 4 },
-							{ 4, 2, 4, 8 },
-							{ 2, 4, 2, 8 },
-							{ 4, 2, 4, 2 }
-						}
-					)
+				boardCanMove(
+					{
+						{ 2, 4, 2, 4 },
+						{ 4, 2, 4, 8 },
+						{ 2, 4, 2, 8 },
+						{ 4, 2, 4, 2 }
+					}
 				)
 			);
 		}
