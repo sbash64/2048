@@ -3,8 +3,7 @@
 #include <GameBoard.h>
 #include <CppUnitTest.h>
 
-namespace MSTest
-{
+namespace MSTest {
 	TEST_CLASS(GameBoardTester) {
 	public:
 		TEST_METHOD(constructorThrowsWhenInvalidBoardPassed) {

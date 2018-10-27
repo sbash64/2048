@@ -2,8 +2,7 @@
 #include "test_board_utility.h"
 #include <CppUnitTest.h>
 
-namespace MSTest
-{
+namespace MSTest {
 	TEST_CLASS(TestBoardTester) {
 	public:
 		TEST_METHOD(rotateClockwiseAllZeros) {
@@ -20,7 +19,9 @@ namespace MSTest
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 }
-					}));
+					}
+				)
+			);
 		}
 
 		TEST_METHOD(rotateClockwiseSingleTwo) {
@@ -37,7 +38,9 @@ namespace MSTest
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 }
-					}));
+					}
+				)
+			);
 		}
 
 		TEST_METHOD(rotateClockwiseUniqueElements) {
@@ -54,7 +57,9 @@ namespace MSTest
 						{ 5, 6, 7, 8 },
 						{ 9, 10, 11, 12 },
 						{ 13, 14, 15, 16 }
-					}));
+					}
+				)
+			);
 		}
 	};
 }
