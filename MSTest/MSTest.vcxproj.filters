@@ -15,23 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="test_board_utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="assert_utility.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="test_board_utility.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameBoardTester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

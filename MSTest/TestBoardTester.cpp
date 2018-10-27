@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "assert_utility.h"
 #include "test_board_utility.h"
 #include <CppUnitTest.h>

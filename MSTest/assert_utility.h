@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include <GameBoard.h>
 #include <CppUnitTest.h>
 #include <vector>

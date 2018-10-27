@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <GameBoardFormatter.h>
 #include <CppUnitTest.h>
 

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "assert_utility.h"
 
 void assertAreEqual(
