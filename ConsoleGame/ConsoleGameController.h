@@ -7,13 +7,12 @@
 #include <memory>
 
 #ifdef CONSOLEGAME_EXPORTS
-#define CONSOLEGAME_API __declspec(dllexport)
+	#define CONSOLEGAME_API __declspec(dllexport)
 #else
-#define CONSOLEGAME_API __declspec(dllimport)
+	#define CONSOLEGAME_API __declspec(dllimport)
 #endif
 
-class ConsoleGameController
-{
+class ConsoleGameController {
 	GameBoard game;
 	std::shared_ptr<Formatter> formatter;
 	std::shared_ptr<IODevice> device;

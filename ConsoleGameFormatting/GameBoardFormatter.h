@@ -4,15 +4,15 @@
 #include <Formatter.h>
 
 #ifdef CONSOLEGAMEFORMATTING_EXPORTS
-#define CONSOLEGAMEFORMATTING_API __declspec(dllexport)
+	#define CONSOLEGAMEFORMATTING_API __declspec(dllexport)
 #else
-#define CONSOLEGAMEFORMATTING_API __declspec(dllimport)
+	#define CONSOLEGAMEFORMATTING_API __declspec(dllimport)
 #endif
 
-class GameBoardFormatter : public Formatter
-{
+class GameBoardFormatter : public Formatter {
 public:
-	CONSOLEGAMEFORMATTING_API std::string asString(const GameBoard &board) override;
+	CONSOLEGAMEFORMATTING_API std::string asString(
+		const GameBoard &board) override;
 private:
 	std::vector<int> maxDigitsInEachColumn(const GameBoard &board);
 };

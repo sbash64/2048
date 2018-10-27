@@ -1,8 +1,9 @@
 #pragma once
 
-class RandomNumberGenerator
-{
+#include "Interface.h"
+
+class RandomNumberGenerator {
 public:
-	virtual ~RandomNumberGenerator() = default;
+	INTERFACE_OPERATIONS(RandomNumberGenerator);
 	virtual int randomIntBetween(int low, int hi) = 0;
 };

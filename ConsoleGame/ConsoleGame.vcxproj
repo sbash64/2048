@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="ConsoleGameController.h" />
     <ClInclude Include="Formatter.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="IODevice.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
   </ItemGroup>

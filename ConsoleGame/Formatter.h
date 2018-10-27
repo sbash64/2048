@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Interface.h"
 #include <GameBoard.h>
 #include <string>
 
-class Formatter
-{
+class Formatter {
 public:
-	virtual ~Formatter() = default;
+	INTERFACE_OPERATIONS(Formatter);
 	virtual std::string asString(const GameBoard &board) = 0;
 };

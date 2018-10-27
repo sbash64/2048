@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Interface.h"
 #include <string>
 
-class IODevice
-{
+class IODevice {
 public:
-	virtual ~IODevice() = default;
+	INTERFACE_OPERATIONS(IODevice);
 	virtual void print(std::string) = 0;
 	virtual bool rightArrowKeyPressed() = 0;
 	virtual bool downArrowKeyPressed() = 0;
