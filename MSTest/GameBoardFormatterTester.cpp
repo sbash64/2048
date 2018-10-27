@@ -1,8 +1,7 @@
 #include <GameBoardFormatter.h>
 #include <CppUnitTest.h>
 
-namespace MSTest
-{
+namespace MSTest {
 	TEST_CLASS(GameBoardFormatterTester) {
 		void assertFormatEqualTo(
 			std::string expected, 
@@ -11,7 +10,7 @@ namespace MSTest
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::AreEqual(
 				expected.c_str(),
-				GameBoardFormatter{}.asString(GameBoard(board)).c_str());
+				GameBoardFormatter{}.asString(GameBoard{ board }).c_str());
 		}
 
 	public:

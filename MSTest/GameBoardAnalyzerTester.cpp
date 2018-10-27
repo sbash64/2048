@@ -2,47 +2,47 @@
 #include <GameBoardAnalyzer.h>
 #include <CppUnitTest.h>
 
-namespace MSTest
-{
+namespace MSTest {
 	TEST_CLASS(GameBoardAnalyzerTester) {
+		void assertOpenCellsEqual(
+			std::vector<std::size_t> indeces,
+			std::vector<std::vector<double>> board)
+		{
+			assertAreEqual(
+				std::move(indeces),
+				GameBoardAnalyzer{}.openCells(
+					GameBoard{ std::move(board) }));
+		}
+
 	public:
 		TEST_METHOD(openCells) {
-			assertAreEqual(
+			assertOpenCellsEqual(
 				{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
-				GameBoardAnalyzer{}.openCells(
-					GameBoard(
-						{
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 },
-							{ 0, 0, 0, 0 }
-						}
-					)
-				));
-			assertAreEqual(
+				{
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 },
+					{ 0, 0, 0, 0 }
+				}
+			);
+			assertOpenCellsEqual(
 				{ 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14 },
-				GameBoardAnalyzer{}.openCells(
-					GameBoard(
-						{
-							{ 1, 0, 0, 0 },
-							{ 0, 1, 0, 0 },
-							{ 0, 0, 1, 0 },
-							{ 0, 0, 0, 1 }
-						}
-					)
-				));
-			assertAreEqual(
+				{
+					{ 1, 0, 0, 0 },
+					{ 0, 1, 0, 0 },
+					{ 0, 0, 1, 0 },
+					{ 0, 0, 0, 1 }
+				}
+			);
+			assertOpenCellsEqual(
 				{ 1, 2, 3, 12, 13, 14 },
-				GameBoardAnalyzer{}.openCells(
-					GameBoard(
-						{
-							{ 1, 1, 1, 0 },
-							{ 0, 1, 1, 0 },
-							{ 0, 1, 1, 0 },
-							{ 0, 1, 1, 1 }
-						}
-					)
-				));
+				{
+					{ 1, 1, 1, 0 },
+					{ 0, 1, 1, 0 },
+					{ 0, 1, 1, 0 },
+					{ 0, 1, 1, 1 }
+				}
+			);
 		}
 
 		TEST_METHOD(canMove) {
