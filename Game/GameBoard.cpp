@@ -1,7 +1,7 @@
 #include "GameBoard.h"
 
-template <typename T>
-GameBoard<T>::GameBoard(std::vector<std::vector<T>> board) :
+template<typename T>
+GameBoard<T>::GameBoard(Board board) :
 	board(std::move(board)),
 	N(this->board.size())
 {
@@ -12,60 +12,61 @@ GameBoard<T>::GameBoard(std::vector<std::vector<T>> board) :
 			throw InvalidBoard{};
 }
 
-template <typename T>
-const std::vector<T> &GameBoard<T>::operator[](std::size_t row) const
+template<typename T>
+typename const GameBoard<T>::Row 
+	&GameBoard<T>::operator[](size_type row) const
 {
 	return board[row];
 }
 
-template <typename T>
-std::size_t GameBoard<T>::size() const
+template<typename T>
+typename GameBoard<T>::size_type GameBoard<T>::size() const
 {
 	return N;
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::slideRight()
 {
 	slide(&GameBoard::toTheRight);
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::slideLeft()
 {
 	slide(&GameBoard::toTheLeft);
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::slideDown()
 {
 	slide(&GameBoard::downwards);
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::slideUp()
 {
 	slide(&GameBoard::upwards);
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::setCell(CellPosition cell, T value)
 {
 	board[cell.row][cell.col] = value;
 }
 
-template <typename T>
+template<typename T>
 void GameBoard<T>::slide(
-	T &(GameBoard::*traversal)(std::size_t index, std::size_t cell))
+	T &(GameBoard::*traversal)(size_type index, size_type cell))
 {
-	for (std::size_t index = 0; index < N; ++index) {
+	for (size_type index = 0; index < N; ++index) {
 		const auto innerTraversal =
-			[=](std::size_t cell) -> decltype(auto) { 
+			[=](size_type cell) -> decltype(auto) { 
 				return (this->*traversal)(index, cell); 
 			};
 		std::vector<bool> hasBeenCombined(N, false);
 		for (
-			std::size_t adjacentCell = N - 1;
+			size_type adjacentCell = N - 1;
 			adjacentCell > 0; 
 			--adjacentCell
 		) {
@@ -95,9 +96,9 @@ void GameBoard<T>::slide(
 }
 
 template <typename T>
-std::size_t GameBoard<T>::findNextNonzeroOrLastCell(
-	std::function<T(std::size_t cell)> traversal,
-	std::size_t start)
+typename GameBoard<T>::size_type GameBoard<T>::findNextNonzeroOrLastCell(
+	std::function<T(size_type cell)> traversal,
+	size_type start)
 {
 	auto _nextNonzeroOrLastCell = start;
 	while (
@@ -109,25 +110,25 @@ std::size_t GameBoard<T>::findNextNonzeroOrLastCell(
 }
 
 template <typename T>
-T &GameBoard<T>::toTheRight(std::size_t index, std::size_t cell)
+T &GameBoard<T>::toTheRight(size_type index, size_type cell)
 {
 	return board[index][cell];
 }
 
 template <typename T>
-T &GameBoard<T>::toTheLeft(std::size_t index, std::size_t cell)
+T &GameBoard<T>::toTheLeft(size_type index, size_type cell)
 {
 	return board[index][N - 1 - cell];
 }
 
 template <typename T>
-T &GameBoard<T>::upwards(std::size_t index, std::size_t cell)
+T &GameBoard<T>::upwards(size_type index, size_type cell)
 {
 	return board[N - 1 - cell][index];
 }
 
 template <typename T>
-T &GameBoard<T>::downwards(std::size_t index, std::size_t cell)
+T &GameBoard<T>::downwards(size_type index, size_type cell)
 {
 	return board[cell][index];
 }
