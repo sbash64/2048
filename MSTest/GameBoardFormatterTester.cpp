@@ -5,12 +5,12 @@ namespace MSTest {
 	TEST_CLASS(GameBoardFormatterTester) {
 		void assertFormatEqualTo(
 			std::string expected, 
-			std::vector<std::vector<double>> board)
+			std::vector<std::vector<int>> board)
 		{
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::AreEqual(
 				expected.c_str(),
-				GameBoardFormatter{}.asString(GameBoard{ board }).c_str());
+				GameBoardFormatter{}.asString(GameBoard<int>{ board }).c_str());
 		}
 
 	public:

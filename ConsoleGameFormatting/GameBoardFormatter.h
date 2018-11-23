@@ -12,7 +12,7 @@
 class GameBoardFormatter : public Formatter {
 public:
 	CONSOLEGAMEFORMATTING_API std::string asString(
-		const GameBoard &board) override;
+		const GameBoard<int> &board) override;
 private:
-	std::vector<int> maxDigitsInEachColumn(const GameBoard &board);
+	std::vector<int> maxDigitsInEachColumn(const GameBoard<int> &board);
 };

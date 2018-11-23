@@ -27,6 +27,11 @@ void assertAreEqual(
 		);
 }
 
+template <typename T>
 void assertAreEqual(
-	const std::vector<std::vector<double>>& expected,
-	const GameBoard& actual);
+	const std::vector<std::vector<T>>& expected,
+	const GameBoard<T> &actual)
+{
+	for (std::size_t i = 0; i < expected.size(); i++)
+		assertAreEqual(expected[i], actual[i]);
+}

@@ -132,7 +132,7 @@ namespace MSTest
 			const auto device = std::make_shared<MockIODevice>();
 			Assert::IsTrue(device->lastOutput().empty());
 			ConsoleGameController(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 2, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -158,7 +158,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -178,7 +178,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -202,7 +202,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 2, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -228,7 +228,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 2, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -254,7 +254,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 2 },
@@ -280,7 +280,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -306,7 +306,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -335,7 +335,7 @@ namespace MSTest
 			const auto device = std::make_shared<MockIODevice>();
 			const auto generator = std::make_shared<MockRandomNumberGenerator>(0);
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -366,7 +366,7 @@ namespace MSTest
 			const auto device = std::make_shared<MockIODevice>();
 			const auto generator = std::make_shared<MockRandomNumberGenerator>(0);
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -389,7 +389,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 0, 0, 0, 0 },
 						{ 0, 0, 0, 0 },
@@ -415,7 +415,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 2, 4, 2, 4 },
 						{ 4, 2, 4, 2 },
@@ -441,7 +441,7 @@ namespace MSTest
 		{
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller(
-				GameBoard(
+				GameBoard<int>(
 					{
 						{ 16, 8, 4, 0 },
 						{ 4, 2, 4, 2 },

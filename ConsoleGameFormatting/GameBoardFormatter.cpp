@@ -13,7 +13,7 @@ static int digits(int number) {
 	return _digits;
 }
 
-std::string GameBoardFormatter::asString(const GameBoard &board) {
+std::string GameBoardFormatter::asString(const GameBoard<int> &board) {
 	std::stringstream stream;
 	const auto maxDigits = maxDigitsInEachColumn(board);
 	for (std::size_t row = 0; row < board.size(); ++row)
@@ -37,11 +37,11 @@ std::string GameBoardFormatter::asString(const GameBoard &board) {
 }
 
 std::vector<int> GameBoardFormatter::maxDigitsInEachColumn(
-	const GameBoard &board) 
+	const GameBoard<int> &board) 
 {
 	std::vector<int> maxDigits;
 	for (std::size_t col = 0; col < board.size(); ++col) {
-		double max = 0;
+		int max = 0;
 		for (std::size_t row = 0; row < board.size(); ++row)
 			max = std::max(max, board[row][col]);
 		maxDigits.push_back(digits(max));

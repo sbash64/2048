@@ -1,7 +1,7 @@
 #include "test_board_utility.h"
 
-std::vector<std::vector<double>> rotateClockwise(
-	std::vector<std::vector<double>> board)
+std::vector<std::vector<int>> rotateClockwise(
+	std::vector<std::vector<int>> board)
 {
 	auto rotated(board);
 	for (std::size_t row = 0; row < rotated.size(); ++row)
