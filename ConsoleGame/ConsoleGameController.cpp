@@ -1,49 +1,23 @@
 #include "ConsoleGameController.h"
-#include <GameBoardAnalyzer.h>
 
 ConsoleGameController::ConsoleGameController(
-	GameBoard<int> game,
-	std::shared_ptr<Formatter> formatter,
-	std::shared_ptr<IODevice> device,
-	std::shared_ptr<RandomNumberGenerator> generator
+	std::shared_ptr<GameModel> model,
+	std::shared_ptr<IODevice> device
 ) :
-	game(std::move(game)),
-	formatter(std::move(formatter)),
-	device(std::move(device)),
-	generator(std::move(generator))
+	model{ std::move(model) },
+	device{ std::move(device) }
 {
-	if (GameBoardAnalyzer{}.canMove(this->game))
-		printGameBoardWithHeader("Press an arrow key to play.\n\n");
-	else
-		printGameBoardWithHeader(
-			"Wow. That's unfortunate. You didn't even get to play!\n\n");
-}
-
-void ConsoleGameController::printGameBoardWithHeader(std::string header) {
-	device->print(header + formatter->asString(game) + "\n\n");
+	this->device->print(this->model->newGame());
 }
 
 void ConsoleGameController::next() {
 	device->getKeyPress();
 	if (device->rightArrowKeyPressed())
-		game.slideRight();
+		device->print(model->right());
 	else if (device->downArrowKeyPressed())
-		game.slideDown();
+		device->print(model->down());
 	else if (device->leftArrowKeyPressed())
-		game.slideLeft();
+		device->print(model->left());
 	else if (device->upArrowKeyPressed())
-		game.slideUp();
-	else {
-		printGameBoardWithHeader(
-			"Unrecognized key pressed.\n"
-			"Press an arrow key to play.\n\n");
-		return;
-	}
-	const auto openCells = GameBoardAnalyzer{}.openCells(game);
-	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
-	game.setCell({ openCells[x] % game.size(), openCells[x] / game.size() }, 2);
-	if (GameBoardAnalyzer{}.canMove(game))
-		printGameBoardWithHeader("");
-	else
-		printGameBoardWithHeader("No more moves can be done. Game over.\n\n");
+		device->print(model->up());
 }

@@ -41,5 +41,8 @@
     <ClCompile Include="ConsoleGameControllerTester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game2048ModelTester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

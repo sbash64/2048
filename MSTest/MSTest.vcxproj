@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameControllerTester.cpp" />
+    <ClCompile Include="Game2048ModelTester.cpp" />
     <ClCompile Include="GameBoardAnalyzerTester.cpp" />
     <ClCompile Include="GameBoardFormatterTester.cpp" />
     <ClCompile Include="GameBoardTester.cpp" />
