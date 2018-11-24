@@ -1,11 +1,11 @@
 #include "GameBoardAnalyzer.h"
 
-std::vector<std::size_t> GameBoardAnalyzer::openCells(
+std::vector<GameBoardAnalyzer::size_type> GameBoardAnalyzer::openCells(
 	const GameBoard<int> &board)
 {
-	std::vector<std::size_t> cells;
-	for (std::size_t col = 0; col < board.size(); ++col)
-		for (std::size_t row = 0; row < board.size(); ++row)
+	std::vector<size_type> cells;
+	for (size_type col = 0; col < board.size(); ++col)
+		for (size_type row = 0; row < board.size(); ++row)
 			if (board[row][col] == 0)
 				cells.push_back(row + col * board.size());
 	return cells;
@@ -13,8 +13,8 @@ std::vector<std::size_t> GameBoardAnalyzer::openCells(
 
 bool GameBoardAnalyzer::canMove(const GameBoard<int> &board)
 {
-	for (std::size_t row = 0; row < board.size(); ++row)
-		for (std::size_t col = 0; col < board.size(); ++col) {
+	for (size_type row = 0; row < board.size(); ++row)
+		for (size_type col = 0; col < board.size(); ++col) {
 			if (board[row][col] == 0)
 				return true;
 			if (
