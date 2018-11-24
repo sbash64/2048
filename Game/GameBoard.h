@@ -10,13 +10,10 @@
 
 template <typename T>
 class GameBoard {
+public:
 	using Row = std::vector<T>;
 	using Board = std::vector<Row>;
 	using size_type = typename std::vector<T>::size_type;
-	// Order important for construction.
-	Board board;
-	const size_type N;
-public:
 	class InvalidBoard {};
 	GAME_API explicit GameBoard(Board);
 	GAME_API const Row &operator[](size_type row) const;
@@ -32,6 +29,9 @@ public:
 	GAME_API void setCell(CellPosition cell, T value);
 
 private:
+	// Order important for construction.
+	Board board;
+	const size_type N;
 	void slide(
 		T &(GameBoard::*)(size_type slice, size_type element));
 	size_type findNextNonzeroOrLastCell(

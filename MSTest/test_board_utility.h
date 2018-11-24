@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
+#include <GameBoard.h>
 
-std::vector<std::vector<int>> rotateClockwise(
-	std::vector<std::vector<int>> board);
+GameBoard<int>::Board rotateClockwise(GameBoard<int>::Board board);

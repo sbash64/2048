@@ -19,9 +19,7 @@ namespace MSTest {
 		}
 
 	private:
-		void assertThrowsInvalidBoard(
-			std::vector<std::vector<int>> board) 
-		{
+		void assertThrowsInvalidBoard(GameBoard<int>::Board board) {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::ExpectException<GameBoard<int>::InvalidBoard>(
 				[&]() {
@@ -81,9 +79,9 @@ namespace MSTest {
 
 	private:
 		void assertBoardMovementAndAllRotatedTransforms(
-			std::vector<std::vector<int>> initial,
+			GameBoard<int>::Board initial,
 			std::string movement,
-			std::vector<std::vector<int>> final)
+			GameBoard<int>::Board final)
 		{
 			for (int i = 0; i < 4; ++i) {
 				assertBoardMove(initial, movement, final);
@@ -94,9 +92,9 @@ namespace MSTest {
 		}
 
 		void assertBoardMove(
-			const std::vector<std::vector<int>> &initial,
+			const GameBoard<int>::Board &initial,
 			const std::string &movement,
-			const std::vector<std::vector<int>> &final)
+			const GameBoard<int>::Board &final)
 		{
 			GameBoard<int> board{ initial };
 			for (const auto &c : movement)

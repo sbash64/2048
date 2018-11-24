@@ -5,7 +5,7 @@ namespace MSTest {
 	TEST_CLASS(GameBoardFormatterTester) {
 		void assertFormatEqualTo(
 			std::string expected, 
-			std::vector<std::vector<int>> board)
+			GameBoard<int>::Board board)
 		{
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::AreEqual(
@@ -14,7 +14,7 @@ namespace MSTest {
 		}
 
 	public:
-		TEST_METHOD(testAsString) {
+		TEST_METHOD(asString) {
 			assertFormatEqualTo(
 				"0 0 0 0\n" \
 				"0 0 0 0\n" \

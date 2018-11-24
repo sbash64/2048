@@ -1,11 +1,10 @@
 #include "test_board_utility.h"
 
-std::vector<std::vector<int>> rotateClockwise(
-	std::vector<std::vector<int>> board)
-{
-	auto rotated(board);
-	for (std::size_t row = 0; row < rotated.size(); ++row)
-		for (std::size_t col = 0; col < rotated[row].size(); ++col)
+GameBoard<int>::Board rotateClockwise(GameBoard<int>::Board board) {
+	auto rotated{ board };
+	using size_type = GameBoard<int>::size_type;
+	for (size_type row = 0; row < rotated.size(); ++row)
+		for (size_type col = 0; col < rotated[row].size(); ++col)
 			rotated[row][col] = (*(board.end() - col - 1))[row];
 	return rotated;
 }

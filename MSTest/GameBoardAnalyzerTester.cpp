@@ -6,7 +6,7 @@ namespace MSTest {
 	TEST_CLASS(GameBoardAnalyzerTester) {
 		void assertOpenCellsEqual(
 			std::vector<std::size_t> indeces,
-			std::vector<std::vector<int>> board)
+			GameBoard<int>::Board board)
 		{
 			assertAreEqual(
 				std::move(indeces),
@@ -46,7 +46,7 @@ namespace MSTest {
 		}
 
 	private:
-		bool boardCanMove(std::vector<std::vector<int>> board) {
+		bool boardCanMove(GameBoard<int>::Board board) {
 			return GameBoardAnalyzer{}.canMove(
 				GameBoard<int>{ std::move(board) }
 			);
