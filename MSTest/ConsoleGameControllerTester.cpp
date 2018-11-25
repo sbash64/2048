@@ -102,6 +102,55 @@ namespace MSTest
 			Assert::AreEqual(std::string{ "newGame" }, device->lastOutput());
 		}
 
+		TEST_METHOD(nextPrintsRightMoveResult) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			device->setRightArrowKeyTrue();
+			controller.next();
+			Assert::AreEqual(std::string{ "right" }, device->lastOutput());
+		}
+
+		TEST_METHOD(nextPrintsLeftMoveResult) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			device->setLeftArrowKeyTrue();
+			controller.next();
+			Assert::AreEqual(std::string{ "left" }, device->lastOutput());
+		}
+
+		TEST_METHOD(nextPrintsUpMoveResult) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			device->setUpArrowKeyTrue();
+			controller.next();
+			Assert::AreEqual(std::string{ "up" }, device->lastOutput());
+		}
+
+		TEST_METHOD(nextPrintsDownMoveResult) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			device->setDownArrowKeyTrue();
+			controller.next();
+			Assert::AreEqual(std::string{ "down" }, device->lastOutput());
+		}
+
+		TEST_METHOD(noMoveDoesNotPrintAnythingSinceNewGame) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			controller.next();
+			Assert::AreEqual(std::string{ "newGame" }, device->lastOutput());
+		}
+
 		TEST_METHOD(nextCallsGetKeyPress) {
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller{
