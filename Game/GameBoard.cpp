@@ -26,25 +26,25 @@ typename GameBoard<T>::size_type GameBoard<T>::size() const
 }
 
 template<typename T>
-void GameBoard<T>::slideRight()
+void GameBoard<T>::right()
 {
 	slide(&GameBoard::toTheRight);
 }
 
 template<typename T>
-void GameBoard<T>::slideLeft()
+void GameBoard<T>::left()
 {
 	slide(&GameBoard::toTheLeft);
 }
 
 template<typename T>
-void GameBoard<T>::slideDown()
+void GameBoard<T>::down()
 {
 	slide(&GameBoard::downwards);
 }
 
 template<typename T>
-void GameBoard<T>::slideUp()
+void GameBoard<T>::up()
 {
 	slide(&GameBoard::upwards);
 }

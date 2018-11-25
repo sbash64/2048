@@ -18,22 +18,22 @@ std::string Game2048Model::newGame() {
 }
 
 std::string Game2048Model::down() {
-	game.slideDown();
+	game.down();
 	return nextMove();
 }
 
 std::string Game2048Model::up() {
-	game.slideUp();
+	game.up();
 	return nextMove();
 }
 
 std::string Game2048Model::left() {
-	game.slideLeft();
+	game.left();
 	return nextMove();
 }
 
 std::string Game2048Model::right() {
-	game.slideRight();
+	game.right();
 	return nextMove();
 }
 

@@ -102,19 +102,19 @@ namespace MSTest {
 				{
 				case 'r':
 				case 'R':
-					board.slideRight();
+					board.right();
 					break;
 				case 'd':
 				case 'D':
-					board.slideDown();
+					board.down();
 					break;
 				case 'l':
 				case 'L':
-					board.slideLeft();
+					board.left();
 					break;
 				case 'u':
 				case 'U':
-					board.slideUp();
+					board.up();
 					break;
 				}
 			assertAreEqual(final, board);

@@ -24,7 +24,7 @@ public:
 };
 
 class MockFormatter : public Formatter {
-	std::string asString(const GameBoard<int>& board) override{
+	std::string asString(const GameBoard<int>& board) override {
 		return "<insert board here>";
 	}
 };

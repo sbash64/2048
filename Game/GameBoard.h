@@ -18,10 +18,10 @@ public:
 	GAME_API explicit GameBoard(Board);
 	GAME_API const Row &operator[](size_type row) const;
 	GAME_API size_type size() const;
-	GAME_API void slideRight();
-	GAME_API void slideLeft();
-	GAME_API void slideDown();
-	GAME_API void slideUp();
+	GAME_API void right();
+	GAME_API void left();
+	GAME_API void down();
+	GAME_API void up();
 	struct CellPosition {
 		size_type row;
 		size_type col;
