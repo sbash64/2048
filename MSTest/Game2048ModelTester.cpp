@@ -1,5 +1,4 @@
 #include <Game2048Model.h>
-#include <GameBoardFormatter.h>
 #include <CppUnitTest.h>
 
 class MockRandomNumberGenerator : public RandomNumberGenerator {
@@ -24,6 +23,12 @@ public:
 	}
 };
 
+class MockFormatter : public Formatter {
+	std::string asString(const GameBoard<int>& board) override{
+		return "<insert board here>";
+	}
+};
+
 namespace MSTest
 {
 	using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -40,17 +45,14 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{ 
-					"Press an arrow key to play.\n" \
+					"Press an arrow key to play.\n"
 					"\n"
-					"2 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
-					"\n" 
+					"<insert board here>\n"
+					"\n"
 				},
 				model.newGame());
 		}
@@ -65,14 +67,11 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
-					"2 0 0 2\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.right());
@@ -89,14 +88,11 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
-					"2 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
-					"2 0 0 0\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.down());
@@ -112,14 +108,11 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
-					"2 0 0 0\n" \
-					"2 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.left());
@@ -135,14 +128,11 @@ namespace MSTest
 						{ 0, 2, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
-					"2 2 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 0\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.up());
@@ -160,7 +150,7 @@ namespace MSTest
 						{ 0, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				generator };
 			model.right();
 			Assert::AreEqual(0, generator->low());
@@ -177,14 +167,11 @@ namespace MSTest
 						{ 2, 0, 0, 0 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(5) };
 			Assert::AreEqual(
 				std::string{
-					"0 0 0 0\n" \
-					"0 2 0 0\n" \
-					"0 0 0 0\n" \
-					"0 0 0 2\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.right());
@@ -200,16 +187,13 @@ namespace MSTest
 						{ 4, 2, 4, 2 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
 					"Wow. That's unfortunate. You didn't even get to play!\n" \
 					"\n"
-					"2 4 2 4\n" \
-					"4 2 4 2\n" \
-					"2 4 2 4\n" \
-					"4 2 4 2\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.newGame());
@@ -225,16 +209,13 @@ namespace MSTest
 						{ 4, 2, 4, 2 }
 					}
 				},
-				std::make_shared<GameBoardFormatter>(),
+				std::make_shared<MockFormatter>(),
 				std::make_shared<MockRandomNumberGenerator>(0) };
 			Assert::AreEqual(
 				std::string{
 					"No more moves can be done. Game over.\n" \
 					"\n"
-					"2 16 8 4\n" \
-					"4  2 4 2\n" \
-					"2  4 2 4\n" \
-					"4  2 4 2\n" \
+					"<insert board here>\n"
 					"\n"
 				},
 				model.right());
