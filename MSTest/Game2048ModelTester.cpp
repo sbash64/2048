@@ -157,26 +157,6 @@ namespace MSTest
 			Assert::AreEqual(14, generator->hi());
 		}
 
-		TEST_METHOD(nextMoveInsertsTwoAccordingToRNG) {
-			Game2048Model model{
-				GameBoard<int>{
-					{
-						{ 0, 0, 0, 0 },
-						{ 0, 0, 0, 0 },
-						{ 0, 0, 0, 0 },
-						{ 2, 0, 0, 0 }
-					}
-				},
-				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(5) };
-			Assert::AreEqual(
-				std::string{
-					"<insert board here>\n"
-					"\n"
-				},
-				model.right());
-		}
-
 		TEST_METHOD(newGameReturnsMessageOnUnluckyBoard) {
 			Game2048Model model{
 				GameBoard<int>{
