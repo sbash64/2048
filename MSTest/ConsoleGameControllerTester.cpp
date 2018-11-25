@@ -3,19 +3,19 @@
 
 class MockModel : public GameModel {
 	std::string newGame() override {
-		return {};
+		return "newGame";
 	}
 	std::string down() override {
-		return {};
+		return "down";
 	}
 	std::string up() override {
-		return {};
+		return "up";
 	}
 	std::string left() override {
-		return {};
+		return "left";
 	}
 	std::string right() override {
-		return {};
+		return "right";
 	}
 };
 
@@ -94,6 +94,14 @@ namespace MSTest
 
 	TEST_CLASS(ConsoleGameControllerTester) {
 	public:
+		TEST_METHOD(constructorPrintsNewGame) {
+			const auto device = std::make_shared<MockIODevice>();
+			ConsoleGameController controller{
+				std::make_shared<MockModel>(),
+				device };
+			Assert::AreEqual(std::string{ "newGame" }, device->lastOutput());
+		}
+
 		TEST_METHOD(nextCallsGetKeyPress) {
 			const auto device = std::make_shared<MockIODevice>();
 			ConsoleGameController controller{
