@@ -19,9 +19,31 @@ class MockModel : public GameModel {
 	}
 };
 
+class LogString {
+	std::string s;
+public:
+	LogString(std::string s = "") : s{ s } {}
+	bool isEmpty() const {
+		return s.empty();
+	}
+	bool beginsWith(std::string const &beginning) {
+		if (s.length() >= beginning.length())
+			return 0 == s.compare(0, beginning.length(), beginning);
+		else
+			return false;
+	}
+	bool contains(std::string const &s2) {
+		return s.find(s2) != std::string::npos;
+	}
+	LogString &operator+=(const LogString &appended) {
+		s += appended.s;
+		return *this;
+	}
+};
+
 class MockIODevice : public IODevice {
 	std::string _lastOutput{};
-	std::string _keyControllerLog{};
+	LogString _keyControllerLog{};
 	bool _rightArrowKey = false;
 	bool _downArrowKey = false;
 	bool _leftArrowKey = false;
@@ -32,21 +54,21 @@ public:
 		_rightArrowKey = true;
 	}
 	bool rightArrowKeyPressed() override {
-		_keyControllerLog += "rightArrowKeyPressed ";
+		_keyControllerLog += std::string{ "rightArrowKeyPressed " };
 		return _rightArrowKey;
 	}
 	void setDownArrowKeyTrue() {
 		_downArrowKey = true;
 	}
 	bool downArrowKeyPressed() override {
-		_keyControllerLog += "downArrowKeyPressed ";
+		_keyControllerLog += std::string{ "downArrowKeyPressed " };
 		return _downArrowKey;
 	}
 	void setLeftArrowKeyTrue() {
 		_leftArrowKey = true;
 	}
 	bool leftArrowKeyPressed() override {
-		_keyControllerLog += "leftArrowKeyPressed ";
+		_keyControllerLog += std::string{ "leftArrowKeyPressed " };
 		return _leftArrowKey;
 	}
 	void setUpArrowKeyTrue() {
@@ -56,11 +78,11 @@ public:
 		_upArrowKey = false;
 	}
 	bool upArrowKeyPressed() override {
-		_keyControllerLog += "upArrowKeyPressed ";
+		_keyControllerLog += std::string{ "upArrowKeyPressed " };
 		return _upArrowKey;
 	}
 	void getKeyPress() override {
-		_keyControllerLog += "getKeyPress ";
+		_keyControllerLog += std::string{ "getKeyPress " };
 		_getKeyPressCalled = true;
 	}
 	bool getKeyPressCalled() const {
@@ -72,21 +94,10 @@ public:
 	void print(std::string output) override {
 		_lastOutput = output;
 	}
-	std::string keyControllerLog() const {
+	LogString keyControllerLog() const {
 		return _keyControllerLog;
 	}
 };
-
-static bool beginsWith(std::string const &beginning, std::string const &s) {
-	if (s.length() >= beginning.length())
-		return (0 == s.compare(0, beginning.length(), beginning));
-	else
-		return false;
-}
-
-static bool contains(std::string const &s1, std::string const &s2) {
-	return s2.find(s1) != std::string::npos;
-}
 
 namespace MSTest
 {
@@ -167,15 +178,15 @@ namespace MSTest
 				device };
 			controller.next();
 			Assert::IsTrue(
-				beginsWith("getKeyPress", device->keyControllerLog()));
+				device->keyControllerLog().beginsWith("getKeyPress"));
 			Assert::IsTrue(
-				contains("leftArrowKeyPressed", device->keyControllerLog()));
+				device->keyControllerLog().contains("leftArrowKeyPressed"));
 			Assert::IsTrue(
-				contains("rightArrowKeyPressed", device->keyControllerLog()));
+				device->keyControllerLog().contains("rightArrowKeyPressed"));
 			Assert::IsTrue(
-				contains("upArrowKeyPressed", device->keyControllerLog()));
+				device->keyControllerLog().contains("upArrowKeyPressed"));
 			Assert::IsTrue(
-				contains("downArrowKeyPressed", device->keyControllerLog()));
+				device->keyControllerLog().contains("downArrowKeyPressed"));
 		}
 	};
 }
