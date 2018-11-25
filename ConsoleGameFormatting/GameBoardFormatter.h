@@ -10,6 +10,7 @@
 #endif
 
 class GameBoardFormatter : public Formatter {
+	using size_type = GameBoard<int>::size_type;
 public:
 	CONSOLEGAMEFORMATTING_API std::string asString(
 		const GameBoard<int> &board) override;

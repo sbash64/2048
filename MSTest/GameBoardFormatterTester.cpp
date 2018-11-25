@@ -10,15 +10,16 @@ namespace MSTest {
 			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::AreEqual(
 				expected.c_str(),
-				GameBoardFormatter{}.asString(GameBoard<int>{ board }).c_str());
+				GameBoardFormatter{}
+					.asString(GameBoard<int>{ board }).c_str());
 		}
 
 	public:
 		TEST_METHOD(asString) {
 			assertFormatEqualTo(
-				"0 0 0 0\n" \
-				"0 0 0 0\n" \
-				"0 0 0 0\n" \
+				"0 0 0 0\n"
+				"0 0 0 0\n"
+				"0 0 0 0\n"
 				"0 0 0 0",
 				{
 					{ 0, 0, 0, 0 },
@@ -28,9 +29,9 @@ namespace MSTest {
 				}
 			);
 			assertFormatEqualTo(
-				"0 0 0 2\n" \
-				"0 0 0 0\n" \
-				"0 0 0 0\n" \
+				"0 0 0 2\n"
+				"0 0 0 0\n"
+				"0 0 0 0\n"
 				"0 0 0 0",
 				{
 					{ 0, 0, 0, 2 },
@@ -40,9 +41,9 @@ namespace MSTest {
 				}
 			);
 			assertFormatEqualTo(
-				" 1  2  3  4\n" \
-				" 5  6  7  8\n" \
-				" 9 10 11 12\n" \
+				" 1  2  3  4\n"
+				" 5  6  7  8\n"
+				" 9 10 11 12\n"
 				"13 14 15 16",
 				{
 					{ 1, 2, 3, 4 },
@@ -52,9 +53,9 @@ namespace MSTest {
 				}
 			);
 			assertFormatEqualTo(
-				"    1     2     3     4\n" \
-				"   50    60    70    80\n" \
-				"  900  1000  1100  1200\n" \
+				"    1     2     3     4\n"
+				"   50    60    70    80\n"
+				"  900  1000  1100  1200\n"
 				"13000 14000 15000 16000",
 				{
 					{ 1, 2, 3, 4 },
@@ -64,9 +65,9 @@ namespace MSTest {
 				}
 			);
 			assertFormatEqualTo(
-				"  1     2 3000   4\n" \
-				" 50     6    7 800\n" \
-				"900    10  110  12\n" \
+				"  1     2 3000   4\n"
+				" 50     6    7 800\n"
+				"900    10  110  12\n"
 				" 13 14000  150 160",
 				{
 					{ 1, 2, 3000, 4 },
