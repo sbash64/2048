@@ -14,44 +14,37 @@ GameBoard<T>::GameBoard(Board board) :
 
 template<typename T>
 typename const GameBoard<T>::Row 
-	&GameBoard<T>::operator[](size_type row) const
-{
+	&GameBoard<T>::operator[](size_type row) const {
 	return board[row];
 }
 
 template<typename T>
-typename GameBoard<T>::size_type GameBoard<T>::size() const
-{
+typename GameBoard<T>::size_type GameBoard<T>::size() const {
 	return N;
 }
 
 template<typename T>
-void GameBoard<T>::right()
-{
+void GameBoard<T>::right() {
 	slide(&GameBoard::toTheRight);
 }
 
 template<typename T>
-void GameBoard<T>::left()
-{
+void GameBoard<T>::left() {
 	slide(&GameBoard::toTheLeft);
 }
 
 template<typename T>
-void GameBoard<T>::down()
-{
+void GameBoard<T>::down() {
 	slide(&GameBoard::downwards);
 }
 
 template<typename T>
-void GameBoard<T>::up()
-{
+void GameBoard<T>::up() {
 	slide(&GameBoard::upwards);
 }
 
 template<typename T>
-void GameBoard<T>::setCell(CellPosition cell, T value)
-{
+void GameBoard<T>::setCell(CellPosition cell, T value) {
 	board[cell.row][cell.col] = value;
 }
 
@@ -110,26 +103,22 @@ typename GameBoard<T>::size_type GameBoard<T>::findNextNonzeroOrLastCell(
 }
 
 template <typename T>
-T &GameBoard<T>::toTheRight(size_type index, size_type cell)
-{
+T &GameBoard<T>::toTheRight(size_type index, size_type cell) {
 	return board[index][cell];
 }
 
 template <typename T>
-T &GameBoard<T>::toTheLeft(size_type index, size_type cell)
-{
+T &GameBoard<T>::toTheLeft(size_type index, size_type cell) {
 	return board[index][N - 1 - cell];
 }
 
 template <typename T>
-T &GameBoard<T>::upwards(size_type index, size_type cell)
-{
+T &GameBoard<T>::upwards(size_type index, size_type cell) {
 	return board[N - 1 - cell][index];
 }
 
 template <typename T>
-T &GameBoard<T>::downwards(size_type index, size_type cell)
-{
+T &GameBoard<T>::downwards(size_type index, size_type cell) {
 	return board[cell][index];
 }
 

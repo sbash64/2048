@@ -32,8 +32,7 @@ private:
 	// Order important for construction.
 	Board board;
 	const size_type N;
-	void slide(
-		T &(GameBoard::*)(size_type slice, size_type element));
+	void slide(T &(GameBoard::*)(size_type slice, size_type element));
 	size_type findNextNonzeroOrLastCell(
 		std::function<T(size_type cell)> direction,
 		size_type start);
