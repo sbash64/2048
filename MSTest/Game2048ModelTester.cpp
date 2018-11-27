@@ -1,3 +1,4 @@
+#include "assert_utility.h"
 #include <ConsoleGameModel/Game2048Model.h>
 #include <CppUnitTest.h>
 
@@ -29,8 +30,7 @@ class MockFormatter : public Formatter {
 	}
 };
 
-namespace MSTest
-{
+namespace MSTest {
 	using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 	TEST_CLASS(Game2048ModelTester) {
@@ -46,15 +46,17 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{ 
 					"Press an arrow key to play.\n"
 					"\n"
 					"<insert board here>\n"
 					"\n"
 				},
-				model.newGame());
+				model.newGame()
+			);
 		}
 
 		TEST_METHOD(right) {
@@ -68,13 +70,15 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"<insert board here>\n"
 					"\n"
 				},
-				model.right());
+				model.right()
+			);
 		}
 
 		TEST_METHOD(down)
@@ -89,13 +93,15 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"<insert board here>\n"
 					"\n"
 				},
-				model.down());
+				model.down()
+			);
 		}
 
 		TEST_METHOD(left) {
@@ -109,13 +115,15 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"<insert board here>\n"
 					"\n"
 				},
-				model.left());
+				model.left()
+			);
 		}
 
 		TEST_METHOD(up) {
@@ -129,8 +137,9 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"<insert board here>\n"
 					"\n"
@@ -151,10 +160,11 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				generator };
+				generator 
+			};
 			model.right();
-			Assert::AreEqual(0, generator->low());
-			Assert::AreEqual(14, generator->hi());
+			assertAreEqual(0, generator->low());
+			assertAreEqual(14, generator->hi());
 		}
 
 		TEST_METHOD(newGameReturnsMessageOnUnluckyBoard) {
@@ -168,15 +178,17 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"Wow. That's unfortunate. You didn't even get to play!\n" \
 					"\n"
 					"<insert board here>\n"
 					"\n"
 				},
-				model.newGame());
+				model.newGame()
+			);
 		}
 
 		TEST_METHOD(nextMoveReturnsGameOverMessageWhenNoMovesLeft) {
@@ -190,15 +202,17 @@ namespace MSTest
 					}
 				},
 				std::make_shared<MockFormatter>(),
-				std::make_shared<MockRandomNumberGenerator>(0) };
-			Assert::AreEqual(
+				std::make_shared<MockRandomNumberGenerator>(0) 
+			};
+			assertAreEqual(
 				std::string{
 					"No more moves can be done. Game over.\n" \
 					"\n"
 					"<insert board here>\n"
 					"\n"
 				},
-				model.right());
+				model.right()
+			);
 		}
 	};
 }

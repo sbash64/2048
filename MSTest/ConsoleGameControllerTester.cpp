@@ -100,9 +100,7 @@ public:
 	}
 };
 
-namespace MSTest
-{
-
+namespace MSTest {
 	TEST_CLASS(ConsoleGameControllerTester) {
 	public:
 		TEST_METHOD(constructorPrintsNewGame) {
