@@ -4,27 +4,20 @@
 #include <vector>
 
 template<typename T>
-void assertAreEqual(
-	const std::vector<T> &expected,
-	const std::vector<T> &actual)
-{
-	for (std::size_t i = 0; i < expected.size(); ++i)
-		Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(
-			expected[i],
-			actual[i]
-		);
+void assertAreEqual(const T &expected, const T &actual) {
+	using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
+	Assert::AreEqual(expected, actual);
 }
 
 template<typename T>
 void assertAreEqual(
-	const std::vector<std::vector<T>> &expected,
-	const std::vector<std::vector<T>> &actual)
+	const std::vector<T> &expected,
+	const std::vector<T> &actual)
 {
-	for (std::size_t i = 0; i < expected.size(); ++i)
-		assertAreEqual(
-			expected[i],
-			actual[i]
-		);
+	assertAreEqual(expected.size(), actual.size());
+	using size_type = std::vector<T>::size_type;
+	for (size_type i = 0; i < expected.size(); ++i)
+		assertAreEqual(expected[i], actual[i]);
 }
 
 template <typename T>
@@ -32,6 +25,8 @@ void assertAreEqual(
 	const std::vector<std::vector<T>>& expected,
 	const GameBoard<T> &actual)
 {
-	for (std::size_t i = 0; i < expected.size(); i++)
+	assertAreEqual(expected.size(), actual.size());
+	using size_type = std::vector<T>::size_type;
+	for (size_type i = 0; i < expected.size(); i++)
 		assertAreEqual(expected[i], actual[i]);
 }
