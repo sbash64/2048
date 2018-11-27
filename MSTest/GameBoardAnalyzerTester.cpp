@@ -5,7 +5,7 @@
 namespace MSTest {
 	TEST_CLASS(GameBoardAnalyzerTester) {
 		void assertOpenCellsEqual(
-			std::vector<std::size_t> indeces,
+			GameBoardAnalyzer::cellIndices indeces,
 			GameBoard<int>::Board board)
 		{
 			assertAreEqual(
