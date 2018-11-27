@@ -1,7 +1,7 @@
 #include "MersenneTwisterGenerator.h"
 
 MersenneTwisterGenerator::MersenneTwisterGenerator() :
-	rng(std::random_device{}())
+	rng{ std::random_device{}() }
 {
 }
 
