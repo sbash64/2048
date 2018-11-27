@@ -6,6 +6,6 @@
 
 class Formatter {
 public:
-	INTERFACE_OPERATIONS(Formatter);
-	virtual std::string asString(const GameBoard<int> &board) = 0;
+    INTERFACE_OPERATIONS(Formatter);
+    virtual std::string asString(const GameBoard<int> &board) = 0;
 };

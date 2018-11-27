@@ -2,49 +2,49 @@
 #include <Game/GameBoardAnalyzer.h>
 
 Game2048Model::Game2048Model(
-	GameBoard<int> game,
-	std::shared_ptr<Formatter> formatter,
-	std::shared_ptr<RandomNumberGenerator> generator
+    GameBoard<int> game,
+    std::shared_ptr<Formatter> formatter,
+    std::shared_ptr<RandomNumberGenerator> generator
 ) :
-	game{ std::move(game) },
-	formatter{ std::move(formatter) },
-	generator{ std::move(generator) } {}
+    game{ std::move(game) },
+    formatter{ std::move(formatter) },
+    generator{ std::move(generator) } {}
 
 std::string Game2048Model::newGame() {
-	std::string directions = GameBoardAnalyzer{}.canMove(game)
-		? "Press an arrow key to play."
-		: "Wow. That's unfortunate. You didn't even get to play!";
-	return directions + "\n\n" + formatter->asString(game) + "\n\n";
+    std::string directions = GameBoardAnalyzer{}.canMove(game)
+        ? "Press an arrow key to play."
+        : "Wow. That's unfortunate. You didn't even get to play!";
+    return directions + "\n\n" + formatter->asString(game) + "\n\n";
 }
 
 std::string Game2048Model::down() {
-	game.down();
-	return nextMove();
+    game.down();
+    return nextMove();
 }
 
 std::string Game2048Model::up() {
-	game.up();
-	return nextMove();
+    game.up();
+    return nextMove();
 }
 
 std::string Game2048Model::left() {
-	game.left();
-	return nextMove();
+    game.left();
+    return nextMove();
 }
 
 std::string Game2048Model::right() {
-	game.right();
-	return nextMove();
+    game.right();
+    return nextMove();
 }
 
 std::string Game2048Model::nextMove()
 {
-	GameBoardAnalyzer analyzer{};
-	const auto openCells = analyzer.openCells(game);
-	const auto x = generator->randomIntBetween(0, openCells.size() - 1);
-	game.setCell({ openCells[x] % game.size(), openCells[x] / game.size() }, 2);
-	std::string header = analyzer.canMove(game)
-		? ""
-		: "No more moves can be done. Game over.\n\n";
-	return header + formatter->asString(game) + "\n\n";
+    GameBoardAnalyzer analyzer{};
+    const auto openCells = analyzer.openCells(game);
+    const auto x = generator->randomIntBetween(0, openCells.size() - 1);
+    game.setCell({ openCells[x] % game.size(), openCells[x] / game.size() }, 2);
+    std::string header = analyzer.canMove(game)
+        ? ""
+        : "No more moves can be done. Game over.\n\n";
+    return header + formatter->asString(game) + "\n\n";
 }

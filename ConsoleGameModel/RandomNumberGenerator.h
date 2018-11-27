@@ -4,6 +4,6 @@
 
 class RandomNumberGenerator {
 public:
-	INTERFACE_OPERATIONS(RandomNumberGenerator);
-	virtual int randomIntBetween(int low, int hi) = 0;
+    INTERFACE_OPERATIONS(RandomNumberGenerator);
+    virtual int randomIntBetween(int low, int hi) = 0;
 };
