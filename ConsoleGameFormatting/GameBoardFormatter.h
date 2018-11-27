@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <ConsoleGameControl/Formatter.h>
+#include <ConsoleGameModel/Formatter.h>
 
 #ifdef CONSOLEGAMEFORMATTING_EXPORTS
 	#define CONSOLEGAMEFORMATTING_API __declspec(dllexport)

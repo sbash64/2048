@@ -1,4 +1,4 @@
-#include <ConsoleGameControl/Game2048Model.h>
+#include <ConsoleGameModel/Game2048Model.h>
 #include <CppUnitTest.h>
 
 class MockRandomNumberGenerator : public RandomNumberGenerator {

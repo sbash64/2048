@@ -1,6 +1,6 @@
 #pragma once
 
-#include "console_game_exports.h"
+#include "console_game_control_exports.h"
 #include "GameModel.h"
 #include "IODevice.h"
 #include <memory>
