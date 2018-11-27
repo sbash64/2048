@@ -1,5 +1,5 @@
 #include "Game2048Model.h"
-#include <GameBoardAnalyzer.h>
+#include <Game/GameBoardAnalyzer.h>
 
 Game2048Model::Game2048Model(
 	GameBoard<int> game,

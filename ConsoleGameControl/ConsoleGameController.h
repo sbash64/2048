@@ -9,8 +9,8 @@ class ConsoleGameController {
 	std::shared_ptr<GameModel> model;
 	std::shared_ptr<IODevice> device;
 public:
-	CONSOLEGAME_API ConsoleGameController(
+	CONSOLEGAMECONTROL_API ConsoleGameController(
 		std::shared_ptr<GameModel> model,
 		std::shared_ptr<IODevice> device);
-	CONSOLEGAME_API void next();
+	CONSOLEGAMECONTROL_API void next();
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <RandomNumberGenerator.h>
+#include <ConsoleGameControl/RandomNumberGenerator.h>
 #include <random>
 
 class MersenneTwisterGenerator : public RandomNumberGenerator {

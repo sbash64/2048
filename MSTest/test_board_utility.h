@@ -1,4 +1,4 @@
 #pragma once
-#include <GameBoard.h>
+#include <Game/GameBoard.h>
 
 GameBoard<int>::Board rotateClockwise(GameBoard<int>::Board board);

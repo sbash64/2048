@@ -4,7 +4,7 @@
 #include "GameModel.h"
 #include "Formatter.h"
 #include "RandomNumberGenerator.h"
-#include <GameBoard.h>
+#include <Game/GameBoard.h>
 #include <memory>
 
 class Game2048Model : public GameModel {
@@ -12,15 +12,15 @@ class Game2048Model : public GameModel {
 	std::shared_ptr<Formatter> formatter;
 	std::shared_ptr<RandomNumberGenerator> generator;
 public:
-	CONSOLEGAME_API Game2048Model(
+	CONSOLEGAMECONTROL_API Game2048Model(
 		GameBoard<int>,
 		std::shared_ptr<Formatter>,
 		std::shared_ptr<RandomNumberGenerator>);
-	CONSOLEGAME_API std::string newGame() override;
-	CONSOLEGAME_API std::string down() override;
-	CONSOLEGAME_API std::string up() override;
-	CONSOLEGAME_API std::string left() override;
-	CONSOLEGAME_API std::string right() override;
+	CONSOLEGAMECONTROL_API std::string newGame() override;
+	CONSOLEGAMECONTROL_API std::string down() override;
+	CONSOLEGAMECONTROL_API std::string up() override;
+	CONSOLEGAMECONTROL_API std::string left() override;
+	CONSOLEGAMECONTROL_API std::string right() override;
 private:
 	std::string nextMove();
 };

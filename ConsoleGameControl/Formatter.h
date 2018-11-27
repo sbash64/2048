@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Interface.h"
-#include <GameBoard.h>
+#include <Game/GameBoard.h>
 #include <string>
 
 class Formatter {

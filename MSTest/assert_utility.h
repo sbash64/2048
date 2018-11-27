@@ -1,5 +1,5 @@
 #pragma once
-#include <GameBoard.h>
+#include <Game/GameBoard.h>
 #include <CppUnitTest.h>
 #include <vector>
 

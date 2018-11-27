@@ -1,4 +1,4 @@
-#include <ConsoleGameController.h>
+#include <ConsoleGameControl/ConsoleGameController.h>
 #include <CppUnitTest.h>
 
 class MockModel : public GameModel {

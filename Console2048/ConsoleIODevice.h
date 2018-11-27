@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IODevice.h>
+#include <ConsoleGameControl/IODevice.h>
 
 class ConsoleIODevice : public IODevice {
 	int key;

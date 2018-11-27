@@ -1,6 +1,6 @@
 #include "assert_utility.h"
 #include "test_board_utility.h"
-#include <GameBoard.h>
+#include <Game/GameBoard.h>
 #include <CppUnitTest.h>
 
 namespace MSTest {

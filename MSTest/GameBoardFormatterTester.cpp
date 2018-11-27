@@ -1,4 +1,4 @@
-#include <GameBoardFormatter.h>
+#include <ConsoleGameFormatting/GameBoardFormatter.h>
 #include <CppUnitTest.h>
 
 namespace MSTest {

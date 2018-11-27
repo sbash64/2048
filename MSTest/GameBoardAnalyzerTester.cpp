@@ -1,5 +1,5 @@
 #include "assert_utility.h"
-#include <GameBoardAnalyzer.h>
+#include <Game/GameBoardAnalyzer.h>
 #include <CppUnitTest.h>
 
 namespace MSTest {
