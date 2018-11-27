@@ -6,9 +6,9 @@
 	#define CONSOLEGAMEMODEL_API __declspec(dllimport)
 #endif
 
-#include <ConsoleGameControl/GameModel.h>
 #include "RandomNumberGenerator.h"
 #include "Formatter.h"
+#include <ConsoleGameControl/GameModel.h>
 #include <memory>
 
 class Game2048Model : public GameModel {
