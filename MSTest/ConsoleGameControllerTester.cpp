@@ -1,3 +1,4 @@
+#include "assert_utility.h"
 #include <ConsoleGameControl/ConsoleGameController.h>
 #include <CppUnitTest.h>
 
@@ -101,7 +102,6 @@ public:
 
 namespace MSTest
 {
-	using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 	TEST_CLASS(ConsoleGameControllerTester) {
 	public:
@@ -110,7 +110,7 @@ namespace MSTest
 			ConsoleGameController controller{
 				std::make_shared<MockModel>(),
 				device };
-			Assert::AreEqual(std::string{ "newGame" }, device->lastOutput());
+			assertAreEqual(std::string{ "newGame" }, device->lastOutput());
 		}
 
 		TEST_METHOD(nextPrintsRightMoveResult) {
@@ -120,7 +120,7 @@ namespace MSTest
 				device };
 			device->setRightArrowKeyTrue();
 			controller.next();
-			Assert::AreEqual(std::string{ "right" }, device->lastOutput());
+			assertAreEqual(std::string{ "right" }, device->lastOutput());
 		}
 
 		TEST_METHOD(nextPrintsLeftMoveResult) {
@@ -130,7 +130,7 @@ namespace MSTest
 				device };
 			device->setLeftArrowKeyTrue();
 			controller.next();
-			Assert::AreEqual(std::string{ "left" }, device->lastOutput());
+			assertAreEqual(std::string{ "left" }, device->lastOutput());
 		}
 
 		TEST_METHOD(nextPrintsUpMoveResult) {
@@ -140,7 +140,7 @@ namespace MSTest
 				device };
 			device->setUpArrowKeyTrue();
 			controller.next();
-			Assert::AreEqual(std::string{ "up" }, device->lastOutput());
+			assertAreEqual(std::string{ "up" }, device->lastOutput());
 		}
 
 		TEST_METHOD(nextPrintsDownMoveResult) {
@@ -150,7 +150,7 @@ namespace MSTest
 				device };
 			device->setDownArrowKeyTrue();
 			controller.next();
-			Assert::AreEqual(std::string{ "down" }, device->lastOutput());
+			assertAreEqual(std::string{ "down" }, device->lastOutput());
 		}
 
 		TEST_METHOD(noMoveDoesNotPrintAnythingSinceNewGame) {
@@ -159,7 +159,7 @@ namespace MSTest
 				std::make_shared<MockModel>(),
 				device };
 			controller.next();
-			Assert::AreEqual(std::string{ "newGame" }, device->lastOutput());
+			assertAreEqual(std::string{ "newGame" }, device->lastOutput());
 		}
 
 		TEST_METHOD(nextCallsGetKeyPress) {
@@ -168,6 +168,7 @@ namespace MSTest
 				std::make_shared<MockModel>(),
 				device};
 			controller.next();
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(device->getKeyPressCalled());
 		}
 
@@ -177,6 +178,7 @@ namespace MSTest
 				std::make_shared<MockModel>(),
 				device };
 			controller.next();
+			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 			Assert::IsTrue(
 				device->keyControllerLog().beginsWith("getKeyPress"));
 			Assert::IsTrue(
