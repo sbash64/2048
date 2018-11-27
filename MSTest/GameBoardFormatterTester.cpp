@@ -1,3 +1,4 @@
+#include "assert_utility.h"
 #include <ConsoleGameFormatting/GameBoardFormatter.h>
 #include <CppUnitTest.h>
 
@@ -7,11 +8,10 @@ namespace MSTest {
 			std::string expected, 
 			GameBoard<int>::Board board)
 		{
-			using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-			Assert::AreEqual(
-				expected.c_str(),
+			assertAreEqual(
+				std::move(expected),
 				GameBoardFormatter{}
-					.asString(GameBoard<int>{ board }).c_str());
+					.asString(GameBoard<int>{ std::move(board) }));
 		}
 
 	public:
