@@ -24,9 +24,6 @@
     <ClInclude Include="GameModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="console_game_control_exports.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleGameController.cpp">

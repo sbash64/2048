@@ -1,6 +1,11 @@
 #pragma once
 
-#include "console_game_control_exports.h"
+#ifdef CONSOLEGAMECONTROL_EXPORTS
+	#define CONSOLEGAMECONTROL_API __declspec(dllexport)
+#else
+	#define CONSOLEGAMECONTROL_API __declspec(dllimport)
+#endif
+
 #include "GameModel.h"
 #include "IODevice.h"
 #include <memory>
