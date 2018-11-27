@@ -4,16 +4,6 @@
 
 namespace MSTest {
     TEST_CLASS(GameBoardFormatterTester) {
-        void assertFormatEqualTo(
-            std::string expected, 
-            GameBoard<int>::Board board)
-        {
-            assertAreEqual(
-                std::move(expected),
-                GameBoardFormatter{}
-                    .asString(GameBoard<int>{ std::move(board) }));
-        }
-
     public:
         TEST_METHOD(asString) {
             assertFormatEqualTo(
@@ -76,6 +66,17 @@ namespace MSTest {
                     { 13, 14000, 150, 160 }
                 }
             );
+        }
+
+    private:
+        void assertFormatEqualTo(
+            std::string expected,
+            GameBoard<int>::Board board)
+        {
+            assertAreEqual(
+                std::move(expected),
+                GameBoardFormatter{}
+            .asString(GameBoard<int>{ std::move(board) }));
         }
     };
 }

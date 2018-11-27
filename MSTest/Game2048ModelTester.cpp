@@ -31,8 +31,6 @@ class MockFormatter : public Formatter {
 };
 
 namespace MSTest {
-    using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
     TEST_CLASS(Game2048ModelTester) {
     public:
         TEST_METHOD(newGamePrintsInitialBoard) {

@@ -4,16 +4,6 @@
 
 namespace MSTest {
     TEST_CLASS(GameBoardAnalyzerTester) {
-        void assertOpenCellsEqual(
-            GameBoardAnalyzer::cellIndices indeces,
-            GameBoard<int>::Board board)
-        {
-            assertAreEqual(
-                std::move(indeces),
-                GameBoardAnalyzer{}.openCells(
-                    GameBoard<int>{ std::move(board) }));
-        }
-
     public:
         TEST_METHOD(openCells) {
             assertOpenCellsEqual(
@@ -46,10 +36,14 @@ namespace MSTest {
         }
 
     private:
-        bool boardCanMove(GameBoard<int>::Board board) {
-            return GameBoardAnalyzer{}.canMove(
-                GameBoard<int>{ std::move(board) }
-            );
+        void assertOpenCellsEqual(
+            GameBoardAnalyzer::cellIndices indeces,
+            GameBoard<int>::Board board)
+        {
+            assertAreEqual(
+                std::move(indeces),
+                GameBoardAnalyzer{}.openCells(
+                    GameBoard<int>{ std::move(board) }));
         }
 
     public:
@@ -104,6 +98,13 @@ namespace MSTest {
                         { 4, 2, 4, 2 }
                     }
                 )
+            );
+        }
+
+    private:
+        bool boardCanMove(GameBoard<int>::Board board) {
+            return GameBoardAnalyzer{}.canMove(
+                GameBoard<int>{ std::move(board) }
             );
         }
     };
